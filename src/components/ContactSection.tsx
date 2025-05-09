@@ -26,7 +26,7 @@ const ContactSection = () => {
               <Input id="subject" placeholder="Ihr Betreff" />
             </div>
             <div>
-              <label htmlFor="message" className="block text-sm font-medium mb-1">Nachricht</label>
+              <label htmlFor="message" className="block text-sm font-medium mb-1 text-left">Nachricht</label>
               <Textarea id="message" placeholder="Ihre Nachricht" rows={4} />
             </div>
             <Button type="submit" className="bg-black hover:bg-gray-800 text-white w-full">
