@@ -9,7 +9,7 @@ const ContactSection = () => {
       
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
-          <h3 className="text-2xl font-serif mb-6">Schreib uns gerne</h3>
+          
           <form className="max-w-xl mx-auto space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
