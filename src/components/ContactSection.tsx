@@ -5,7 +5,7 @@ import { Mail, Phone, MapPin } from "lucide-react";
 const ContactSection = () => {
   return <section id="contact" className="px-6 py-[16px]">
       <div className="vertical-line h-32 mb-16"></div>
-      <h2 className="section-title">04 Kontakt</h2>
+      <h2 className="section-title">Kontakt</h2>
       
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
