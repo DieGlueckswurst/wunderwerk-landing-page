@@ -34,7 +34,11 @@ const Header = () => {
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div className="flex-shrink-0">
-          <h1 className="text-2xl font-serif tracking-widest">WUNDERWERK</h1>
+          <img 
+            src="/lovable-uploads/5752114c-85f9-4894-af89-e0cb6a2aa5c9.png" 
+            alt="Wunderwerk Logo" 
+            className="h-12 w-auto"
+          />
         </div>
         
         <nav className="hidden md:flex items-center space-x-8">
