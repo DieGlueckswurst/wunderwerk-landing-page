@@ -62,7 +62,7 @@ const TestimonialsSection = () => {
         </div>
         
         {/* Dots navigation */}
-        <div className="flex justify-center space-x-2">
+        <div className="flex justify-center space-x-1">
           {testimonials.map((_, index) => <button key={index} onClick={() => goToTestimonial(index)} className={`w-3 h-3 rounded-full ${currentIndex === index ? "bg-black" : "bg-gray-300"}`} aria-label={`Go to testimonial ${index + 1}`} />)}
         </div>
       </div>
