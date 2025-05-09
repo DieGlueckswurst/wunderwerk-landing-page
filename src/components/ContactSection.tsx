@@ -22,7 +22,7 @@ const ContactSection = () => {
               </div>
             </div>
             <div>
-              <label htmlFor="subject" className="block text-sm font-medium mb-1">Betreff</label>
+              <label htmlFor="subject" className="block text-sm font-medium mb-1 text-left">Betreff</label>
               <Input id="subject" placeholder="Ihr Betreff" />
             </div>
             <div>
