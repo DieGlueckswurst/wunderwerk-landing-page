@@ -18,7 +18,7 @@ const HeroSection = () => {
       <div 
         className="parallax-bg"
         style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&q=80')`,
+          backgroundImage: `url('/lovable-uploads/bb8cfdff-2af7-49d3-bad0-c5a7df3375dd.png')`,
           transform: `translateY(${offset * 0.5}px)`, // Parallax effect
         }}
       />

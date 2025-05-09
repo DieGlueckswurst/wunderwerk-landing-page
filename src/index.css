@@ -110,7 +110,7 @@
 
 .vertical-line {
   width: 1px;
-  height: 80px;
+  height: 120px; /* Increased height */
   background-color: #ddd;
   margin: 0 auto;
 }

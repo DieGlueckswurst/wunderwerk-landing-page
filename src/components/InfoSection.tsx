@@ -1,8 +1,8 @@
 
 const InfoSection = () => {
   return (
-    <section id="info" className="py-20 px-6">
-      <div className="vertical-line mb-12"></div>
+    <section id="info" className="py-24 px-6">
+      <div className="vertical-line h-32 mb-16"></div>
       <h2 className="section-title">01 Info</h2>
       
       <div className="max-w-3xl mx-auto text-center">

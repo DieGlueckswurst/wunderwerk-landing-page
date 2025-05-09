@@ -19,6 +19,12 @@ const Room = ({ imageSrc, title, description }: RoomProps) => {
           <p className="font-sans">{description}</p>
         </div>
       </div>
+      {/* Tap indicator */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div className="w-12 h-12 rounded-full bg-white/30 flex items-center justify-center">
+          <div className="w-4 h-4 bg-white rounded-full"></div>
+        </div>
+      </div>
     </div>
   );
 };
@@ -43,8 +49,8 @@ const RoomsSection = () => {
   ];
 
   return (
-    <section id="rooms" className="py-20 px-6">
-      <div className="vertical-line mb-12"></div>
+    <section id="rooms" className="py-24 px-6">
+      <div className="vertical-line h-32 mb-16"></div>
       <h2 className="section-title">02 Räume</h2>
       
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
