@@ -37,7 +37,7 @@ const Header = () => {
           <img 
             src="/lovable-uploads/5752114c-85f9-4894-af89-e0cb6a2aa5c9.png" 
             alt="Wunderwerk Logo" 
-            className="h-12 w-auto"
+            className="h-16 w-auto" // Increased height from h-12 to h-16
           />
         </div>
         

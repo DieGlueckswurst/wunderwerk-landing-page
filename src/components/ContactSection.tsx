@@ -1,38 +1,116 @@
+
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
+
 const ContactSection = () => {
-  return <section id="contact" className="px-6 py-[16px]">
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const { toast } = useToast();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Basic validation
+    if (!name || !email || !message) {
+      toast({
+        title: "Fehlende Informationen",
+        description: "Bitte fülle alle erforderlichen Felder aus.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      toast({
+        title: "Ungültige E-Mail",
+        description: "Bitte gib eine gültige E-Mail-Adresse ein.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    // In a real app, you would send this data to your server or a service like EmailJS
+    // For now, we'll simulate a successful submission
+    setTimeout(() => {
+      setIsSubmitted(true);
+      toast({
+        title: "Nachricht gesendet!",
+        description: "Wir haben deine Nachricht erhalten und werden uns bald bei dir melden.",
+      });
+    }, 1000);
+  };
+
+  return (
+    <section id="contact" className="px-6 py-20">
       <div className="vertical-line h-32 mb-16"></div>
       <h2 className="section-title">Kontakt</h2>
       
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
-          
-          <form className="max-w-xl mx-auto space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium mb-1 text-left">Name</label>
-                <Input id="name" placeholder="Ihr Name" />
+          {!isSubmitted ? (
+            <form onSubmit={handleSubmit} className="max-w-xl mx-auto space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium mb-1 text-left">Name</label>
+                  <Input 
+                    id="name" 
+                    placeholder="Dein Name" 
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium mb-1 text-left">E-Mail</label>
+                  <Input 
+                    id="email" 
+                    type="email" 
+                    placeholder="Deine E-Mail" 
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </div>
               </div>
               <div>
-                <label htmlFor="email" className="block text-sm font-medium mb-1 text-left">E-Mail</label>
-                <Input id="email" type="email" placeholder="Ihre E-Mail" />
+                <label htmlFor="subject" className="block text-sm font-medium mb-1 text-left">Betreff</label>
+                <Input 
+                  id="subject" 
+                  placeholder="Dein Betreff" 
+                  value={subject}
+                  onChange={(e) => setSubject(e.target.value)}
+                />
               </div>
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium mb-1 text-left">Nachricht</label>
+                <Textarea 
+                  id="message" 
+                  placeholder="Deine Nachricht" 
+                  rows={4}
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  required
+                />
+              </div>
+              <Button type="submit" className="bg-black hover:bg-gray-800 text-white w-full">
+                Nachricht senden
+              </Button>
+            </form>
+          ) : (
+            <div className="text-center p-8 border border-gray-200 rounded-lg">
+              <div className="mb-4 text-5xl">✓</div>
+              <h3 className="text-2xl font-serif mb-2">Vielen Dank!</h3>
+              <p className="text-gray-600">Deine Nachricht wurde erfolgreich gesendet. Wir werden uns so schnell wie möglich bei dir melden.</p>
             </div>
-            <div>
-              <label htmlFor="subject" className="block text-sm font-medium mb-1 text-left">Betreff</label>
-              <Input id="subject" placeholder="Ihr Betreff" />
-            </div>
-            <div>
-              <label htmlFor="message" className="block text-sm font-medium mb-1 text-left">Nachricht</label>
-              <Textarea id="message" placeholder="Ihre Nachricht" rows={4} />
-            </div>
-            <Button type="submit" className="bg-black hover:bg-gray-800 text-white w-full">
-              Nachricht senden
-            </Button>
-          </form>
+          )}
         </div>
         
         <div className="text-center">
@@ -54,6 +132,8 @@ const ContactSection = () => {
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default ContactSection;

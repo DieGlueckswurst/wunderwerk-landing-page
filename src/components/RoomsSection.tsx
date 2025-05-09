@@ -1,6 +1,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 type RoomProps = {
   imageSrc: string;
@@ -14,11 +15,21 @@ const Room = ({
   description
 }: RoomProps) => {
   const [isHovered, setIsHovered] = useState(false);
+  const navigate = useNavigate();
+  
+  const handleClick = () => {
+    setIsHovered(!isHovered);
+  };
+
+  const handleLearnMore = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    navigate(`/room/${title.toLowerCase()}`);
+  };
   
   return (
     <div 
       className="relative overflow-hidden cursor-pointer h-[400px]"
-      onClick={() => setIsHovered(!isHovered)}
+      onClick={handleClick}
       onMouseLeave={() => setIsHovered(false)}
     >
       <img 
@@ -43,7 +54,11 @@ const Room = ({
           <div className="text-white text-center p-4">
             <h3 className="text-2xl font-serif mb-2">{title}</h3>
             <p className="font-sans mb-6">{description}</p>
-            <Button variant="outline" className="text-white border-white hover:bg-white/20">
+            <Button 
+              variant="outline" 
+              className="text-white border-white hover:bg-white/20"
+              onClick={handleLearnMore}
+            >
               Mehr erfahren
             </Button>
           </div>
@@ -61,12 +76,13 @@ const RoomsSection = () => {
       description: "Perfekt für Gruppenkurse und Workshops"
     }, 
     {
-      imageSrc: "/lovable-uploads/b946643a-5502-49bf-a6ee-2e8f84a5c90e.png",
+      // Swapped these two images
+      imageSrc: "/lovable-uploads/200e60c3-25ee-435c-bfa5-5ced63f102ed.png",
       title: "Kugelwohl",
       description: "Speziell ausgestattet für Hebammenarbeit"
     }, 
     {
-      imageSrc: "/lovable-uploads/200e60c3-25ee-435c-bfa5-5ced63f102ed.png",
+      imageSrc: "/lovable-uploads/b946643a-5502-49bf-a6ee-2e8f84a5c90e.png",
       title: "Werkstadt",
       description: "Optimale Ausstattung für Physiotherapie"
     }
