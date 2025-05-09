@@ -1,0 +1,91 @@
+
+import { useEffect, useState } from 'react';
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+
+const Header = () => {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      window.scrollTo({
+        top: element.offsetTop - 100,
+        behavior: 'smooth'
+      });
+    }
+  };
+  
+  return (
+    <header 
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 py-5 px-6 md:px-12 transition-all duration-300", 
+        scrolled ? "bg-white/90 backdrop-blur-md shadow-sm" : "bg-transparent"
+      )}
+    >
+      <div className="max-w-7xl mx-auto flex items-center justify-between">
+        <div className="flex-shrink-0">
+          <h1 className="text-2xl font-serif tracking-widest">WUNDERWERK</h1>
+        </div>
+        
+        <nav className="hidden md:flex items-center space-x-8">
+          <Button 
+            onClick={() => scrollToSection('start')}
+            variant="ghost" 
+            className="font-sans text-sm tracking-wider hover:bg-transparent hover:text-black"
+          >
+            START
+          </Button>
+          <Button 
+            onClick={() => scrollToSection('info')}
+            variant="ghost" 
+            className="font-sans text-sm tracking-wider hover:bg-transparent hover:text-black"
+          >
+            INFO
+          </Button>
+          <Button 
+            onClick={() => scrollToSection('rooms')}
+            variant="ghost" 
+            className="font-sans text-sm tracking-wider hover:bg-transparent hover:text-black"
+          >
+            RÄUME
+          </Button>
+          <Button 
+            onClick={() => scrollToSection('testimonials')}
+            variant="ghost" 
+            className="font-sans text-sm tracking-wider hover:bg-transparent hover:text-black"
+          >
+            KUNDEN
+          </Button>
+          <Button 
+            onClick={() => scrollToSection('contact')}
+            variant="ghost" 
+            className="font-sans text-sm tracking-wider hover:bg-transparent hover:text-black"
+          >
+            KONTAKT
+          </Button>
+        </nav>
+        
+        <Button variant="outline" className="md:hidden" size="icon">
+          <span className="sr-only">Open menu</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+            <line x1="4" x2="20" y1="12" y2="12"></line>
+            <line x1="4" x2="20" y1="6" y2="6"></line>
+            <line x1="4" x2="20" y1="18" y2="18"></line>
+          </svg>
+        </Button>
+      </div>
+    </header>
+  );
+};
+
+export default Header;
