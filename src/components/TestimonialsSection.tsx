@@ -43,12 +43,12 @@ const TestimonialsSection = () => {
   };
   return <section id="testimonials" className="px-6 py-[40px]">
       <div className="vertical-line h-32 mb-16"></div>
-      <h2 className="section-title">03 Kunden</h2>
+      <h2 className="section-title">Nicht nur wir fühlen uns hier wohl</h2>
       
       <div className="max-w-4xl mx-auto text-center mb-12">
-        <h3 className="text-2xl md:text-3xl font-serif mb-12">Nicht nur wir finden die Räume toll</h3>
         
-        <div className="relative h-[200px] flex items-center justify-center mb-8">
+        
+        <div className="relative h-[160px] flex items-center justify-center mb-0 px-0">
           {testimonials.map((testimonial, index) => <Testimonial key={index} text={testimonial.text} author={testimonial.author} active={currentIndex === index} />)}
           
           {/* Navigation arrows */}
