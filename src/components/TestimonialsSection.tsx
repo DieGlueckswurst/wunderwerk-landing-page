@@ -10,8 +10,8 @@ const Testimonial = ({
   active: boolean;
 }) => {
   return <div className={`transition-opacity duration-500 ${active ? "opacity-100" : "opacity-0 absolute"}`}>
-      <p className="text-xl md:text-2xl text-center font-serif italic mb-6 max-w-3xl mx-auto">"{text}"</p>
-      <p className="text-center font-sans text-lg">{author}</p>
+      <p className="text-xl text-center font-serif italic mb-6 max-w-3xl mx-auto md:text-lg">"{text}"</p>
+      <p className="text-center font-sans text-base">{author}</p>
     </div>;
 };
 const TestimonialsSection = () => {
@@ -43,7 +43,7 @@ const TestimonialsSection = () => {
   };
   return <section id="testimonials" className="px-6 py-[40px]">
       <div className="vertical-line h-32 mb-16"></div>
-      <h2 className="section-title">Nicht nur wir fühlen uns hier wohl</h2>
+      <h2 className="section-title">03 Stimmen</h2>
       
       <div className="max-w-4xl mx-auto text-center mb-12">
         
