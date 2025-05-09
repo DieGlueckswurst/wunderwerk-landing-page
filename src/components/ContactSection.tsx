@@ -17,7 +17,7 @@ const ContactSection = () => {
                 <Input id="name" placeholder="Ihr Name" />
               </div>
               <div>
-                <label htmlFor="email" className="block text-sm font-medium mb-1">E-Mail</label>
+                <label htmlFor="email" className="block text-sm font-medium mb-1 text-left">E-Mail</label>
                 <Input id="email" type="email" placeholder="Ihre E-Mail" />
               </div>
             </div>
