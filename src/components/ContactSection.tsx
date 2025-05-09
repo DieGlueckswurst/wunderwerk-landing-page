@@ -1,12 +1,9 @@
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, Phone, MapPin } from "lucide-react";
-
 const ContactSection = () => {
-  return (
-    <section id="contact" className="py-24 px-6">
+  return <section id="contact" className="px-6 py-[16px]">
       <div className="vertical-line h-32 mb-16"></div>
       <h2 className="section-title">04 Kontakt</h2>
       
@@ -57,8 +54,6 @@ const ContactSection = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default ContactSection;

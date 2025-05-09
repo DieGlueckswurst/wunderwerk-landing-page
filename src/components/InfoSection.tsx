@@ -1,7 +1,5 @@
-
 const InfoSection = () => {
-  return (
-    <section id="info" className="py-24 px-6">
+  return <section id="info" className="px-6 py-[40px]">
       <div className="vertical-line h-32 mb-16"></div>
       <h2 className="section-title">01 Info</h2>
       
@@ -15,8 +13,6 @@ const InfoSection = () => {
           und Physiotherapeuten sind. Jeder Raum wurde mit Blick auf Funktionalität und Ästhetik gestaltet.
         </p>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default InfoSection;
