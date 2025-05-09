@@ -13,7 +13,7 @@ const ContactSection = () => {
           <form className="max-w-xl mx-auto space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium mb-1">Name</label>
+                <label htmlFor="name" className="block text-sm font-medium mb-1 text-left">Name</label>
                 <Input id="name" placeholder="Ihr Name" />
               </div>
               <div>
