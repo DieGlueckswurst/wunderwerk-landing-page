@@ -69,16 +69,21 @@ const RoomDetail = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Header section styled like About page */}
+      <section className="pt-24 pb-16 px-6 py-[74px]">
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif mb-6">{roomData.title}</h1>
+          <Button
+            onClick={() => navigate('/')}
+            variant="outline"
+            className="rounded-full mt-4"
+            size="icon"
+          >
+            <ArrowLeft className="h-4 w-4" />
+          </Button>
+        </div>
+      </section>
       <div className="container mx-auto px-6 pt-4 pb-16">
-        <Button
-          onClick={() => navigate('/')}
-          variant="ghost"
-          className="mb-4 pl-0 hover:bg-transparent"
-        >
-          <ArrowLeft className="mr-2" />
-          Zurück zur Übersicht
-        </Button>
-
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div className="relative h-[500px] overflow-hidden rounded-lg">
             <img
