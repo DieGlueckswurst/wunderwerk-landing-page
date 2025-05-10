@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
 
@@ -26,9 +27,9 @@ const RotatingText = () => {
   }, []);
 
   return (
-    <div className="relative h-[1.5em] inline-block w-full text-center">
+    <div className="inline-block">
       <span
-        className={`absolute left-1/2 -translate-x-1/2 transition-all duration-300 font-avenir text-white ${isVisible
+        className={`transition-all duration-300 font-avenir text-white ${isVisible
           ? "opacity-100 translate-y-0"
           : "opacity-0 translate-y-4"
           }`}
@@ -86,9 +87,10 @@ const HeroSection = () => {
             className="w-64 h-64 lg:w-80 lg:h-80 -mt-32 lg:-mt-40"
           />
         </div>
-        <div className="flex flex-row items-baseline justify-center gap-2 md:gap-3 text-2xl md:text-3xl lg:text-4xl font-avenir text-white mt-8 flex-wrap">
-          <span className="align-baseline">Räumlichkeiten für</span>
-          <span className="font-bold tracking-wider whitespace-nowrap align-baseline">
+        
+        <div className="flex flex-col md:flex-row items-center justify-center text-2xl md:text-3xl lg:text-4xl font-avenir text-white mt-8">
+          <span className="mb-2 md:mb-0">Räumlichkeiten für</span>
+          <span className="font-bold tracking-wider md:ml-3">
             <RotatingText />
           </span>
         </div>
