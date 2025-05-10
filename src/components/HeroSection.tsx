@@ -41,9 +41,19 @@ const RotatingText = () => {
 
 const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [opacity, setOpacity] = useState(1);
 
   useEffect(() => {
     setIsVisible(true);
+
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const newOpacity = Math.max(0, 1 - scrollPosition / 50);
+      setOpacity(newOpacity);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
@@ -59,12 +69,13 @@ const HeroSection = () => {
       <div
         className={`relative z-10 text-center transition-all duration-1000 mt-32 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
+        style={{ opacity }}
       >
-        <div className="mb-12">
+        <div className="mb-12 -mt-16">
           <img
             src="/logos/wunderwerk_circle_black_blurr.svg"
             alt="Wunderwerk Logo"
-            className="w-32 h-32 md:w-48 md:h-48 mx-auto"
+            className="w-64 h-64 md:w-80 md:h-80 mx-auto"
           />
         </div>
         <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-3 text-2xl md:text-3xl lg:text-4xl font-avenir text-white">
