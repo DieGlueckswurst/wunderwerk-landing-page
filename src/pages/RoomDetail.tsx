@@ -70,8 +70,8 @@ const RoomDetail = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Header section styled like About page */}
-      <section className="pt-24 pb-16 px-6 py-[74px]">
-        <div className="max-w-4xl mx-auto flex items-center justify-center gap-4 text-center">
+      <section className="pt-24 pb-16">
+        <div className="container mx-auto px-6 max-w-4xl flex items-center gap-4">
           <Button
             onClick={() => navigate('/')}
             variant="outline"
