@@ -49,7 +49,7 @@ const ContactSection = () => {
           email: email,
           reply_to: email,
           subject: subject || 'Neue Kontaktanfrage',
-          message: `Von: ${email}\n\n${message}`,
+          message: `${message}\n\nVon: ${email}\n\n\n\ --------------------`,
           to_email: 'info@wunderwerk-nuernberg.de',
         },
         'cfytsdgAHM6hq2nyF'
