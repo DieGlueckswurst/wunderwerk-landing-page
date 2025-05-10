@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -77,6 +78,14 @@ const Header = () => {
             >
               KONTAKT
             </Button>
+            <Link to="/about">
+              <Button
+                variant="ghost"
+                className={`font-sans hover:text-gray-600 transition-colors ${scrolled ? 'text-black' : 'text-white'}`}
+              >
+                ÜBER
+              </Button>
+            </Link>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -116,6 +125,14 @@ const Header = () => {
                 >
                   KONTAKT
                 </Button>
+                <Link to="/about" onClick={() => setIsOpen(false)}>
+                  <Button
+                    variant="ghost"
+                    className="font-sans text-black hover:text-gray-600 transition-colors justify-start w-full text-left"
+                  >
+                    ÜBER
+                  </Button>
+                </Link>
               </nav>
             </SheetContent>
           </Sheet>
