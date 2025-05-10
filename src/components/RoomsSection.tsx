@@ -67,7 +67,7 @@ const RoomsSection = () => {
     <div className="vertical-line h-48 mb-16"></div>
     <h2 className="section-title">02 Räume</h2>
 
-    <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
       {rooms.map((room, index) => <Room key={index} {...room} />)}
     </div>
   </section>;

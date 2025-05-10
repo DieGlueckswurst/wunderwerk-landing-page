@@ -1,8 +1,8 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, X } from "lucide-react";
 import { useState } from "react";
-import { Sheet, SheetContent } from "@/components/ui/sheet";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 
 const getRoomData = (roomId: string) => {
   const rooms = {
@@ -69,7 +69,7 @@ const RoomDetail = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <div className="container mx-auto px-6 pt-4">
+      <div className="container mx-auto px-6 pt-4 pb-16">
         <Button
           onClick={() => navigate('/')}
           variant="ghost"
@@ -145,13 +145,21 @@ const RoomDetail = () => {
       </div>
 
       {/* Fullscreen Image View */}
-      <Sheet open={isFullscreenOpen} onOpenChange={setIsFullscreenOpen}>
-        <SheetContent side="right" className="w-full p-0 bg-black/90">
+      <Dialog open={isFullscreenOpen} onOpenChange={setIsFullscreenOpen}>
+        <DialogContent className="max-w-[90vw] max-h-[90vh] p-0 bg-black/95 border-none">
           <div className="relative w-full h-full flex items-center justify-center">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="absolute top-4 right-4 text-white hover:bg-white/20"
+              onClick={() => setIsFullscreenOpen(false)}
+            >
+              <X className="h-6 w-6" />
+            </Button>
             <img
               src={roomData.images[currentImageIndex]}
               alt={`${roomData.title} - Bild ${currentImageIndex + 1}`}
-              className="max-w-full max-h-full object-contain"
+              className="max-w-full max-h-[90vh] object-contain"
             />
             {roomData.images.length > 1 && (
               <>
@@ -182,8 +190,8 @@ const RoomDetail = () => {
               </>
             )}
           </div>
-        </SheetContent>
-      </Sheet>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
