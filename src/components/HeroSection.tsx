@@ -34,7 +34,7 @@ const HeroSection = () => {
         <img
           src="/logos/wunderwerk_circle_black_blurr.svg"
           alt="Wunderwerk Circle"
-          className="w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 -mt-24 md:-mt-32 lg:-mt-40"
+          className="w-64 h-64 lg:w-80 lg:h-80 -mt-32 lg:-mt-40"
           style={{ opacity }}
         />
       </div>
