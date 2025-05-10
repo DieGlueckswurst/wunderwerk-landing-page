@@ -37,7 +37,7 @@ const Header = () => {
             src="/logos/wunderwerk_text_black_transparent.svg"
             alt="Wunderwerk Logo"
             className={cn(
-              "h-12 w-auto transition-opacity duration-300",
+              "h-8 w-auto transition-opacity duration-300",
               scrolled ? "opacity-100" : "opacity-0"
             )}
           />

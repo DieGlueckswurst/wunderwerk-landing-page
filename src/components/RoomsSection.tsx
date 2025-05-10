@@ -55,7 +55,7 @@ const Room = ({
             <p className="font-sans mb-6">{description}</p>
             <Button
               variant="outline"
-              className="text-black border-white hover:bg-white/20"
+              className="text-black border-white hover:bg-white/20 hover:text-white"
               onClick={handleLearnMore}
             >
               Mehr erfahren

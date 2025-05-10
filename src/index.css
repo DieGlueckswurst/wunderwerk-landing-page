@@ -121,7 +121,7 @@
 }
 
 .section-title {
-  @apply font-serif italic text-2xl text-gray-600 text-center mb-20;
+  @apply font-serif italic text-3xl text-gray-600 text-center mb-20;
   /* Increased margin */
 }
 
