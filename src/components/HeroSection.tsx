@@ -78,7 +78,7 @@ const HeroSection = () => {
             className="w-64 h-64 md:w-80 md:h-80 mx-auto"
           />
         </div>
-        <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-3 text-2xl md:text-3xl lg:text-4xl font-avenir text-white">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-3 text-2xl md:text-3xl lg:text-4xl font-avenir text-white mt-8">
           <span>Räumlichkeiten für</span>
           <span className="font-bold tracking-wider">
             <RotatingText />
