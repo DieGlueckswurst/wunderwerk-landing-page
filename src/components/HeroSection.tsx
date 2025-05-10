@@ -27,7 +27,7 @@ const RotatingText = () => {
   }, []);
 
   return (
-    <div className="inline-block">
+    <div className="inline-block min-w-[180px] text-center h-[1.2em]">
       <span
         className={`transition-all duration-300 font-avenir text-white ${isVisible
           ? "opacity-100 translate-y-0"
@@ -77,22 +77,24 @@ const HeroSection = () => {
       </div>
 
       <div
-        className="relative z-10 text-center mt-32"
+        className="relative z-10 text-center"
         style={{ opacity }}
       >
-        <div className="mb-12 -mt-32">
-          <img
-            src="/logos/wunderwerk_circle_black_blurr.svg"
-            alt="Wunderwerk Logo"
-            className="w-64 h-64 lg:w-80 lg:h-80 -mt-32 lg:-mt-40"
-          />
-        </div>
-        
-        <div className="flex flex-col md:flex-row items-center justify-center text-2xl md:text-3xl lg:text-4xl font-avenir text-white mt-8">
-          <span className="mb-2 md:mb-0">Räumlichkeiten für</span>
-          <span className="font-bold tracking-wider md:ml-3">
-            <RotatingText />
-          </span>
+        <div className="flex flex-col items-center justify-center">
+          <div className="mb-12">
+            <img
+              src="/logos/wunderwerk_circle_black_blurr.svg"
+              alt="Wunderwerk Logo"
+              className="w-64 h-64 lg:w-80 lg:h-80"
+            />
+          </div>
+          
+          <div className="flex flex-col md:flex-row items-center justify-center text-2xl md:text-3xl lg:text-4xl font-avenir text-white mt-8">
+            <span className="mb-2 md:mb-0">Räumlichkeiten für</span>
+            <span className="font-bold tracking-wider md:ml-3">
+              <RotatingText />
+            </span>
+          </div>
         </div>
       </div>
     </div>
