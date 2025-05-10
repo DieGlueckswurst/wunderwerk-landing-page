@@ -71,16 +71,16 @@ const RoomDetail = () => {
     <div className="min-h-screen bg-white">
       {/* Header section styled like About page */}
       <section className="pt-24 pb-16 px-6 py-[74px]">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif mb-6">{roomData.title}</h1>
+        <div className="max-w-4xl mx-auto flex items-center justify-center gap-4 text-center">
           <Button
             onClick={() => navigate('/')}
             variant="outline"
-            className="rounded-full mt-4"
+            className="rounded-full"
             size="icon"
           >
             <ArrowLeft className="h-4 w-4" />
           </Button>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif mb-0 flex-1">{roomData.title}</h1>
         </div>
       </section>
       <div className="container mx-auto px-6 pt-4 pb-16">
@@ -123,7 +123,6 @@ const RoomDetail = () => {
           </div>
 
           <div>
-            <h1 className="text-4xl font-serif mb-4">{roomData.title}</h1>
             <p className="text-lg mb-8">{roomData.description}</p>
 
             <h2 className="text-2xl font-serif mb-4">Ausstattung</h2>
