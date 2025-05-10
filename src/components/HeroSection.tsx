@@ -48,7 +48,7 @@ const HeroSection = () => {
 
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
-      const newOpacity = Math.max(0, 1 - scrollPosition / 50);
+      const newOpacity = Math.max(0, 1 - scrollPosition / 200);
       setOpacity(newOpacity);
     };
 
