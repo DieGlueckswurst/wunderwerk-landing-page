@@ -58,6 +58,10 @@ const RoomsSection = () => {
     imageSrc: "/rooms/werkstadt/werkstadt_unfinished.png",
     title: "Werkstadt",
     description: "Optimale Ausstattung für Physiotherapie"
+  }, {
+    imageSrc: "/rooms/cafe/cafe_ambiente.png",
+    title: "Café",
+    description: "Ideal für kleine Ausstellungen, Pop-up Events und intime Konzerte"
   }];
   return <section id="rooms" className="px-6 py-[40px]">
     <div className="vertical-line h-48 mb-16"></div>
