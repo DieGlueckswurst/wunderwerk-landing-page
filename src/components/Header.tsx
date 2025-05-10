@@ -39,7 +39,11 @@ const Header = () => {
               variant="ghost"
               className="p-0 hover:bg-transparent"
             >
-              <img src="/logos/wunderwerk_text_black_transparent.svg" alt="Wunderwerk Logo" className="h-10" />
+              <img
+                src="/logos/wunderwerk_text_black_transparent.svg"
+                alt="Wunderwerk Logo"
+                className={`h-8 transition-opacity duration-300 ${scrolled ? 'opacity-100' : 'opacity-0'}`}
+              />
             </Button>
           </div>
 
