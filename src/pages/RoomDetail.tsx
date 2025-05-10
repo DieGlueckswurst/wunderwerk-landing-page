@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { useState } from "react";
+import { Sheet, SheetContent } from "@/components/ui/sheet";
 
 const getRoomData = (roomId: string) => {
   const rooms = {
@@ -30,7 +31,7 @@ const getRoomData = (roomId: string) => {
       title: "Café",
       description: "Unser Café-Raum bietet eine einzigartige Atmosphäre für kreative Events und kulturelle Veranstaltungen. Mit seiner gemütlichen Ausstattung ist er ideal für kleine Ausstellungen, Pop-up Events und intime Konzerte. Die Kombination aus modernem Design und behaglicher Atmosphäre schafft den perfekten Rahmen für unvergessliche Momente.",
       features: ["28 m² Fläche", "Große, lichtdurchflutete Fenster", "Gemütliche Wohnzimmer-Atmosphäre", "Barbereich"],
-      images: ["/rooms/cafe/cafe_ambiente.jpeg"]
+      images: ["/rooms/cafe/cafe_ambiente.png"]
     }
   };
 
@@ -41,6 +42,7 @@ const RoomDetail = () => {
   const { roomId } = useParams<{ roomId: string }>();
   const navigate = useNavigate();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isFullscreenOpen, setIsFullscreenOpen] = useState(false);
 
   const roomData = getRoomData(roomId || "");
 
@@ -66,12 +68,12 @@ const RoomDetail = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white pt-16">
-      <div className="container mx-auto px-6 py-8">
+    <div className="min-h-screen bg-white">
+      <div className="container mx-auto px-6 pt-4">
         <Button
           onClick={() => navigate('/')}
           variant="ghost"
-          className="mb-6 pl-0 hover:bg-transparent"
+          className="mb-4 pl-0 hover:bg-transparent"
         >
           <ArrowLeft className="mr-2" />
           Zurück zur Übersicht
@@ -82,7 +84,8 @@ const RoomDetail = () => {
             <img
               src={roomData.images[currentImageIndex]}
               alt={`${roomData.title} - Bild ${currentImageIndex + 1}`}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover cursor-pointer"
+              onClick={() => setIsFullscreenOpen(true)}
             />
             {roomData.images.length > 1 && (
               <>
@@ -140,6 +143,47 @@ const RoomDetail = () => {
           </div>
         </div>
       </div>
+
+      {/* Fullscreen Image View */}
+      <Sheet open={isFullscreenOpen} onOpenChange={setIsFullscreenOpen}>
+        <SheetContent side="right" className="w-full p-0 bg-black/90">
+          <div className="relative w-full h-full flex items-center justify-center">
+            <img
+              src={roomData.images[currentImageIndex]}
+              alt={`${roomData.title} - Bild ${currentImageIndex + 1}`}
+              className="max-w-full max-h-full object-contain"
+            />
+            {roomData.images.length > 1 && (
+              <>
+                <Button
+                  onClick={prevImage}
+                  variant="ghost"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white"
+                >
+                  ←
+                </Button>
+                <Button
+                  onClick={nextImage}
+                  variant="ghost"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white"
+                >
+                  →
+                </Button>
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
+                  {roomData.images.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentImageIndex(index)}
+                      className={`w-2 h-2 rounded-full transition-colors ${index === currentImageIndex ? 'bg-white' : 'bg-white/50'
+                        }`}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+        </SheetContent>
+      </Sheet>
     </div>
   );
 };
