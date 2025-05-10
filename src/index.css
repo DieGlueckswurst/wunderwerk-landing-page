@@ -118,6 +118,8 @@
   /* Increased height */
   background-color: #ddd;
   margin: 0 auto;
+  margin-bottom: 24px;
+  /* Increased space between line and title */
 }
 
 .section-title {

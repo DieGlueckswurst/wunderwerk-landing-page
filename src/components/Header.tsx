@@ -70,7 +70,7 @@ const Header = () => {
             variant="ghost"
             className="font-sans text-sm tracking-wider hover:bg-transparent hover:text-black"
           >
-            KUNDEN
+            STIMMEN
           </Button>
           <Button
             onClick={() => scrollToSection('contact')}

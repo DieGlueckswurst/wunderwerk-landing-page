@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+
 const Testimonial = ({
   author,
   text,
@@ -9,61 +10,79 @@ const Testimonial = ({
   text: string;
   active: boolean;
 }) => {
-  return <div className={`transition-opacity duration-500 ${active ? "opacity-100" : "opacity-0 absolute"}`}>
-      <p className="text-xl text-center font-avenir-next-italic mb-6 max-w-3xl mx-auto md:text-lg">"{text}"</p>
+  return (
+    <div className={`transition-opacity duration-500 ${active ? "opacity-100" : "opacity-0 absolute"}`}>
+      <p className="text-xl text-center font-['Avenir_Next'] italic mb-6 max-w-3xl mx-auto md:text-lg">"{text}"</p>
       <p className="text-center font-sans text-base">{author}</p>
-    </div>;
+    </div>
+  );
 };
+
 const TestimonialsSection = () => {
-  const testimonials = [{
-    text: "Die Räume im Wunderwerk sind einfach perfekt für meine Yogakurse. Hell, großzügig und mit einer wunderbaren Atmosphäre.",
-    author: "Sarah M., Yogalehrerin"
-  }, {
-    text: "Als Hebamme finde ich hier alles, was ich für meine Arbeit brauche. Die Atmosphäre ist entspannt und professionell zugleich.",
-    author: "Claudia K., Hebamme"
-  }, {
-    text: "Meine Patienten fühlen sich im Wunderwerk sofort wohl. Die Räume sind optimal für meine physiotherapeutische Arbeit ausgestattet.",
-    author: "Thomas L., Physiotherapeut"
-  }];
+  const testimonials = [
+    {
+      text: "Ich habe hier das Dübeln gelernt. Hoffentlich hält alles.",
+      author: "C. K."
+    },
+    {
+      text: "Räumlichkeiten mit wahnsinnig schönem Licht.",
+      author: "T. H."
+    },
+    {
+      text: "Den Namen finde ich fraglich, sonst top.",
+      author: "I. K."
+    }
+  ];
+
   const [currentIndex, setCurrentIndex] = useState(0);
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex(prevIndex => (prevIndex + 1) % testimonials.length);
     }, 5000);
+
     return () => clearInterval(interval);
   }, [testimonials.length]);
-  const goToTestimonial = (index: number) => {
-    setCurrentIndex(index);
-  };
+
   const goToPrev = () => {
     setCurrentIndex(prevIndex => (prevIndex - 1 + testimonials.length) % testimonials.length);
   };
+
   const goToNext = () => {
     setCurrentIndex(prevIndex => (prevIndex + 1) % testimonials.length);
   };
-  return <section id="testimonials" className="px-6 py-[40px]">
+
+  return (
+    <section id="testimonials" className="px-6 py-20">
       <div className="vertical-line h-48 mb-16"></div>
-      <h2 className="section-title">03 Nicht nur wir finden die Räume toll</h2>
+      <h2 className="section-title">03 Stimmen</h2>
 
       <div className="max-w-4xl mx-auto text-center mb-12">
         <div className="relative h-[160px] flex items-center justify-center mb-8 px-12">
-          {testimonials.map((testimonial, index) => <Testimonial key={index} text={testimonial.text} author={testimonial.author} active={currentIndex === index} />)}
+          {testimonials.map((testimonial, index) => (
+            <Testimonial key={index} text={testimonial.text} author={testimonial.author} active={currentIndex === index} />
+          ))}
 
           {/* Navigation arrows */}
-          <button className="absolute left-0 top-1/2 -translate-y-1/2 text-gray-400 hover:text-black" onClick={goToPrev} aria-label="Previous testimonial">
+          <button
+            className="absolute left-0 top-1/2 -translate-y-1/2 text-gray-400 hover:text-black"
+            onClick={goToPrev}
+            aria-label="Previous testimonial"
+          >
             <ChevronLeft size={32} />
           </button>
 
-          <button className="absolute right-0 top-1/2 -translate-y-1/2 text-gray-400 hover:text-black" onClick={goToNext} aria-label="Next testimonial">
+          <button
+            className="absolute right-0 top-1/2 -translate-y-1/2 text-gray-400 hover:text-black"
+            onClick={goToNext}
+            aria-label="Next testimonial"
+          >
             <ChevronRight size={32} />
           </button>
         </div>
-
-        {/* Dots navigation */}
-        <div className="flex justify-center space-x-2">
-          {testimonials.map((_, index) => <button key={index} onClick={() => goToTestimonial(index)} className={`h-2 w-2 rounded-full transition-colors ${currentIndex === index ? "bg-black" : "bg-gray-300"}`} aria-label={`Go to testimonial ${index + 1}`} />)}
-        </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default TestimonialsSection;

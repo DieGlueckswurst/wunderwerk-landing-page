@@ -21,3 +21,11 @@
     font-style: normal;
     font-display: swap;
 }
+
+@font-face {
+    font-family: 'Avenir Next';
+    src: url('./AvenirNext-Italic.woff2') format('woff2');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
