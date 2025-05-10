@@ -19,7 +19,7 @@ const RotatingText = () => {
       setTimeout(() => {
         setCurrentIndex((prev) => (prev + 1) % words.length);
         setIsVisible(true);
-      }, 300); // Half of the total animation duration
+      }, 150); // Reduced from 300ms to 150ms
     }, 3000); // Show each word for 3 seconds
 
     return () => clearInterval(interval);
@@ -28,7 +28,7 @@ const RotatingText = () => {
   return (
     <div className="relative h-[1.5em] inline-block">
       <span
-        className={`absolute left-0 transition-all duration-600 font-avenir text-white ${isVisible
+        className={`absolute left-0 transition-all duration-300 font-avenir text-white ${isVisible
           ? "opacity-100 translate-y-0"
           : "opacity-0 translate-y-4"
           }`}
@@ -71,7 +71,7 @@ const HeroSection = () => {
           }`}
         style={{ opacity }}
       >
-        <div className="mb-12 -mt-16">
+        <div className="mb-12 -mt-32">
           <img
             src="/logos/wunderwerk_circle_black_blurr.svg"
             alt="Wunderwerk Logo"
