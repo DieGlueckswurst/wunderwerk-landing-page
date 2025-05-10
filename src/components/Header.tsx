@@ -102,7 +102,10 @@ const Header = () => {
               </svg>
             </Button>
           </SheetTrigger>
-          <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+          <SheetContent
+            side="right"
+            className="w-[300px] sm:w-[400px] bg-white/90 backdrop-blur-md"
+          >
             <nav className="flex flex-col space-y-4 mt-8">
               <Button
                 onClick={() => scrollToSection('start')}
