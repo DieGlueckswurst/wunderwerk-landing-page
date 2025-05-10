@@ -22,15 +22,15 @@ const TestimonialsSection = () => {
   const testimonials = [
     {
       text: "Ich habe hier das Dübeln gelernt. Hoffentlich hält alles.",
-      author: "C. K."
+      author: "Chris"
     },
     {
       text: "Räumlichkeiten mit wahnsinnig schönem Licht.",
-      author: "T. H."
+      author: "Toni"
     },
     {
       text: "Den Namen finde ich fraglich, sonst top.",
-      author: "I. K."
+      author: "Ina"
     }
   ];
 

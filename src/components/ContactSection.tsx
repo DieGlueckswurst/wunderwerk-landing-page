@@ -41,17 +41,18 @@ const ContactSection = () => {
       return;
     }
     try {
-      await emailjs.send('service_xlrejj5',
-        // service ID
+      await emailjs.send(
+        'service_xlrejj5',
         'template_v4gzqoc',
-        // template ID
         {
           from_name: name,
           from_email: email,
+          reply_to: email,
           subject: subject || 'Neue Kontaktanfrage',
           message: message,
-          to_email: 'info@wunderwerk-nuernberg.de'
-        }, 'cfytsdgAHM6hq2nyF' // public key
+          to_email: 'info@wunderwerk-nuernberg.de',
+        },
+        'cfytsdgAHM6hq2nyF'
       );
       setIsSubmitted(true);
       toast({
