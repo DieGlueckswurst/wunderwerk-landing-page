@@ -117,6 +117,9 @@ const About = () => {
         </div>
       </div>
     </section>
+    <div className="py-12 text-center text-2xl font-serif text-gray-700">
+      Die Zukunft? Wird wunderbar.
+    </div>
   </div>;
 };
 export default About;
