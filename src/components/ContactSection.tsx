@@ -107,7 +107,7 @@ const ContactSection = () => {
       <div className="text-center">
         <div className="mb-8">
           <a href="mailto:info@wunderwerk-nuernberg.de" className="mb-2 block">info@wunderwerk-nuernberg.de</a>
-          <p>Wunderwerk • Musterstraße 123 • 90402 Nürnberg</p>
+          <p>Wunderwerk • Pfarrgasse 9 • 90402 Nürnberg</p>
         </div>
       </div>
     </div>

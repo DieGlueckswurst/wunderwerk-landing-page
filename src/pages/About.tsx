@@ -33,7 +33,7 @@ const About = () => {
     id: 2,
     date: "1945",
     title: "Nürnberg in Ruinen",
-    description: "Die Stadt wurde fast vollständig zerstört, darunter auch die Pfarrgasse 9.",
+    description: "Krieg, nicht gut.",
     image: "/timeline/nuremberg_in_ruins.png"
   }, {
     id: 3,
@@ -91,8 +91,8 @@ const About = () => {
           {timelineItems.map((item, index) => <div key={item.id} className="mb-16 md:mb-24 relative">
             <div className={`md:flex items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
               {/* Date marker for desktop */}
-              <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white border-4 border-gray-200 z-10 flex items-center justify-center">
-                <span className="font-bold text-xs">{item.date}</span>
+              <div className="hidden md:block absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white border-4 border-gray-200 z-10 flex items-center justify-center">
+                <span className="font-bold text-xs leading-none text-center flex items-center justify-center w-full h-full">{item.date}</span>
               </div>
 
               {/* Content */}
