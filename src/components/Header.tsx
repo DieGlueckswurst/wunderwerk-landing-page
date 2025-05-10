@@ -34,26 +34,42 @@ const Header = () => {
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
-            <Link to="/" className="flex items-center">
+            <Button
+              onClick={() => scrollToSection('start')}
+              variant="ghost"
+              className="p-0 hover:bg-transparent"
+            >
               <img src="/logos/wunderwerk_circle_black.svg" alt="Wunderwerk Logo" className="h-10" />
-            </Link>
+            </Button>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <Link to="/#rooms" className={`font-sans hover:text-gray-600 transition-colors ${scrolled ? 'text-black' : 'text-white'}`}>
+            <Button
+              onClick={() => scrollToSection('rooms')}
+              variant="ghost"
+              className={`font-sans hover:text-gray-600 transition-colors ${scrolled ? 'text-black' : 'text-white'}`}
+            >
               RÄUME
-            </Link>
-            <Link to="/#testimonials" className={`font-sans hover:text-gray-600 transition-colors ${scrolled ? 'text-black' : 'text-white'}`}>
+            </Button>
+            <Button
+              onClick={() => scrollToSection('testimonials')}
+              variant="ghost"
+              className={`font-sans hover:text-gray-600 transition-colors ${scrolled ? 'text-black' : 'text-white'}`}
+            >
               STIMMEN
-            </Link>
-            <Link to="/#contact" className={`font-sans hover:text-gray-600 transition-colors ${scrolled ? 'text-black' : 'text-white'}`}>
+            </Button>
+            <Button
+              onClick={() => scrollToSection('contact')}
+              variant="ghost"
+              className={`font-sans hover:text-gray-600 transition-colors ${scrolled ? 'text-black' : 'text-white'}`}
+            >
               KONTAKT
-            </Link>
+            </Button>
           </nav>
 
           {/* Mobile Menu Button */}
-          <Sheet>
+          <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className={`md:hidden ${scrolled ? 'bg-white' : 'bg-transparent'}`}>
                 <Menu className={`h-6 w-6 ${scrolled ? 'text-black' : 'text-white'}`} />
@@ -61,15 +77,27 @@ const Header = () => {
             </SheetTrigger>
             <SheetContent side="right" className="w-[300px] bg-white/80 backdrop-blur-md">
               <nav className="flex flex-col space-y-4 mt-8">
-                <Link to="/#rooms" className="font-sans text-black hover:text-gray-600 transition-colors">
+                <Button
+                  onClick={() => scrollToSection('rooms')}
+                  variant="ghost"
+                  className="font-sans text-black hover:text-gray-600 transition-colors justify-start"
+                >
                   RÄUME
-                </Link>
-                <Link to="/#testimonials" className="font-sans text-black hover:text-gray-600 transition-colors">
+                </Button>
+                <Button
+                  onClick={() => scrollToSection('testimonials')}
+                  variant="ghost"
+                  className="font-sans text-black hover:text-gray-600 transition-colors justify-start"
+                >
                   STIMMEN
-                </Link>
-                <Link to="/#contact" className="font-sans text-black hover:text-gray-600 transition-colors">
+                </Button>
+                <Button
+                  onClick={() => scrollToSection('contact')}
+                  variant="ghost"
+                  className="font-sans text-black hover:text-gray-600 transition-colors justify-start"
+                >
                   KONTAKT
-                </Link>
+                </Button>
               </nav>
             </SheetContent>
           </Sheet>
