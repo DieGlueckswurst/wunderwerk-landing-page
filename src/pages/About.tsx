@@ -76,8 +76,8 @@ const About = () => {
     <div className="min-h-screen bg-white">
       <Header />
       
-      {/* Back button with scrolled effect */}
-      <div className={`fixed top-20 left-6 z-40 transition-opacity duration-300 ${scrolled ? 'opacity-100' : 'opacity-0'}`}>
+      {/* Back button - now always visible */}
+      <div className="fixed top-20 left-6 z-40">
         <Link to="/">
           <Button variant="outline" className="rounded-full" size="icon">
             <ArrowLeft className="h-4 w-4" />
@@ -85,8 +85,8 @@ const About = () => {
         </Link>
       </div>
       
-      {/* Hero section */}
-      <section className="pt-32 pb-16 px-6">
+      {/* Hero section - reduced top padding */}
+      <section className="pt-24 pb-16 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif mb-6">Über Wunderwerk</h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
