@@ -26,9 +26,9 @@ const RotatingText = () => {
   }, []);
 
   return (
-    <div className="relative h-[1.5em] inline-block">
+    <div className="relative h-[1.5em] inline-block w-full text-center">
       <span
-        className={`absolute left-0 transition-all duration-300 font-avenir text-white ${isVisible
+        className={`absolute left-1/2 -translate-x-1/2 transition-all duration-300 font-avenir text-white ${isVisible
           ? "opacity-100 translate-y-0"
           : "opacity-0 translate-y-4"
           }`}
@@ -49,7 +49,7 @@ const HeroSection = () => {
       setOffset(newOffset);
 
       // Calculate opacity: 1 until 80px scroll, then fade to 0 at 130px scroll
-      const newOpacity = Math.max(0, 1 - ((newOffset - 80) / 50));
+      const newOpacity = Math.max(0, 1 - ((newOffset - 110) / 50));
       setOpacity(newOpacity);
     };
 
