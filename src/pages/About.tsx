@@ -52,7 +52,7 @@ const About = () => {
     date: "2025",
     title: "Harte Arbeit muss belohnt werden",
     description: "Das Eis als Rettung langer Arbeitstage.",
-    image: "/timeline/eis_rettung.png"
+    image: "/timeline/eis.png"
   }, {
     id: 6,
     date: "2025",
@@ -73,7 +73,7 @@ const About = () => {
     </div>
 
     {/* Hero section - reduced top padding */}
-    <section className="pt-24 pb-16 px-6 py-[74px]">
+    <section className="pt-24 pb-16 px-6 py-[44px]">
       <div className="max-w-4xl mx-auto text-center">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif mb-6">Über uns</h1>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto">Es war einmal...</p>
