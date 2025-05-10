@@ -28,7 +28,7 @@ const RotatingText = () => {
   return (
     <div className="relative h-[1.5em] inline-block">
       <span
-        className={`absolute left-0 transition-all duration-600 font-avenir ${isVisible
+        className={`absolute left-0 transition-all duration-600 font-avenir text-white ${isVisible
           ? "opacity-100 translate-y-0"
           : "opacity-0 translate-y-4"
           }`}
@@ -64,10 +64,10 @@ const HeroSection = () => {
           <img
             src="/logos/wunderwerk_circle_black_blurr.svg"
             alt="Wunderwerk Logo"
-            className="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 mx-auto"
+            className="w-32 h-32 md:w-48 md:h-48 mx-auto"
           />
         </div>
-        <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-3 text-2xl md:text-3xl lg:text-4xl font-avenir">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-3 text-2xl md:text-3xl lg:text-4xl font-avenir text-white">
           <span>Räumlichkeiten für</span>
           <span className="font-bold tracking-wider">
             <RotatingText />
