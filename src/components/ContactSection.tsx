@@ -45,11 +45,11 @@ const ContactSection = () => {
         'service_xlrejj5',
         'template_v4gzqoc',
         {
-          from_name: name,
-          from_email: email,
+          name: name,
+          email: email,
           reply_to: email,
           subject: subject || 'Neue Kontaktanfrage',
-          message: message,
+          message: `Von: ${email}\n\n${message}`,
           to_email: 'info@wunderwerk-nuernberg.de',
         },
         'cfytsdgAHM6hq2nyF'
