@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
@@ -56,7 +55,7 @@ const Room = ({
             <p className="font-sans mb-6">{description}</p>
             <Button
               variant="outline"
-              className="text-white border-white hover:bg-white/20"
+              className="text-black border-white hover:bg-white/20"
               onClick={handleLearnMore}
             >
               Mehr erfahren

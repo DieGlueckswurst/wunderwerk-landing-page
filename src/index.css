@@ -101,21 +101,28 @@
     @apply bg-background text-foreground font-sans;
     scroll-behavior: smooth;
   }
-  
-  h1, h2, h3, h4, h5, h6 {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-serif tracking-wide;
   }
 }
 
 .vertical-line {
   width: 1px;
-  height: 160px; /* Increased height */
+  height: 160px;
+  /* Increased height */
   background-color: #ddd;
   margin: 0 auto;
 }
 
 .section-title {
-  @apply font-serif italic text-xl text-gray-600 text-center mb-20; /* Increased margin */
+  @apply font-serif italic text-2xl text-gray-600 text-center mb-20;
+  /* Increased margin */
 }
 
 .parallax-container {
