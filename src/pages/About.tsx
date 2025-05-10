@@ -52,7 +52,7 @@ const About = () => {
     date: "2025",
     title: "Harte Arbeit muss belohnt werden",
     description: "Das Eis als Rettung langer Arbeitstage.",
-    image: "/timeline/eis.png"
+    image: "/timeline/eis_rettung.png"
   }, {
     id: 6,
     date: "2025",
