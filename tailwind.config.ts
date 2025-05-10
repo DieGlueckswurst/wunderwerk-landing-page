@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -20,9 +19,9 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        serif: ['Playfair Display', 'serif'],
-      },
+				sans: ['Avenir Next', 'sans-serif'],
+				serif: ['Summer Font', 'serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -90,22 +89,22 @@ export default {
 						height: '0'
 					}
 				},
-        'scroll-bg': {
-          '0%': { backgroundPosition: '0% 0%' },
-          '100%': { backgroundPosition: '0% 100%' }
-        },
-        'testimonial-fade': {
-          '0%': { opacity: '0', transform: 'translateY(10px)' },
-          '10%': { opacity: '1', transform: 'translateY(0)' },
-          '90%': { opacity: '1', transform: 'translateY(0)' },
-          '100%': { opacity: '0', transform: 'translateY(-10px)' }
-        }
+				'scroll-bg': {
+					'0%': { backgroundPosition: '0% 0%' },
+					'100%': { backgroundPosition: '0% 100%' }
+				},
+				'testimonial-fade': {
+					'0%': { opacity: '0', transform: 'translateY(10px)' },
+					'10%': { opacity: '1', transform: 'translateY(0)' },
+					'90%': { opacity: '1', transform: 'translateY(0)' },
+					'100%': { opacity: '0', transform: 'translateY(-10px)' }
+				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-        'scroll-bg': 'scroll-bg 20s linear infinite alternate',
-        'testimonial-fade': 'testimonial-fade 10s ease-in-out infinite'
+				'scroll-bg': 'scroll-bg 20s linear infinite alternate',
+				'testimonial-fade': 'testimonial-fade 10s ease-in-out infinite'
 			}
 		}
 	},
