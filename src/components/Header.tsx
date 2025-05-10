@@ -86,7 +86,14 @@ const Header = () => {
 
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild>
-            <Button variant="outline" className="md:hidden" size="icon">
+            <Button
+              variant="outline"
+              className={cn(
+                "md:hidden",
+                scrolled ? "bg-white" : "bg-transparent border-transparent hover:bg-transparent"
+              )}
+              size="icon"
+            >
               <span className="sr-only">Open menu</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
                 <line x1="4" x2="20" y1="12" y2="12"></line>
