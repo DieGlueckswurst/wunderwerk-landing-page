@@ -26,7 +26,7 @@ const getRoomData = (roomId: string) => {
       title: "Café",
       description: "Unser Café-Raum bietet eine einzigartige Atmosphäre für kreative Events und kulturelle Veranstaltungen. Mit seiner gemütlichen Ausstattung ist er ideal für kleine Ausstellungen, Pop-up Events und intime Konzerte. Die Kombination aus modernem Design und behaglicher Atmosphäre schafft den perfekten Rahmen für unvergessliche Momente.",
       features: ["28 m² Fläche", "Große, lichtdurchflutete Fenster", "Gemütliche Wohnzimmer-Atmosphäre", "Barbereich"],
-      imageSrc: "/rooms/cafe/cafe_ambiente.jpeg"
+      imageSrc: "/rooms/cafe/cafe_ambiente.png"
     }
   };
 
