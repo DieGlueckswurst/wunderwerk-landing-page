@@ -146,7 +146,7 @@ const RoomDetail = () => {
 
       {/* Fullscreen Image View */}
       <Dialog open={isFullscreenOpen} onOpenChange={setIsFullscreenOpen}>
-        <DialogContent className="max-w-[90vw] max-h-[90vh] p-0 bg-black/95 border-none">
+        <DialogContent className="max-w-[90vw] max-h-[90vh] p-0 bg-black/95 border-none [&>button]:hidden">
           <div className="relative w-full h-full flex items-center justify-center">
             <Button
               variant="ghost"

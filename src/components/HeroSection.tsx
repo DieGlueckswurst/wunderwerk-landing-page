@@ -2,93 +2,79 @@ import { useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
 
 const RotatingText = () => {
-  const texts = [
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isVisible, setIsVisible] = useState(true);
+
+  const words = [
     "Hebammen",
     "Physiotherapeuten",
     "Yoga-Kurse",
     "Fortbildungen",
     "Pop-up Events"
   ];
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [text, setText] = useState('');
-  const [delta, setDelta] = useState(200 - Math.random() * 100);
 
   useEffect(() => {
-    let ticker = setInterval(() => {
-      tick();
-    }, delta);
+    const interval = setInterval(() => {
+      setIsVisible(false);
+      setTimeout(() => {
+        setCurrentIndex((prev) => (prev + 1) % words.length);
+        setIsVisible(true);
+      }, 300); // Half of the total animation duration
+    }, 3000); // Show each word for 3 seconds
 
-    return () => clearInterval(ticker);
-  }, [text, delta]);
-
-  const tick = () => {
-    const fullText = texts[currentIndex];
-
-    if (isDeleting) {
-      setText(prev => fullText.substring(0, prev.length - 1));
-      setDelta(50);
-    } else {
-      setText(prev => fullText.substring(0, prev.length + 1));
-      setDelta(200 - Math.random() * 100);
-    }
-
-    if (!isDeleting && text === fullText) {
-      setDelta(2000); // Pause at end
-      setIsDeleting(true);
-    } else if (isDeleting && text === '') {
-      setIsDeleting(false);
-      setCurrentIndex(prev => (prev + 1) % texts.length);
-      setDelta(500); // Pause before starting new word
-    }
-  };
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <div className="text-center md:text-left flex flex-col md:flex-row items-center gap-4 md:gap-8">
-      <span className="text-white text-2xl md:text-3xl font-sans">Räumlichkeiten für</span>
-      <div className="h-12 md:h-16 flex items-center justify-center">
-        <span className="text-white text-2xl md:text-3xl font-sans font-bold tracking-wide">{text}</span>
-        <span className="text-white text-2xl md:text-3xl font-sans font-bold animate-pulse">|</span>
-      </div>
+    <div className="relative h-[1.5em] inline-block">
+      <span
+        className={`absolute left-0 transition-all duration-600 ${isVisible
+          ? "opacity-100 translate-y-0"
+          : "opacity-0 -translate-y-4"
+          }`}
+      >
+        {words[currentIndex]}
+      </span>
     </div>
   );
 };
 
 const HeroSection = () => {
-  const [opacity, setOpacity] = useState(1);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      const newOpacity = Math.max(0, 1 - scrollPosition / 50);
-      setOpacity(newOpacity);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    setIsVisible(true);
   }, []);
 
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden">
-      <div
-        className="absolute inset-0 w-full h-full transition-transform duration-1000"
-        style={{
-          backgroundImage: 'url("/hero/studio_clean.png")',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          transform: `translateY(${window.scrollY * 0.5}px)`
-        }}
-      />
-      <div className="relative z-10 flex flex-col items-center">
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <div className="absolute inset-0 z-0">
         <img
-          src="/logos/wunderwerk_circle_black_blurr.svg"
-          alt="Wunderwerk Logo"
-          className="w-80 h-80 -mt-40 mb-8"
-          style={{ opacity }}
+          src="/hero/hero.png"
+          alt="Hero Background"
+          className="w-full h-full object-cover"
         />
-        <RotatingText />
       </div>
-    </section>
+
+      <div
+        className={`relative z-10 text-center transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+      >
+        <div className="mb-8">
+          <img
+            src="/logo/logo_circle.png"
+            alt="Wunderwerk Logo"
+            className="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 mx-auto"
+          />
+        </div>
+        <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-3 text-2xl md:text-3xl lg:text-4xl font-serif">
+          <span>Räumlichkeiten für</span>
+          <span className="font-bold tracking-wider">
+            <RotatingText />
+          </span>
+        </div>
+      </div>
+    </div>
   );
 };
 
