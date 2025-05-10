@@ -48,8 +48,8 @@ const HeroSection = () => {
       const newOffset = window.pageYOffset;
       setOffset(newOffset);
 
-      // Calculate opacity: 1 at 0px scroll, 0 at 150px scroll
-      const newOpacity = Math.max(0, 1 - (newOffset / 150));
+      // Calculate opacity: 1 until 80px scroll, then fade to 0 at 130px scroll
+      const newOpacity = Math.max(0, 1 - ((newOffset - 80) / 50));
       setOpacity(newOpacity);
     };
 
