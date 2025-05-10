@@ -28,9 +28,9 @@ const RotatingText = () => {
   return (
     <div className="relative h-[1.5em] inline-block">
       <span
-        className={`absolute left-0 transition-all duration-600 ${isVisible
+        className={`absolute left-0 transition-all duration-600 font-avenir ${isVisible
           ? "opacity-100 translate-y-0"
-          : "opacity-0 -translate-y-4"
+          : "opacity-0 translate-y-4"
           }`}
       >
         {words[currentIndex]}
@@ -50,7 +50,7 @@ const HeroSection = () => {
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 z-0">
         <img
-          src="/hero/hero.png"
+          src="/hero/studio_clean.png"
           alt="Hero Background"
           className="w-full h-full object-cover"
         />
@@ -62,12 +62,12 @@ const HeroSection = () => {
       >
         <div className="mb-12">
           <img
-            src="/logo/logo_circle.png"
+            src="/logos/wunderwerk_circle_black_blurr.svg"
             alt="Wunderwerk Logo"
             className="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 mx-auto"
           />
         </div>
-        <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-3 text-2xl md:text-3xl lg:text-4xl font-serif">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-3 text-2xl md:text-3xl lg:text-4xl font-avenir">
           <span>Räumlichkeiten für</span>
           <span className="font-bold tracking-wider">
             <RotatingText />
