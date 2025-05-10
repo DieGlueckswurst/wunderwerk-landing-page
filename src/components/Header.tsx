@@ -46,6 +46,13 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             <Button
+              onClick={() => scrollToSection('info')}
+              variant="ghost"
+              className={`font-sans hover:text-gray-600 transition-colors ${scrolled ? 'text-black' : 'text-white'}`}
+            >
+              INFO
+            </Button>
+            <Button
               onClick={() => scrollToSection('rooms')}
               variant="ghost"
               className={`font-sans hover:text-gray-600 transition-colors ${scrolled ? 'text-black' : 'text-white'}`}
@@ -77,6 +84,13 @@ const Header = () => {
             </SheetTrigger>
             <SheetContent side="right" className="w-[300px] bg-white/80 backdrop-blur-md">
               <nav className="flex flex-col space-y-4 mt-8">
+                <Button
+                  onClick={() => scrollToSection('info')}
+                  variant="ghost"
+                  className="font-sans text-black hover:text-gray-600 transition-colors justify-start"
+                >
+                  INFO
+                </Button>
                 <Button
                   onClick={() => scrollToSection('rooms')}
                   variant="ghost"
