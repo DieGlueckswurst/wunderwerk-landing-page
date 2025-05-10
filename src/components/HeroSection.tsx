@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
+import { ChevronDown } from "lucide-react";
 
 const RotatingText = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -58,6 +59,14 @@ const HeroSection = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const scrollToNextSection = () => {
+    const heroHeight = window.innerHeight;
+    window.scrollTo({
+      top: heroHeight,
+      behavior: 'smooth'
+    });
+  };
+
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div
@@ -95,6 +104,16 @@ const HeroSection = () => {
               <RotatingText />
             </span>
           </div>
+        </div>
+      </div>
+      
+      <div 
+        className="absolute bottom-10 left-0 right-0 z-10 flex justify-center animate-bounce cursor-pointer"
+        onClick={scrollToNextSection}
+        style={{ opacity }}
+      >
+        <div className="bg-white bg-opacity-20 rounded-full p-2 backdrop-blur-sm hover:bg-opacity-30 transition-all">
+          <ChevronDown className="w-6 h-6 text-white" />
         </div>
       </div>
     </div>
