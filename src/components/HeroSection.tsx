@@ -57,10 +57,10 @@ const HeroSection = () => {
       </div>
 
       <div
-        className={`relative z-10 text-center transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+        className={`relative z-10 text-center transition-all duration-1000 mt-32 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
       >
-        <div className="mb-8">
+        <div className="mb-12">
           <img
             src="/logo/logo_circle.png"
             alt="Wunderwerk Logo"
