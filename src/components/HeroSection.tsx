@@ -19,8 +19,8 @@ const RotatingText = () => {
       setTimeout(() => {
         setCurrentIndex((prev) => (prev + 1) % words.length);
         setIsVisible(true);
-      }, 150); // Reduced from 300ms to 150ms
-    }, 3000); // Show each word for 3 seconds
+      }, 150);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, []);
@@ -40,15 +40,16 @@ const RotatingText = () => {
 };
 
 const HeroSection = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [offset, setOffset] = useState(0);
   const [opacity, setOpacity] = useState(1);
 
   useEffect(() => {
-    setIsVisible(true);
-
     const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      const newOpacity = Math.max(0, 1 - scrollPosition / 50);
+      const newOffset = window.pageYOffset;
+      setOffset(newOffset);
+
+      // Calculate opacity: 1 at 0px scroll, 0 at 50px scroll
+      const newOpacity = Math.max(0, 1 - (newOffset / 50));
       setOpacity(newOpacity);
     };
 
@@ -58,7 +59,15 @@ const HeroSection = () => {
 
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 z-0">
+      <div
+        className="absolute inset-0 z-0"
+        style={{
+          transform: `translateY(${offset * 0.5}px)`,
+          height: '120%',
+          width: '100%',
+          top: '-10%'
+        }}
+      >
         <img
           src="/hero/studio_clean.png"
           alt="Hero Background"
@@ -67,15 +76,14 @@ const HeroSection = () => {
       </div>
 
       <div
-        className={`relative z-10 text-center transition-all duration-1000 mt-32 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
+        className="relative z-10 text-center mt-32"
         style={{ opacity }}
       >
         <div className="mb-12 -mt-32">
           <img
             src="/logos/wunderwerk_circle_black_blurr.svg"
             alt="Wunderwerk Logo"
-            className="w-64 h-64 md:w-80 md:h-80 mx-auto"
+            className="w-64 h-64 lg:w-80 lg:h-80 -mt-32 lg:-mt-40"
           />
         </div>
         <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-3 text-2xl md:text-3xl lg:text-4xl font-avenir text-white mt-8">
