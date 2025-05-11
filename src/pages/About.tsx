@@ -28,7 +28,7 @@ const About = () => {
     date: "1900",
     title: "Nürnberger Lebkuchen",
     description: "Ich weiß nicht, was davor hier war. Vielleicht eine Lebkuchenbäckerei?",
-    image: "/timeline/lebkuchenbäckerei.png"
+    image: "/timeline/lebkuchenbaeckerei.png"
   }, {
     id: 2,
     date: "1945",
