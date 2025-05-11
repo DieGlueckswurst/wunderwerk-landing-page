@@ -31,13 +31,28 @@ const Header = () => {
     }
   };
 
-  const handleLogoClick = () => {
+  const handleSectionClick = (sectionId: string) => {
     if (location.pathname === '/') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      scrollToSection(sectionId);
     } else {
-      navigate('/');
+      navigate('/', { state: { scrollTo: sectionId } });
+      setIsOpen(false);
     }
   };
+
+  const handleAboutClick = () => {
+    navigate('/about');
+    setIsOpen(false);
+  };
+
+  useEffect(() => {
+    if (location.pathname === '/' && location.state && location.state.scrollTo) {
+      const sectionId = location.state.scrollTo;
+      setTimeout(() => {
+        scrollToSection(sectionId);
+      }, 100);
+    }
+  }, [location]);
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/80 backdrop-blur-md shadow-sm' : 'bg-transparent'}`}>
@@ -45,7 +60,7 @@ const Header = () => {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <Button
-              onClick={handleLogoClick}
+              onClick={() => scrollToSection('info')}
               variant="ghost"
               className="p-0 hover:bg-transparent"
             >
@@ -60,41 +75,40 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             <Button
-              onClick={() => scrollToSection('info')}
+              onClick={() => handleSectionClick('info')}
               variant="ghost"
               className={`font-sans hover:text-gray-600 transition-colors ${scrolled ? 'text-black' : 'text-white'}`}
             >
               INFO
             </Button>
             <Button
-              onClick={() => scrollToSection('rooms')}
+              onClick={() => handleSectionClick('rooms')}
               variant="ghost"
               className={`font-sans hover:text-gray-600 transition-colors ${scrolled ? 'text-black' : 'text-white'}`}
             >
               RÄUME
             </Button>
             <Button
-              onClick={() => scrollToSection('testimonials')}
+              onClick={() => handleSectionClick('testimonials')}
               variant="ghost"
               className={`font-sans hover:text-gray-600 transition-colors ${scrolled ? 'text-black' : 'text-white'}`}
             >
               STIMMEN
             </Button>
             <Button
-              onClick={() => scrollToSection('contact')}
+              onClick={() => handleSectionClick('contact')}
               variant="ghost"
               className={`font-sans hover:text-gray-600 transition-colors ${scrolled ? 'text-black' : 'text-white'}`}
             >
               KONTAKT
             </Button>
-            <Link to="/about">
-              <Button
-                variant="ghost"
-                className={`font-sans hover:text-gray-600 transition-colors ${scrolled ? 'text-black' : 'text-white'}`}
-              >
-                ÜBER
-              </Button>
-            </Link>
+            <Button
+              onClick={handleAboutClick}
+              variant="ghost"
+              className={`font-sans hover:text-gray-600 transition-colors ${scrolled ? 'text-black' : 'text-white'}`}
+            >
+              ÜBER
+            </Button>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -107,41 +121,40 @@ const Header = () => {
             <SheetContent side="right" className="w-[300px] bg-white/80 backdrop-blur-md">
               <nav className="flex flex-col space-y-4 mt-8">
                 <Button
-                  onClick={() => scrollToSection('info')}
+                  onClick={() => handleSectionClick('info')}
                   variant="ghost"
                   className="font-sans text-black hover:text-gray-600 transition-colors justify-start"
                 >
                   INFO
                 </Button>
                 <Button
-                  onClick={() => scrollToSection('rooms')}
+                  onClick={() => handleSectionClick('rooms')}
                   variant="ghost"
                   className="font-sans text-black hover:text-gray-600 transition-colors justify-start"
                 >
                   RÄUME
                 </Button>
                 <Button
-                  onClick={() => scrollToSection('testimonials')}
+                  onClick={() => handleSectionClick('testimonials')}
                   variant="ghost"
                   className="font-sans text-black hover:text-gray-600 transition-colors justify-start"
                 >
                   STIMMEN
                 </Button>
                 <Button
-                  onClick={() => scrollToSection('contact')}
+                  onClick={() => handleSectionClick('contact')}
                   variant="ghost"
                   className="font-sans text-black hover:text-gray-600 transition-colors justify-start"
                 >
                   KONTAKT
                 </Button>
-                <Link to="/about" onClick={() => setIsOpen(false)}>
-                  <Button
-                    variant="ghost"
-                    className="font-sans text-black hover:text-gray-600 transition-colors justify-start w-full text-left"
-                  >
-                    ÜBER
-                  </Button>
-                </Link>
+                <Button
+                  onClick={handleAboutClick}
+                  variant="ghost"
+                  className="font-sans text-black hover:text-gray-600 transition-colors justify-start"
+                >
+                  ÜBER
+                </Button>
               </nav>
             </SheetContent>
           </Sheet>
