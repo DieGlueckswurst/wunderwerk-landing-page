@@ -32,9 +32,9 @@ const Datenschutz = () => {
             <h2>1. Datenschutz auf einen Blick</h2>
             <h3>Allgemeine Hinweise</h3>
             <p>
-              Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, 
-              wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert 
-              werden können. Ausführliche Informationen zum Thema Datenschutz entnehmen Sie unserer unter diesem Text 
+              Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert,
+              wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert
+              werden können. Ausführliche Informationen zum Thema Datenschutz entnehmen Sie unserer unter diesem Text
               aufgeführten Datenschutzerklärung.
             </p>
 
@@ -51,38 +51,37 @@ const Datenschutz = () => {
 
             <p>
               <strong>Wofür nutzen wir Ihre Daten?</strong><br />
-              Ein Teil der Daten wird erhoben, um eine fehlerfreie Bereitstellung der Website zu gewährleisten. 
+              Ein Teil der Daten wird erhoben, um eine fehlerfreie Bereitstellung der Website zu gewährleisten.
               Andere Daten können zur Analyse Ihres Nutzerverhaltens verwendet werden.
             </p>
 
             <p>
               <strong>Welche Rechte haben Sie bezüglich Ihrer Daten?</strong><br />
-              Sie haben jederzeit das Recht, unentgeltlich Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten 
-              personenbezogenen Daten zu erhalten. Sie haben außerdem ein Recht, die Berichtigung oder Löschung dieser Daten 
-              zu verlangen. Wenn Sie eine Einwilligung zur Datenverarbeitung erteilt haben, können Sie diese Einwilligung 
-              jederzeit für die Zukunft widerrufen. Außerdem haben Sie das Recht, unter bestimmten Umständen die Einschränkung 
+              Sie haben jederzeit das Recht, unentgeltlich Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten
+              personenbezogenen Daten zu erhalten. Sie haben außerdem ein Recht, die Berichtigung oder Löschung dieser Daten
+              zu verlangen. Wenn Sie eine Einwilligung zur Datenverarbeitung erteilt haben, können Sie diese Einwilligung
+              jederzeit für die Zukunft widerrufen. Außerdem haben Sie das Recht, unter bestimmten Umständen die Einschränkung
               der Verarbeitung Ihrer personenbezogenen Daten zu verlangen.
             </p>
 
             <h2>2. Kontaktformular und EmailJS</h2>
             <p>
-              Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive 
-              der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen 
+              Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive
+              der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen
               bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.
             </p>
-            
+
             <p>
-              Für das Kontaktformular nutzen wir den Dienst EmailJS. EmailJS übermittelt die Formularinhalte per E-Mail und 
-              speichert diese Informationen vorübergehend auf seinen Servern. Weitere Informationen zum Umgang mit Nutzerdaten 
+              Für das Kontaktformular nutzen wir den Dienst EmailJS. EmailJS übermittelt die Formularinhalte per E-Mail und
+              speichert diese Informationen vorübergehend auf seinen Servern. Weitere Informationen zum Umgang mit Nutzerdaten
               finden Sie in der Datenschutzerklärung von EmailJS.
             </p>
 
             <h2>3. Verantwortlicher</h2>
             <p>
               Christian Konnerth<br />
-              Wunderwerk<br />
-              Pfarrgasse 9<br />
-              90402 Nürnberg<br />
+              Helmstraße 19<br />
+              90419 Nürnberg<br />
               E-Mail: info@wunderwerk-nuernberg.de
             </p>
           </div>
