@@ -23,7 +23,12 @@ const Header = () => {
   const scrollToSection = (id: string, isMobile: boolean = false) => {
     const element = document.getElementById(id);
     if (element) {
-      // For mobile, add a small delay to allow the sheet to close
+      const targetPosition = element.offsetTop - 100;
+      const startPosition = window.pageYOffset;
+      const distance = targetPosition - startPosition;
+      const duration = 800; // Consistent duration across all devices
+      let startTime: number | null = null;
+
       const scroll = () => {
         window.scrollTo({
           top: element.offsetTop - 100,
@@ -31,12 +36,34 @@ const Header = () => {
         });
       };
 
+      // Custom smooth scroll function
+      const smoothScroll = (currentTime: number) => {
+        if (startTime === null) startTime = currentTime;
+        const timeElapsed = currentTime - startTime;
+        const progress = Math.min(timeElapsed / duration, 1);
+
+        // Easing function for smoother animation
+        const easeInOutCubic = (t: number) => t < 0.5
+          ? 4 * t * t * t
+          : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+        window.scrollTo(0, startPosition + distance * easeInOutCubic(progress));
+
+        if (timeElapsed < duration) {
+          requestAnimationFrame(smoothScroll);
+        }
+      };
+
       if (isMobile) {
         // Close the sheet first, then scroll
         setIsOpen(false);
-        setTimeout(scroll, 300); // Wait for sheet closing animation
+        setTimeout(() => {
+          startTime = null;
+          requestAnimationFrame(smoothScroll);
+        }, 300); // Wait for sheet closing animation
       } else {
-        scroll();
+        startTime = null;
+        requestAnimationFrame(smoothScroll);
       }
     }
   };
