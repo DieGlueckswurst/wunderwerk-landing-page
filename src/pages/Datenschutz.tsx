@@ -1,29 +1,14 @@
-
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
+import PageHeader from "@/components/PageHeader";
 
 const Datenschutz = () => {
   return (
     <div className="min-h-screen bg-white">
       <Header />
-
-      {/* Back button */}
-      <div className="fixed top-20 left-6 z-40">
-        <Link to="/">
-          <Button variant="outline" size="icon" className="rounded-full">
-            <ArrowLeft className="h-4 w-4" />
-          </Button>
-        </Link>
-      </div>
-
-      {/* Header section */}
-      <section className="pt-24 pb-16">
-        <div className="container mx-auto px-6 max-w-4xl text-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif mb-0">Datenschutz</h1>
-        </div>
-      </section>
+      <PageHeader title="Datenschutz" />
 
       {/* Content section */}
       <section className="pb-16">

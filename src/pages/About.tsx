@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Header from "@/components/Header";
+import PageHeader from "@/components/PageHeader";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -12,6 +13,7 @@ interface TimelineItem {
   description: string;
   image: string;
 }
+
 const About = () => {
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
@@ -60,66 +62,57 @@ const About = () => {
     description: "Es ist vollbracht! Das Wunderwerk ist offiziell eröffnet.",
     image: "/timeline/group.png"
   }];
-  return <div className="min-h-screen bg-white">
-    <Header />
 
-    {/* Back button - now always visible */}
-    <div className="fixed top-20 left-6 z-40">
-      <Link to="/">
-        <Button variant="outline" size="icon" className="rounded-full py-0">
-          <ArrowLeft className="h-4 w-4" />
-        </Button>
-      </Link>
-    </div>
+  return (
+    <div className="min-h-screen bg-white">
+      <Header />
+      <PageHeader title="Über uns" />
 
-    {/* Hero section - reduced top padding */}
-    <section className="pt-14 pb-6 px-6 py-[74px]">
-      <div className="max-w-4xl mx-auto text-center">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif mb-6">Über uns</h1>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto">Es war einmal...</p>
-      </div>
-    </section>
+      {/* Timeline section */}
+      <section className="py-16 px-6 bg-orange-50">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">Es war einmal...</p>
+          </div>
+          <div className="relative">
+            {/* Vertical line */}
+            <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gray-200"></div>
 
-    {/* Timeline section */}
-    <section className="py-16 px-6 bg-orange-50">
-      <div className="max-w-6xl mx-auto">
-        <div className="relative">
-          {/* Vertical line */}
-          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gray-200"></div>
+            {/* Timeline items */}
+            {timelineItems.map((item, index) => <div key={item.id} className="mb-16 md:mb-24 relative">
+              <div className={`md:flex items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+                {/* Date marker for desktop */}
+                <div className="hidden md:block absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white border-4 border-gray-200 z-10 flex items-center justify-center">
+                  <span className="font-bold text-xs leading-none text-center flex items-center justify-center w-full h-full">{item.date}</span>
+                </div>
 
-          {/* Timeline items */}
-          {timelineItems.map((item, index) => <div key={item.id} className="mb-16 md:mb-24 relative">
-            <div className={`md:flex items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
-              {/* Date marker for desktop */}
-              <div className="hidden md:block absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white border-4 border-gray-200 z-10 flex items-center justify-center">
-                <span className="font-bold text-xs leading-none text-center flex items-center justify-center w-full h-full">{item.date}</span>
-              </div>
-
-              {/* Content */}
-              <div className={`md:w-1/2 ${index % 2 === 0 ? 'md:pr-16' : 'md:pl-16'}`}>
-                <div className="bg-white rounded-lg shadow-md overflow-hidden">
-                  <img src={item.image} alt={item.title} className="w-full h-64 object-cover" onError={e => {
-                    const target = e.target as HTMLImageElement;
-                    target.src = "https://images.unsplash.com/photo-1617173296640-e8d5320017bb?q=80&w=1600&h=900&auto=format&fit=crop";
-                  }} />
-                  <div className="p-6">
-                    {/* Date marker for mobile */}
-                    <div className="md:hidden mb-2 inline-block px-3 py-1 bg-gray-100 rounded-full text-xs font-bold">
-                      {item.date}
+                {/* Content */}
+                <div className={`md:w-1/2 ${index % 2 === 0 ? 'md:pr-16' : 'md:pl-16'}`}>
+                  <div className="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src={item.image} alt={item.title} className="w-full h-64 object-cover" onError={e => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = "https://images.unsplash.com/photo-1617173296640-e8d5320017bb?q=80&w=1600&h=900&auto=format&fit=crop";
+                    }} />
+                    <div className="p-6">
+                      {/* Date marker for mobile */}
+                      <div className="md:hidden mb-2 inline-block px-3 py-1 bg-gray-100 rounded-full text-xs font-bold">
+                        {item.date}
+                      </div>
+                      <h3 className="text-xl font-serif mb-2">{item.title}</h3>
+                      <p className="text-gray-600">{item.description}</p>
                     </div>
-                    <h3 className="text-xl font-serif mb-2">{item.title}</h3>
-                    <p className="text-gray-600">{item.description}</p>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>)}
+            </div>)}
+          </div>
         </div>
+      </section>
+      <div className="py-12 text-center text-2xl font-serif text-gray-700">
+        Die Zukunft? Wird wunderbar.
       </div>
-    </section>
-    <div className="py-12 text-center text-2xl font-serif text-gray-700">
-      Die Zukunft? Wird wunderbar.
     </div>
-  </div>;
+  );
 };
+
 export default About;
