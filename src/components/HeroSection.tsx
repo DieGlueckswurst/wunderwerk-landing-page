@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
@@ -79,7 +78,7 @@ const HeroSection = () => {
         }}
       >
         <img
-          src="/hero/studio_clean.png"
+          src="/hero/studio_clean.webp"
           alt="Hero Background"
           className="w-full h-full object-cover"
         />
