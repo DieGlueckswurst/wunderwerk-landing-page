@@ -73,7 +73,7 @@ const About = () => {
     </div>
 
     {/* Hero section - reduced top padding */}
-    <section className="pt-12 pb-6 px-6 py-[74px]">
+    <section className="pt-14 pb-6 px-6 py-[74px]">
       <div className="max-w-4xl mx-auto text-center">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif mb-6">Über uns</h1>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto">Es war einmal...</p>
