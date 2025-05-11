@@ -26,8 +26,8 @@ const PageHeader = ({ title, showBackButton = true }: PageHeaderProps) => {
             </div>
             {showBackButton && (
                 <div
-                    className="fixed z-40 left-6 transition-all duration-200"
-                    style={{ top: scrolled ? '5rem' : '4rem' }}
+                    className="fixed z-50 left-6 transition-all duration-200"
+                    style={{ top: scrolled ? '5rem' : '2.5rem' }}
                 >
                     <Link to="/">
                         <Button variant="outline" size="icon" className="rounded-full">
