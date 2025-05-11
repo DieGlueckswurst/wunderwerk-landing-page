@@ -4,6 +4,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import emailjs from '@emailjs/browser';
+import { Link } from "react-router-dom";
+
 const ContactSection = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -116,12 +118,12 @@ const ContactSection = () => {
       <div className="border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center">
         <p className="text-sm text-gray-500 mb-4 md:mb-0">© 2025 Wunderwerk Nürnberg. Alle Rechte vorbehalten.</p>
         <div className="flex gap-6">
-          <a href="#" className="text-sm text-gray-500 hover:text-black">Impressum</a>
-          <a href="#" className="text-sm text-gray-500 hover:text-black">Datenschutz</a>
-          <a href="#" className="text-sm text-gray-500 hover:text-black">AGB</a>
+          <Link to="/impressum" className="text-sm text-gray-500 hover:text-black">Impressum</Link>
+          <Link to="/datenschutz" className="text-sm text-gray-500 hover:text-black">Datenschutz</Link>
         </div>
       </div>
     </div>
   </section>;
 };
+
 export default ContactSection;

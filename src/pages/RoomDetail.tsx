@@ -1,8 +1,10 @@
+
 import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, X } from "lucide-react";
 import { useState } from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
+import Header from "@/components/Header";
 
 const getRoomData = (roomId: string) => {
   const rooms = {
@@ -69,20 +71,27 @@ const RoomDetail = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      <Header />
+
+      {/* Back button */}
+      <div className="fixed top-20 left-6 z-40">
+        <Button
+          onClick={() => navigate('/')}
+          variant="outline"
+          className="rounded-full"
+          size="icon"
+        >
+          <ArrowLeft className="h-4 w-4" />
+        </Button>
+      </div>
+
       {/* Header section styled like About page */}
       <section className="pt-24 pb-16">
-        <div className="container mx-auto px-6 max-w-4xl flex items-center gap-4">
-          <Button
-            onClick={() => navigate('/')}
-            variant="outline"
-            className="rounded-full"
-            size="icon"
-          >
-            <ArrowLeft className="h-4 w-4" />
-          </Button>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif mb-0 flex-1">{roomData.title}</h1>
+        <div className="container mx-auto px-6 max-w-4xl">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif mb-0">{roomData.title}</h1>
         </div>
       </section>
+      
       <div className="container mx-auto px-6 pt-4 pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div className="relative h-[500px] overflow-hidden rounded-lg">
