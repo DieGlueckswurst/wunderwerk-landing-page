@@ -66,14 +66,14 @@ const About = () => {
     {/* Back button - now always visible */}
     <div className="fixed top-20 left-6 z-40">
       <Link to="/">
-        <Button variant="outline" className="rounded-full" size="icon">
+        <Button variant="outline" size="icon" className="rounded-full py-0">
           <ArrowLeft className="h-4 w-4" />
         </Button>
       </Link>
     </div>
 
     {/* Hero section - reduced top padding */}
-    <section className="pt-24 pb-16 px-6 py-[44px]">
+    <section className="pt-24 pb-16 px-6 py-[36px]">
       <div className="max-w-4xl mx-auto text-center">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif mb-6">Über uns</h1>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto">Es war einmal...</p>
