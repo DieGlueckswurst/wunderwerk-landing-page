@@ -88,12 +88,14 @@ const HeroSection = () => {
         className="relative z-10 text-center"
         style={{ opacity }}
       >
-        <div className="flex justify-center mb-12">
-          <img
-            src="/logos/wunderwerk_circle_black_blurr.svg"
-            alt="Wunderwerk Logo"
-            className="w-64 h-64 lg:w-80 lg:h-80"
-          />
+        <div className="relative h-0">
+          <div className="absolute left-1/2 top-0 -translate-x-1/2">
+            <img
+              src="/logos/wunderwerk_circle_black_blurr.svg"
+              alt="Wunderwerk Logo"
+              className="w-64 h-64 lg:w-80 lg:h-80"
+            />
+          </div>
         </div>
         <div className="flex flex-col md:flex-row items-center justify-center text-2xl md:text-3xl lg:text-4xl font-avenir text-white mt-8">
           <span className="mb-2 md:mb-0">Räumlichkeiten für</span>
