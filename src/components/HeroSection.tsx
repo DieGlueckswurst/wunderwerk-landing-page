@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
@@ -85,15 +86,18 @@ const HeroSection = () => {
       </div>
 
       <div
-        className="relative z-10 text-center"
+        className="relative z-10 text-center w-full"
         style={{ opacity }}
       >
+        {/* Logo container with fixed width and centered */}
         <div className="flex justify-center mb-12">
-          <img
-            src="/logos/wunderwerk_circle_black_blurr.svg"
-            alt="Wunderwerk Logo"
-            className="w-64 h-64 lg:w-80 lg:h-80"
-          />
+          <div className="w-64 h-64 lg:w-80 lg:h-80 flex items-center justify-center">
+            <img
+              src="/logos/wunderwerk_circle_black_blurr.svg"
+              alt="Wunderwerk Logo"
+              className="w-full h-full"
+            />
+          </div>
         </div>
         <div className="flex flex-col md:flex-row items-center justify-center text-2xl md:text-3xl lg:text-4xl font-avenir text-white mt-8">
           <span className="mb-2 md:mb-0">Räumlichkeiten für</span>
