@@ -20,20 +20,30 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (id: string) => {
+  const scrollToSection = (id: string, isMobile: boolean = false) => {
     const element = document.getElementById(id);
     if (element) {
-      window.scrollTo({
-        top: element.offsetTop - 100,
-        behavior: 'smooth'
-      });
-      setIsOpen(false); // Close menu after clicking
+      // For mobile, add a small delay to allow the sheet to close
+      const scroll = () => {
+        window.scrollTo({
+          top: element.offsetTop - 100,
+          behavior: 'smooth'
+        });
+      };
+
+      if (isMobile) {
+        // Close the sheet first, then scroll
+        setIsOpen(false);
+        setTimeout(scroll, 300); // Wait for sheet closing animation
+      } else {
+        scroll();
+      }
     }
   };
 
   const handleSectionClick = (sectionId: string) => {
     if (location.pathname === '/') {
-      scrollToSection(sectionId);
+      scrollToSection(sectionId, window.innerWidth < 768); // Pass isMobile flag
     } else {
       navigate('/', { state: { scrollTo: sectionId } });
       setIsOpen(false);
@@ -121,9 +131,30 @@ const Header = () => {
           </nav>
 
           {/* Mobile Menu Button */}
-          <Sheet open={isOpen} onOpenChange={setIsOpen}>
+          <Sheet open={isOpen} onOpenChange={(open) => {
+            setIsOpen(open);
+            // Reset any active states when the sheet closes
+            if (!open) {
+              const button = document.querySelector('[data-sheet-trigger]');
+              if (button) {
+                button.classList.remove('active', 'hover:bg-gray-100');
+              }
+            }
+          }}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className={`md:hidden ${scrolled ? 'bg-white' : 'bg-transparent'}`}>
+              <Button
+                variant="ghost"
+                size="icon"
+                data-sheet-trigger
+                className={`md:hidden touch-none select-none ${scrolled ? 'bg-white' : 'bg-transparent'
+                  } ${isOpen ? 'bg-gray-100' : ''}`}
+                onTouchEnd={(e) => {
+                  // Prevent the default touch behavior
+                  e.preventDefault();
+                  // Reset the button state
+                  e.currentTarget.blur();
+                }}
+              >
                 <Menu className={`h-6 w-6 ${scrolled ? 'text-black' : 'text-white'}`} />
               </Button>
             </SheetTrigger>
