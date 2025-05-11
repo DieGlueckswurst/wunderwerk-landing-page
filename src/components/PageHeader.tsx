@@ -20,7 +20,7 @@ const PageHeader = ({ title, showBackButton = true }: PageHeaderProps) => {
     }, []);
 
     return (
-        <section className="pt-16 pb-8">
+        <section className="pt-10 pb-8">
             <div className="container mx-auto px-6 max-w-4xl text-center">
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif mb-0">{title}</h1>
             </div>
