@@ -6,8 +6,8 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-  const base = process.env.NODE_ENV === 'production' ? './' : '/';
-  
+  const base = '/wunderwerk-landing-page/';
+
   return {
     base,
     server: {
