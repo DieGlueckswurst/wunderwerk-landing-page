@@ -148,12 +148,6 @@ const Header = () => {
                 data-sheet-trigger
                 className={`md:hidden touch-none select-none ${scrolled ? 'bg-white' : 'bg-transparent'
                   } ${isOpen ? 'bg-gray-100' : ''}`}
-                onTouchEnd={(e) => {
-                  // Prevent the default touch behavior
-                  e.preventDefault();
-                  // Reset the button state
-                  e.currentTarget.blur();
-                }}
               >
                 <Menu className={`h-6 w-6 ${scrolled ? 'text-black' : 'text-white'}`} />
               </Button>
