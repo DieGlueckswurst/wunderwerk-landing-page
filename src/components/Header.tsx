@@ -54,13 +54,22 @@ const Header = () => {
     }
   }, [location]);
 
+  // Handle logo click (app bar icon)
+  const handleLogoClick = () => {
+    if (location.pathname === '/') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      navigate('/');
+    }
+  };
+
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/80 backdrop-blur-md shadow-sm' : 'bg-transparent'}`}>
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <Button
-              onClick={() => scrollToSection('info')}
+              onClick={handleLogoClick}
               variant="ghost"
               className="p-0 hover:bg-transparent"
             >
