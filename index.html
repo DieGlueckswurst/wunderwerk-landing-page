@@ -9,9 +9,9 @@
     content="Wunderwerk Nürnberg - Professionelle Räume für Kurse, Hebammen und Physiotherapeuten" />
   <meta name="author" content="Wunderwerk" />
 
-  <!-- Font imports -->
-  <link rel="stylesheet" href="/fonts/avenir-next.css">
-  <link rel="stylesheet" href="/fonts/summer-font.css">
+  <!-- Font imports with relative paths -->
+  <link rel="stylesheet" href="./fonts/avenir-next.css">
+  <link rel="stylesheet" href="./fonts/summer-font.css">
 
   <meta property="og:title" content="Wunderwerk | Räume in Nürnberg" />
   <meta property="og:description" content="Professionelle Räume für Kurse, Hebammen und Physiotherapeuten" />
@@ -21,13 +21,35 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@wunderwerk" />
   <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+  
+  <!-- Base tag for GitHub Pages -->
+  <script>
+    // Dynamically set the base URL for GitHub Pages or other environments
+    (function() {
+      const base = document.createElement('base');
+      const isGitHubPages = window.location.hostname.includes('github.io');
+      
+      // If on GitHub Pages, use the repository name as the base path
+      // Otherwise, use root path
+      if (isGitHubPages) {
+        const pathSegments = window.location.pathname.split('/');
+        // The repository name should be the first path segment
+        const repoName = pathSegments.length > 1 ? pathSegments[1] : '';
+        base.href = repoName ? `/${repoName}/` : '/';
+      } else {
+        base.href = '/';
+      }
+      
+      document.head.prepend(base);
+    })();
+  </script>
 </head>
 
 <body>
   <div id="root"></div>
   <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
   <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
-  <script type="module" src="/src/main.tsx"></script>
+  <script type="module" src="./src/main.tsx"></script>
 </body>
 
 </html>
