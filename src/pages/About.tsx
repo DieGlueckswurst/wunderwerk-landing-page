@@ -81,7 +81,7 @@ const About = () => {
     </section>
 
     {/* Timeline section */}
-    <section className="py-16 px-6 bg-gray-50">
+    <section className="py-16 px-6 bg-orange-50">
       <div className="max-w-6xl mx-auto">
         <div className="relative">
           {/* Vertical line */}
