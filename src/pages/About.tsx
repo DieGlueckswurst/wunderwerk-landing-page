@@ -13,7 +13,6 @@ interface TimelineItem {
   description: string;
   image: string;
 }
-
 const About = () => {
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
@@ -62,9 +61,7 @@ const About = () => {
     description: "Es ist vollbracht! Das Wunderwerk ist offiziell eröffnet.",
     image: "/timeline/group.png"
   }];
-
-  return (
-    <div className="min-h-screen bg-white">
+  return <div className="min-h-screen bg-white">
       <Header />
       <PageHeader title="Über uns" />
 
@@ -90,9 +87,9 @@ const About = () => {
                 <div className={`md:w-1/2 ${index % 2 === 0 ? 'md:pr-16' : 'md:pl-16'}`}>
                   <div className="bg-white rounded-lg shadow-md overflow-hidden">
                     <img src={item.image} alt={item.title} className="w-full h-64 object-cover" onError={e => {
-                      const target = e.target as HTMLImageElement;
-                      target.src = "https://images.unsplash.com/photo-1617173296640-e8d5320017bb?q=80&w=1600&h=900&auto=format&fit=crop";
-                    }} />
+                    const target = e.target as HTMLImageElement;
+                    target.src = "https://images.unsplash.com/photo-1617173296640-e8d5320017bb?q=80&w=1600&h=900&auto=format&fit=crop";
+                  }} />
                     <div className="p-6">
                       {/* Date marker for mobile */}
                       <div className="md:hidden mb-2 inline-block px-3 py-1 bg-gray-100 rounded-full text-xs font-bold">
@@ -111,8 +108,6 @@ const About = () => {
       <div className="py-12 text-center text-2xl font-serif text-gray-700">
         Die Zukunft? Wird wunderbar.
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default About;
