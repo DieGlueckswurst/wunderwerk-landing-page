@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { ChevronDown } from "lucide-react";
 
@@ -110,8 +109,7 @@ const HeroSection = () => {
         </div>
       </div>
       
-      {/* This is a spacer element that ensures content after the hero section 
-           starts at the correct position (after the screen height) */}
+      {/* Spacer element to push content below the hero section */}
       <div className="h-screen w-full" />
     </div>
   );
