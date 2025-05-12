@@ -1,6 +1,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const Testimonial = ({
   author,
@@ -13,12 +14,14 @@ const Testimonial = ({
   active: boolean;
   leaving: boolean;
 }) => {
+  const isMobile = useIsMobile();
+  
   return (
     <div
       className={`absolute inset-0 transition-opacity duration-300 ease-in-out flex flex-col items-center justify-center
         ${active ? "opacity-100 z-10" : "opacity-0 z-0"}`}
     >
-      <p className="text-xl text-center font-['Avenir_Next'] italic mb-6 max-w-3xl px-12 mx-auto md:text-lg">"{text}"</p>
+      <p className={`text-xl text-center font-['Avenir_Next'] italic mb-6 max-w-3xl mx-auto md:text-lg ${isMobile ? 'px-6' : 'px-12'}`}>"{text}"</p>
       <p className="text-center font-sans text-base">{author}</p>
     </div>
   );
@@ -40,6 +43,7 @@ const TestimonialsSection = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [leavingIndex, setLeavingIndex] = useState<number | null>(null);
   const timerRef = useRef<number | null>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -111,7 +115,7 @@ const TestimonialsSection = () => {
 
       <div className="max-w-4xl mx-auto text-center mb-12">
         <div
-          className="relative h-[180px] flex items-center justify-center mb-8 px-16"
+          className={`relative h-[180px] flex items-center justify-center mb-8 ${isMobile ? 'px-8' : 'px-16'}`}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
@@ -127,21 +131,21 @@ const TestimonialsSection = () => {
 
           {/* Navigation arrows - Fixed pointer events */}
           <button
-            className="absolute left-0 top-1/2 -translate-y-1/2 text-gray-400 hover:text-black transition-colors p-4 z-20"
+            className={`absolute left-0 top-1/2 -translate-y-1/2 text-gray-400 hover:text-black transition-colors z-20 ${isMobile ? 'p-2' : 'p-4'}`}
             onClick={goToPrev}
             aria-label="Previous testimonial"
             type="button"
           >
-            <ChevronLeft size={32} />
+            <ChevronLeft size={isMobile ? 24 : 32} />
           </button>
 
           <button
-            className="absolute right-0 top-1/2 -translate-y-1/2 text-gray-400 hover:text-black transition-colors p-4 z-20"
+            className={`absolute right-0 top-1/2 -translate-y-1/2 text-gray-400 hover:text-black transition-colors z-20 ${isMobile ? 'p-2' : 'p-4'}`}
             onClick={goToNext}
             aria-label="Next testimonial"
             type="button"
           >
-            <ChevronRight size={32} />
+            <ChevronRight size={isMobile ? 24 : 32} />
           </button>
 
           {/* Indicator dots */}
