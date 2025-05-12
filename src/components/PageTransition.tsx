@@ -1,3 +1,4 @@
+
 import { useLocation } from 'react-router-dom';
 
 interface PageTransitionProps {
@@ -11,10 +12,11 @@ const PageTransition = ({ children }: PageTransitionProps) => {
         <div
             key={location.pathname}
             className="page-fade"
+            style={{ position: 'relative', zIndex: 1 }}
         >
             {children}
         </div>
     );
 };
 
-export default PageTransition; 
+export default PageTransition;

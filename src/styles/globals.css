@@ -48,7 +48,6 @@ html, body {
 
 /* Add background to all non-hero sections */
 section:not(#hero) {
-  background-color: white;
   position: relative;
   z-index: 10;
 }
@@ -56,4 +55,9 @@ section:not(#hero) {
 /* Fix for About page background and z-index layering */
 body.about-page {
   background-color: rgb(255 247 237); /* bg-orange-50 equivalent */
+}
+
+/* Remove white background from sections inside the About page */
+body.about-page section:not(.no-bg-override) {
+  background-color: transparent !important;
 }
