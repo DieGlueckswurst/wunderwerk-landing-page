@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { ChevronDown } from "lucide-react";
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const RotatingText = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -41,6 +42,7 @@ const RotatingText = () => {
 
 const HeroSection = () => {
   const [opacity, setOpacity] = useState(1);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -63,15 +65,17 @@ const HeroSection = () => {
   };
 
   return (
-    <div className="relative h-screen">
-      {/* Background layer with a z-index below the content */}
+    <div className="relative h-screen overflow-hidden">
+      {/* Background image using a more Safari-friendly approach */}
       <div 
-        className="absolute top-0 left-0 w-full h-screen z-0"
+        className="absolute top-0 left-0 w-full h-full bg-cover bg-center"
         style={{
           backgroundImage: `url('/hero/studio_clean.webp')`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed'
+          position: 'absolute',
+          zIndex: 0,
+          ...(isMobile ? 
+            { backgroundAttachment: 'scroll' } : 
+            { backgroundAttachment: 'fixed' })
         }}
       />
       
