@@ -64,17 +64,18 @@ const HeroSection = () => {
 
   return (
     <div className="relative h-screen">
-      {/* Fixed background - stays in place */}
+      {/* Background layer with a z-index below the content */}
       <div 
-        className="fixed top-0 left-0 w-full h-screen z-0"
+        className="absolute top-0 left-0 w-full h-screen z-0"
         style={{
           backgroundImage: `url('/hero/studio_clean.webp')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
+          backgroundAttachment: 'fixed'
         }}
       />
       
-      {/* Content that fades out when scrolling */}
+      {/* Content layer with a higher z-index */}
       <div 
         className="relative z-10 h-screen flex flex-col items-center justify-center"
         style={{ opacity }}
