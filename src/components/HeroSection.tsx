@@ -130,7 +130,7 @@ const HeroSection = () => {
           alt="Hero Background"
           className="w-full h-full object-cover"
           loading="eager"
-          priority="high"
+          importance="high"
         />
       </div>
 
