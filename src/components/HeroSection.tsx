@@ -1,5 +1,5 @@
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, CSSProperties } from 'react';
 import { ChevronDown } from "lucide-react";
 import { useIsMobile } from '../hooks/use-mobile';
 
@@ -82,16 +82,16 @@ const HeroSection = () => {
     });
   };
 
-  // Apply hardware acceleration to improve performance
-  const transformStyle = {
+  // Apply hardware acceleration to improve performance with correct TypeScript types
+  const transformStyle: CSSProperties = {
     opacity,
     transform: `translateY(-${translateY}px)`,
     transition: 'transform 0.05s ease-out',
     willChange: 'transform, opacity',
     WebkitBackfaceVisibility: 'hidden',
-    WebkitPerspective: '1000',
+    WebkitPerspective: 1000,
     backfaceVisibility: 'hidden',
-    perspective: '1000'
+    perspective: 1000
   };
 
   return (
