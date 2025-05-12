@@ -1,4 +1,3 @@
-
 import { useEffect, useState, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
@@ -45,33 +44,26 @@ const HeroSection = () => {
   const [offset, setOffset] = useState(0);
   const [opacity, setOpacity] = useState(1);
   const requestRef = useRef<number>();
-  const previousTimeRef = useRef<number>();
-  const scrollY = useRef(0);
+  const targetOffset = useRef(0);
 
-  // Smoother parallax animation with requestAnimationFrame
-  const animate = (time: number) => {
-    if (previousTimeRef.current !== undefined) {
-      // Gradually update the offset for smoother transitions
-      scrollY.current = window.pageYOffset;
-      setOffset(scrollY.current);
-      
-      // Calculate opacity: 1 until 80px scroll, then fade to 0 at 130px scroll
-      const newOpacity = Math.max(0, 1 - ((scrollY.current - 110) / 50));
-      setOpacity(newOpacity);
-    }
-    previousTimeRef.current = time;
+  // Smoother parallax animation with requestAnimationFrame and lerp
+  const animate = () => {
+    setOffset(prev => {
+      const next = prev + (targetOffset.current - prev) * 0.15;
+      return Math.abs(next - targetOffset.current) < 0.1 ? targetOffset.current : next;
+    });
+    // Calculate opacity: 1 until 80px scroll, then fade to 0 at 130px scroll
+    const newOpacity = Math.max(0, 1 - ((targetOffset.current - 110) / 50));
+    setOpacity(newOpacity);
     requestRef.current = requestAnimationFrame(animate);
   };
 
   useEffect(() => {
-    // Use passive event listener for better performance
     const handleScroll = () => {
-      scrollY.current = window.pageYOffset;
+      targetOffset.current = window.pageYOffset;
     };
-    
     window.addEventListener('scroll', handleScroll, { passive: true });
     requestRef.current = requestAnimationFrame(animate);
-    
     return () => {
       window.removeEventListener('scroll', handleScroll);
       if (requestRef.current) {
