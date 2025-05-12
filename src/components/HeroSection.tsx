@@ -48,7 +48,10 @@ const HeroSection = () => {
       // Control both the fade effect and translation based on scroll position
       const scrollY = window.scrollY;
       const newOpacity = Math.max(0, 1 - (scrollY / 300));
-      const newTranslate = Math.min(100, scrollY / 2); // Move up as user scrolls down
+      
+      // Adjust the translation to move elements further up
+      // This will ensure they continue moving until fully faded at around 300px scroll
+      const newTranslate = Math.min(200, scrollY / 1.5);
       
       setOpacity(newOpacity);
       setTranslateY(newTranslate);
@@ -112,7 +115,7 @@ const HeroSection = () => {
           onClick={scrollToNextSection}
           style={{ 
             opacity,
-            transform: `translateY(-${translateY * 0.3}px)`, // Softer movement for the button
+            transform: `translateY(-${translateY * 0.5}px)`, // Increase scroll speed for the button
             transition: 'transform 0.05s ease-out' 
           }}
         >
