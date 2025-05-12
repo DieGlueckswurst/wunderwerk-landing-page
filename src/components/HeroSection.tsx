@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef, CSSProperties } from 'react';
 import { ChevronDown } from "lucide-react";
 import { useIsMobile } from '../hooks/use-mobile';
@@ -42,46 +41,33 @@ const RotatingText = () => {
 
 const HeroSection = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [showScrollIndicator, setShowScrollIndicator] = useState(true);
+  const [showScrollIndicator, setShowScrollIndicator] = useState(true); // Default to visible
   const isMobile = useIsMobile();
   const frameId = useRef<number | null>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
-  const scrollButtonRef = useRef<HTMLDivElement>(null);
   
-  // Improved logic to check for button visibility
+  // Simplify scroll indicator logic - show it by default
   useEffect(() => {
+    // Only hide on very small screens where there might not be enough space
     const checkSpaceForButton = () => {
-      if (contentRef.current) {
-        const contentBottom = contentRef.current.getBoundingClientRect().bottom;
-        const viewportHeight = window.innerHeight;
-        
-        // Show button if content doesn't fill the entire screen
-        // Using a smaller threshold to ensure it appears more often
-        const threshold = isMobile ? 20 : 30; 
-        const hasEnoughSpace = viewportHeight - contentBottom > threshold;
-        
-        console.log('Content bottom:', contentBottom);
-        console.log('Viewport height:', viewportHeight);
-        console.log('Space available:', viewportHeight - contentBottom);
-        console.log('Should show button:', hasEnoughSpace);
-        
-        setShowScrollIndicator(hasEnoughSpace);
+      // Use a very small threshold to show button in most cases
+      const smallScreenThreshold = 400; // Extremely small screens
+      
+      if (window.innerHeight < smallScreenThreshold) {
+        setShowScrollIndicator(false);
+      } else {
+        setShowScrollIndicator(true);
       }
     };
     
-    // Check on initial render and window resize
     checkSpaceForButton();
     window.addEventListener('resize', checkSpaceForButton);
     
-    // Adding a slight delay to ensure accurate measurements after DOM is fully rendered
-    const timeoutId = setTimeout(checkSpaceForButton, 500);
-    
     return () => {
       window.removeEventListener('resize', checkSpaceForButton);
-      clearTimeout(timeoutId);
     };
-  }, [isMobile]);
+  }, []);
   
   useEffect(() => {
     const handleScroll = () => {
@@ -178,10 +164,9 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* Scroll down button - with improved visibility logic */}
+        {/* Scroll down button - simplified to show by default */}
         {showScrollIndicator && (
           <div
-            ref={scrollButtonRef}
             className={`absolute z-10 flex justify-center animate-bounce cursor-pointer ${
               isMobile ? 'bottom-16' : 'bottom-8'
             } left-0 right-0`}
