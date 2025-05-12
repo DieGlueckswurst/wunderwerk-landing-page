@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { ChevronDown } from "lucide-react";
+import { useIsMobile } from '../hooks/use-mobile';
 
 const RotatingText = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -42,6 +43,7 @@ const RotatingText = () => {
 const HeroSection = () => {
   const [opacity, setOpacity] = useState(1);
   const [translateY, setTranslateY] = useState(0);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -111,7 +113,9 @@ const HeroSection = () => {
 
         {/* Scroll down button - separate from main content for custom animation */}
         <div
-          className="absolute bottom-10 left-0 right-0 z-10 flex justify-center animate-bounce cursor-pointer"
+          className={`absolute z-10 flex justify-center animate-bounce cursor-pointer ${
+            isMobile ? 'bottom-24' : 'bottom-10'
+          } left-0 right-0`}
           onClick={scrollToNextSection}
           style={{ 
             opacity,
