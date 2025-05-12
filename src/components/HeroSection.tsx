@@ -56,7 +56,8 @@ const HeroSection = () => {
       frameId.current = requestAnimationFrame(() => {
         // Calculate scroll progress as a value between 0 and 1
         const scrollY = window.scrollY;
-        const maxScroll = window.innerHeight * 0.8; // Use 80% of screen height as max scroll
+        // Use a smaller maxScroll value for faster fading
+        const maxScroll = window.innerHeight * 0.5; // Reduced from 0.8 to 0.5 for faster fade
         const newProgress = Math.min(1, scrollY / maxScroll);
         setScrollProgress(newProgress);
         frameId.current = null;
