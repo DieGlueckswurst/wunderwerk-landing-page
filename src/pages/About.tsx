@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import Header from "@/components/Header";
 import PageHeader from "@/components/PageHeader";
@@ -61,12 +62,12 @@ const About = () => {
     description: "Es ist vollbracht! Das Wunderwerk ist offiziell eröffnet.",
     image: "/timeline/group.png"
   }];
-  return <div className="min-h-screen bg-white">
+  return <div className="min-h-screen bg-orange-50">
       <Header />
       <PageHeader title="Über uns" />
 
       {/* Timeline section */}
-      <section className="py-16 px-6 bg-orange-50">
+      <section className="py-16 px-6 bg-orange-50 relative z-10">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">Es war einmal...</p>
@@ -105,7 +106,7 @@ const About = () => {
           </div>
         </div>
       </section>
-      <div className="py-12 text-center text-2xl font-serif text-gray-700">
+      <div className="py-12 text-center text-2xl font-serif text-gray-700 bg-orange-50">
         Die Zukunft? Wird wunderbar.
       </div>
     </div>;

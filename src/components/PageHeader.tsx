@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
@@ -20,17 +21,17 @@ const PageHeader = ({ title, showBackButton = true }: PageHeaderProps) => {
     }, []);
 
     return (
-        <section className="pt-10 pb-8">
+        <section className="pt-10 pb-8 relative">
             <div className="container mx-auto px-6 max-w-4xl text-center">
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif mb-0">{title}</h1>
             </div>
             {showBackButton && (
                 <div
-                    className="fixed z-50 left-6 transition-all duration-200"
+                    className="fixed z-50 left-6 transition-all duration-200 pointer-events-auto"
                     style={{ top: scrolled ? '5rem' : '2.5rem' }}
                 >
                     <Link to="/">
-                        <Button variant="outline" size="icon" className="rounded-full">
+                        <Button variant="outline" size="icon" className="rounded-full shadow-md">
                             <ArrowLeft className="h-4 w-4" />
                         </Button>
                     </Link>
