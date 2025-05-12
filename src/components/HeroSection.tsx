@@ -54,7 +54,7 @@ const HeroSection = () => {
       if (contentRef.current && scrollButtonRef.current) {
         const contentBottom = contentRef.current.getBoundingClientRect().bottom;
         const viewportHeight = window.innerHeight;
-        const minGap = isMobile ? 100 : 120; // Minimum gap in pixels
+        const minGap = isMobile ? 40 : 60; // Reduced minimum gap in pixels
         
         // Only show button if there's enough space below the content
         const hasEnoughSpace = viewportHeight - contentBottom > minGap;
