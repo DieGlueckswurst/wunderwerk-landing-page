@@ -146,7 +146,7 @@ const HeroSection = () => {
           style={contentStyle}
         >
           {/* Logo container with fixed width and centered */}
-          <div className={`flex justify-center ${isMobile ? 'mb-6 mt-[-90px]' : 'mb-12'}`}>
+          <div className={`flex justify-center ${isMobile ? 'mb-6 mt-[20px]' : 'mb-12'}`}>
             <div className={`${isMobile ? 'w-56 h-56' : 'w-64 h-64 lg:w-80 lg:h-80'} flex items-center justify-center`}>
               <img
                 src="/logos/wunderwerk_circle_black_blurr.svg"
@@ -156,7 +156,7 @@ const HeroSection = () => {
               />
             </div>
           </div>
-          <div className={`flex flex-col md:flex-row items-center justify-center text-2xl md:text-3xl lg:text-4xl font-avenir text-white ${isMobile ? 'mt-4' : 'mt-8'}`}>
+          <div className={`flex flex-col md:flex-row items-center justify-center text-2xl md:text-3xl lg:text-4xl font-avenir text-white ${isMobile ? 'mt-8' : 'mt-8'}`}>
             <span className="mb-2 md:mb-0">Räumlichkeiten für</span>
             <span className="font-bold tracking-wider md:ml-3">
               <RotatingText />
