@@ -46,18 +46,26 @@ const HeroSection = () => {
   const isMobile = useIsMobile();
   const frameId = useRef<number | null>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const heroRef = useRef<HTMLDivElement>(null);
   const scrollButtonRef = useRef<HTMLDivElement>(null);
   
-  // Check if enough space exists between content and bottom of viewport
+  // Improved logic to check for button visibility
   useEffect(() => {
     const checkSpaceForButton = () => {
-      if (contentRef.current && scrollButtonRef.current) {
+      if (contentRef.current) {
         const contentBottom = contentRef.current.getBoundingClientRect().bottom;
         const viewportHeight = window.innerHeight;
-        const minGap = isMobile ? 40 : 60; // Reduced minimum gap in pixels
         
-        // Only show button if there's enough space below the content
-        const hasEnoughSpace = viewportHeight - contentBottom > minGap;
+        // Show button if content doesn't fill the entire screen
+        // Using a smaller threshold to ensure it appears more often
+        const threshold = isMobile ? 20 : 30; 
+        const hasEnoughSpace = viewportHeight - contentBottom > threshold;
+        
+        console.log('Content bottom:', contentBottom);
+        console.log('Viewport height:', viewportHeight);
+        console.log('Space available:', viewportHeight - contentBottom);
+        console.log('Should show button:', hasEnoughSpace);
+        
         setShowScrollIndicator(hasEnoughSpace);
       }
     };
@@ -66,8 +74,12 @@ const HeroSection = () => {
     checkSpaceForButton();
     window.addEventListener('resize', checkSpaceForButton);
     
+    // Adding a slight delay to ensure accurate measurements after DOM is fully rendered
+    const timeoutId = setTimeout(checkSpaceForButton, 500);
+    
     return () => {
       window.removeEventListener('resize', checkSpaceForButton);
+      clearTimeout(timeoutId);
     };
   }, [isMobile]);
   
@@ -83,7 +95,7 @@ const HeroSection = () => {
         // Calculate scroll progress as a value between 0 and 1
         const scrollY = window.scrollY;
         // Use a smaller maxScroll value for faster fading
-        const maxScroll = window.innerHeight * 0.5; // Reduced from 0.8 to 0.5 for faster fade
+        const maxScroll = window.innerHeight * 0.5; 
         const newProgress = Math.min(1, scrollY / maxScroll);
         setScrollProgress(newProgress);
         frameId.current = null;
@@ -129,7 +141,7 @@ const HeroSection = () => {
   };
 
   return (
-    <div className="h-screen w-full relative">
+    <div ref={heroRef} className="h-screen w-full relative">
       {/* Fixed position wrapper for the hero content */}
       <div className="fixed top-0 left-0 w-full h-screen z-0">
         {/* Background image */}
@@ -166,12 +178,12 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* Scroll down button - only shown if there's enough space */}
+        {/* Scroll down button - with improved visibility logic */}
         {showScrollIndicator && (
           <div
             ref={scrollButtonRef}
             className={`absolute z-10 flex justify-center animate-bounce cursor-pointer ${
-              isMobile ? 'bottom-24' : 'bottom-10'
+              isMobile ? 'bottom-16' : 'bottom-8'
             } left-0 right-0`}
             onClick={scrollToNextSection}
             style={scrollButtonStyle}
