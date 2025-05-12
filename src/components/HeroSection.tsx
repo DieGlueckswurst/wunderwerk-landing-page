@@ -1,7 +1,6 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
-import { useIsMobile } from '@/hooks/use-mobile';
 
 const RotatingText = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -42,48 +41,17 @@ const RotatingText = () => {
 };
 
 const HeroSection = () => {
-  const [offset, setOffset] = useState(0);
   const [opacity, setOpacity] = useState(1);
-  const requestRef = useRef<number>();
-  const previousTimeRef = useRef<number>();
-  const scrollY = useRef(0);
-  const isMobile = useIsMobile();
-  
-  // Use a simpler, more consistent approach to parallax scrolling
-  const animate = (time: number) => {
-    if (previousTimeRef.current !== undefined) {
-      // Use a consistent damping factor for all devices
-      const damping = 0.12; // Lower value = smoother but slower transitions
-      
-      // Gradually approach the target scroll position
-      const currentScroll = window.pageYOffset;
-      scrollY.current = scrollY.current + (currentScroll - scrollY.current) * damping;
-      
-      // Update the parallax offset
-      setOffset(scrollY.current);
-      
-      // Calculate opacity based on scroll position
-      // Fade out between 80px and 140px of scrolling
-      const newOpacity = Math.max(0, 1 - ((scrollY.current - 80) / 60));
-      setOpacity(newOpacity);
-    }
-    
-    previousTimeRef.current = time;
-    requestRef.current = requestAnimationFrame(animate);
-  };
 
   useEffect(() => {
-    // Initial scroll position
-    scrollY.current = window.pageYOffset;
-    
-    // Start animation loop
-    requestRef.current = requestAnimationFrame(animate);
-    
-    return () => {
-      if (requestRef.current) {
-        cancelAnimationFrame(requestRef.current);
-      }
+    // Optional: Fade out content as you scroll
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const newOpacity = Math.max(0, 1 - ((scrollY - 110) / 50));
+      setOpacity(newOpacity);
     };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const scrollToNextSection = () => {
@@ -95,25 +63,9 @@ const HeroSection = () => {
   };
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div
-        className="absolute inset-0 z-0 will-change-transform"
-        style={{
-          transform: `translate3d(0, ${offset * 0.4}px, 0)`, // Reduced parallax effect for more subtlety
-          height: '120%',
-          width: '100%',
-          top: '-10%',
-          backfaceVisibility: 'hidden',
-        }}
-      >
-        <img
-          src="/hero/studio_clean.webp"
-          alt="Hero Background"
-          className="w-full h-full object-cover"
-          loading="eager"
-        />
-      </div>
-
+    <div
+      className="relative min-h-screen flex items-center justify-center overflow-hidden hero-bg"
+    >
       <div
         className="relative z-10 text-center w-full"
         style={{ opacity }}
