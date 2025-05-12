@@ -42,8 +42,34 @@ const RotatingText = () => {
 
 const HeroSection = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [showScrollIndicator, setShowScrollIndicator] = useState(true);
   const isMobile = useIsMobile();
   const frameId = useRef<number | null>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const scrollButtonRef = useRef<HTMLDivElement>(null);
+  
+  // Check if enough space exists between content and bottom of viewport
+  useEffect(() => {
+    const checkSpaceForButton = () => {
+      if (contentRef.current && scrollButtonRef.current) {
+        const contentBottom = contentRef.current.getBoundingClientRect().bottom;
+        const viewportHeight = window.innerHeight;
+        const minGap = isMobile ? 100 : 120; // Minimum gap in pixels
+        
+        // Only show button if there's enough space below the content
+        const hasEnoughSpace = viewportHeight - contentBottom > minGap;
+        setShowScrollIndicator(hasEnoughSpace);
+      }
+    };
+    
+    // Check on initial render and window resize
+    checkSpaceForButton();
+    window.addEventListener('resize', checkSpaceForButton);
+    
+    return () => {
+      window.removeEventListener('resize', checkSpaceForButton);
+    };
+  }, [isMobile]);
   
   useEffect(() => {
     const handleScroll = () => {
@@ -117,6 +143,7 @@ const HeroSection = () => {
         
         {/* Content layer with optimized transitions */}
         <div 
+          ref={contentRef}
           className="relative z-10 h-full flex flex-col items-center justify-center"
           style={contentStyle}
         >
@@ -139,18 +166,21 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* Scroll down button - optimized animation */}
-        <div
-          className={`absolute z-10 flex justify-center animate-bounce cursor-pointer ${
-            isMobile ? 'bottom-24' : 'bottom-10'
-          } left-0 right-0`}
-          onClick={scrollToNextSection}
-          style={scrollButtonStyle}
-        >
-          <div className="bg-white bg-opacity-20 rounded-full p-2 backdrop-blur-sm hover:bg-opacity-30 transition-all">
-            <ChevronDown className="w-6 h-6 text-white" />
+        {/* Scroll down button - only shown if there's enough space */}
+        {showScrollIndicator && (
+          <div
+            ref={scrollButtonRef}
+            className={`absolute z-10 flex justify-center animate-bounce cursor-pointer ${
+              isMobile ? 'bottom-24' : 'bottom-10'
+            } left-0 right-0`}
+            onClick={scrollToNextSection}
+            style={scrollButtonStyle}
+          >
+            <div className="bg-white bg-opacity-20 rounded-full p-2 backdrop-blur-sm hover:bg-opacity-30 transition-all">
+              <ChevronDown className="w-6 h-6 text-white" />
+            </div>
           </div>
-        </div>
+        )}
       </div>
       
       {/* Spacer element to push content below the hero section */}
