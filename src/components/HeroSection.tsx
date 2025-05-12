@@ -1,6 +1,8 @@
+
 import { useEffect, useState, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const RotatingText = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -44,33 +46,64 @@ const HeroSection = () => {
   const [offset, setOffset] = useState(0);
   const [opacity, setOpacity] = useState(1);
   const requestRef = useRef<number>();
+  const previousTimeRef = useRef<number>();
   const targetOffset = useRef(0);
-
-  // Smoother parallax animation with requestAnimationFrame and lerp
-  const animate = () => {
-    setOffset(prev => {
-      const next = prev + (targetOffset.current - prev) * 0.15;
-      return Math.abs(next - targetOffset.current) < 0.1 ? targetOffset.current : next;
-    });
-    // Calculate opacity: 1 until 80px scroll, then fade to 0 at 130px scroll
-    const newOpacity = Math.max(0, 1 - ((targetOffset.current - 110) / 50));
-    setOpacity(newOpacity);
+  const isMobile = useIsMobile();
+  
+  // Improved smooth animation with time-based lerp
+  const animate = (time: number) => {
+    if (previousTimeRef.current !== undefined) {
+      const deltaTime = Math.min(time - previousTimeRef.current, 100) / 1000;
+      const lerpFactor = Math.min(1, deltaTime * 3); // Smoother transition with time-based lerping
+      
+      setOffset(prev => {
+        const next = prev + (targetOffset.current - prev) * lerpFactor;
+        return Math.abs(next - targetOffset.current) < 0.1 ? targetOffset.current : next;
+      });
+      
+      // Calculate opacity: 1 until 80px scroll, then fade to 0 at 130px scroll
+      const newOpacity = Math.max(0, 1 - ((targetOffset.current - 110) / 50));
+      setOpacity(newOpacity);
+    }
+    
+    previousTimeRef.current = time;
     requestRef.current = requestAnimationFrame(animate);
   };
 
   useEffect(() => {
+    // Use passive event listener for better performance
     const handleScroll = () => {
       targetOffset.current = window.pageYOffset;
     };
+    
     window.addEventListener('scroll', handleScroll, { passive: true });
     requestRef.current = requestAnimationFrame(animate);
+    
+    // Optimize for mouse wheel scrolling with specific event handler
+    const handleWheel = (e: WheelEvent) => {
+      // Smooth out mouse wheel delta to prevent stuttering
+      if (Math.abs(e.deltaY) > 30) {
+        e.preventDefault();
+        targetOffset.current += e.deltaY * 0.3; // Dampen wheel scroll effect
+        targetOffset.current = Math.max(0, targetOffset.current); // Prevent negative values
+      }
+    };
+    
+    // Only add wheel event listener on desktop (non-mobile) devices
+    if (!isMobile) {
+      window.addEventListener('wheel', handleWheel, { passive: false });
+    }
+    
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      if (!isMobile) {
+        window.removeEventListener('wheel', handleWheel);
+      }
       if (requestRef.current) {
         cancelAnimationFrame(requestRef.current);
       }
     };
-  }, []);
+  }, [isMobile]);
 
   const scrollToNextSection = () => {
     const heroHeight = window.innerHeight;
@@ -97,7 +130,7 @@ const HeroSection = () => {
           alt="Hero Background"
           className="w-full h-full object-cover"
           loading="eager"
-          fetchPriority="high"
+          priority="high"
         />
       </div>
 
