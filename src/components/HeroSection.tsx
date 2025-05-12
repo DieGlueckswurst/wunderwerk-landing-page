@@ -46,22 +46,25 @@ const HeroSection = () => {
   const [opacity, setOpacity] = useState(1);
   const requestRef = useRef<number>();
   const previousTimeRef = useRef<number>();
-  const targetOffset = useRef(0);
+  const scrollY = useRef(0);
   const isMobile = useIsMobile();
   
-  // Improved smooth animation with time-based lerp
+  // Use a simpler, more consistent approach to parallax scrolling
   const animate = (time: number) => {
     if (previousTimeRef.current !== undefined) {
-      const deltaTime = Math.min(time - previousTimeRef.current, 100) / 1000;
-      const lerpFactor = Math.min(1, deltaTime * 3); // Smoother transition with time-based lerping
+      // Use a consistent damping factor for all devices
+      const damping = 0.12; // Lower value = smoother but slower transitions
       
-      setOffset(prev => {
-        const next = prev + (targetOffset.current - prev) * lerpFactor;
-        return Math.abs(next - targetOffset.current) < 0.1 ? targetOffset.current : next;
-      });
+      // Gradually approach the target scroll position
+      const currentScroll = window.pageYOffset;
+      scrollY.current = scrollY.current + (currentScroll - scrollY.current) * damping;
       
-      // Calculate opacity: 1 until 80px scroll, then fade to 0 at 130px scroll
-      const newOpacity = Math.max(0, 1 - ((targetOffset.current - 110) / 50));
+      // Update the parallax offset
+      setOffset(scrollY.current);
+      
+      // Calculate opacity based on scroll position
+      // Fade out between 80px and 140px of scrolling
+      const newOpacity = Math.max(0, 1 - ((scrollY.current - 80) / 60));
       setOpacity(newOpacity);
     }
     
@@ -70,39 +73,18 @@ const HeroSection = () => {
   };
 
   useEffect(() => {
-    // Use passive event listener for better performance
-    const handleScroll = () => {
-      targetOffset.current = window.pageYOffset;
-    };
+    // Initial scroll position
+    scrollY.current = window.pageYOffset;
     
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    // Start animation loop
     requestRef.current = requestAnimationFrame(animate);
     
-    // Optimize for mouse wheel scrolling with specific event handler
-    const handleWheel = (e: WheelEvent) => {
-      // Smooth out mouse wheel delta to prevent stuttering
-      if (Math.abs(e.deltaY) > 30) {
-        e.preventDefault();
-        targetOffset.current += e.deltaY * 0.3; // Dampen wheel scroll effect
-        targetOffset.current = Math.max(0, targetOffset.current); // Prevent negative values
-      }
-    };
-    
-    // Only add wheel event listener on desktop (non-mobile) devices
-    if (!isMobile) {
-      window.addEventListener('wheel', handleWheel, { passive: false });
-    }
-    
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-      if (!isMobile) {
-        window.removeEventListener('wheel', handleWheel);
-      }
       if (requestRef.current) {
         cancelAnimationFrame(requestRef.current);
       }
     };
-  }, [isMobile]);
+  }, []);
 
   const scrollToNextSection = () => {
     const heroHeight = window.innerHeight;
@@ -117,7 +99,7 @@ const HeroSection = () => {
       <div
         className="absolute inset-0 z-0 will-change-transform"
         style={{
-          transform: `translate3d(0, ${offset * 0.5}px, 0)`,
+          transform: `translate3d(0, ${offset * 0.4}px, 0)`, // Reduced parallax effect for more subtlety
           height: '120%',
           width: '100%',
           top: '-10%',
