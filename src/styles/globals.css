@@ -1,4 +1,5 @@
 
+
 .vertical-line {
   width: 1px;
   height: 160px;
@@ -63,7 +64,8 @@ body.about-page {
   background-color: rgb(255 247 237) !important; /* bg-orange-50 with !important to override other styles */
 }
 
-/* Ensure the footer message has the same background as timeline */
+/* Footer message now has white background */
 .footer-message {
-  background-color: rgb(255 247 237) !important; /* bg-orange-50 */
+  background-color: white !important;
 }
+

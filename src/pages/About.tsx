@@ -93,7 +93,7 @@ const About = () => {
 
                   {/* Content */}
                   <div className={`md:w-1/2 ${index % 2 === 0 ? 'md:pr-16' : 'md:pl-16'}`}>
-                    <div className="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div className="bg-white rounded-lg overflow-hidden">
                       <img 
                         src={item.image} 
                         alt={item.title} 
