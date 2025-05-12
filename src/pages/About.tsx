@@ -68,12 +68,12 @@ const About = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-orange-50">
+    <div className="min-h-screen">
       <Header />
       <PageHeader title="Über uns" />
 
       {/* Timeline section */}
-      <section className="py-16 px-6 bg-orange-50 relative">
+      <section className="py-16 px-6 timeline-section relative">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">Es war einmal...</p>
@@ -120,7 +120,7 @@ const About = () => {
         </div>
       </section>
       
-      <div className="py-12 text-center text-2xl font-serif text-gray-700 bg-orange-50">
+      <div className="py-12 text-center text-2xl font-serif text-gray-700 footer-message">
         Die Zukunft? Wird wunderbar.
       </div>
     </div>

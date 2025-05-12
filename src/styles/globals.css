@@ -50,14 +50,20 @@ html, body {
 section:not(#hero) {
   position: relative;
   z-index: 10;
+  background-color: white;
 }
 
 /* Fix for About page background and z-index layering */
 body.about-page {
-  background-color: rgb(255 247 237); /* bg-orange-50 equivalent */
+  background-color: white; /* Reset to white */
 }
 
-/* Remove white background from sections inside the About page */
-body.about-page section:not(.no-bg-override) {
-  background-color: transparent !important;
+/* Target only the timeline section in the About page */
+body.about-page .timeline-section {
+  background-color: rgb(255 247 237); /* bg-orange-50 for timeline only */
+}
+
+/* Ensure the footer message has the same background as timeline */
+body.about-page .footer-message {
+  background-color: rgb(255 247 237); /* bg-orange-50 */
 }
