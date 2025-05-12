@@ -72,8 +72,8 @@ const About = () => {
       <Header />
       <PageHeader title="Über uns" />
 
-      {/* Timeline section */}
-      <section className="py-16 px-6 timeline-section relative">
+      {/* Timeline section - reduced bottom padding from py-16 to py-12 with pb-8 */}
+      <section className="pt-12 pb-8 px-6 timeline-section relative">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">Es war einmal...</p>
