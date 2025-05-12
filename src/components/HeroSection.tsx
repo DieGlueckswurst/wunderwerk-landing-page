@@ -41,37 +41,39 @@ const RotatingText = () => {
 };
 
 const HeroSection = () => {
-  const [opacity, setOpacity] = useState(1);
-  const [translateY, setTranslateY] = useState(0);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const isMobile = useIsMobile();
-  const ticking = useRef(false);
+  const frameId = useRef<number | null>(null);
   
   useEffect(() => {
     const handleScroll = () => {
-      // Skip if we're already processing a frame
-      if (ticking.current) return;
+      // Cancel any pending animation frame
+      if (frameId.current) {
+        cancelAnimationFrame(frameId.current);
+      }
       
-      // Request animation frame to throttle updates
-      ticking.current = true;
-      
-      requestAnimationFrame(() => {
-        // Control both the fade effect and translation based on scroll position
+      // Schedule new animation frame
+      frameId.current = requestAnimationFrame(() => {
+        // Calculate scroll progress as a value between 0 and 1
         const scrollY = window.scrollY;
-        const newOpacity = Math.max(0, 1 - (scrollY / 300));
-        
-        // Adjust the translation to move elements further up
-        const newTranslate = Math.min(200, scrollY / 1.5);
-        
-        setOpacity(newOpacity);
-        setTranslateY(newTranslate);
-        
-        // Reset the flag so we can process the next event
-        ticking.current = false;
+        const maxScroll = window.innerHeight * 0.8; // Use 80% of screen height as max scroll
+        const newProgress = Math.min(1, scrollY / maxScroll);
+        setScrollProgress(newProgress);
+        frameId.current = null;
       });
     };
     
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    
+    // Initial calculation
+    handleScroll();
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (frameId.current) {
+        cancelAnimationFrame(frameId.current);
+      }
+    };
   }, []);
 
   const scrollToNextSection = () => {
@@ -82,16 +84,21 @@ const HeroSection = () => {
     });
   };
 
-  // Apply hardware acceleration to improve performance with correct TypeScript types
-  const transformStyle: CSSProperties = {
+  // Calculate opacity and transform values based on scroll progress
+  const opacity = 1 - scrollProgress;
+  const translateY = scrollProgress * 200; // Max translation of 200px
+
+  // Optimized transform style for better mobile performance
+  const contentStyle: CSSProperties = {
     opacity,
-    transform: `translateY(-${translateY}px)`,
-    transition: 'transform 0.05s ease-out',
-    willChange: 'transform, opacity',
-    WebkitBackfaceVisibility: 'hidden',
-    WebkitPerspective: 1000,
-    backfaceVisibility: 'hidden',
-    perspective: 1000
+    transform: `translate3d(0, -${translateY}px, 0)`,
+    willChange: 'transform, opacity'
+  };
+  
+  // Apply less aggressive transform to the scroll button
+  const scrollButtonStyle: CSSProperties = {
+    opacity,
+    transform: `translate3d(0, -${translateY * 0.5}px, 0)`
   };
 
   return (
@@ -107,13 +114,13 @@ const HeroSection = () => {
           }}
         />
         
-        {/* Content layer with opacity and translateY transitions */}
+        {/* Content layer with optimized transitions */}
         <div 
           className="relative z-10 h-full flex flex-col items-center justify-center"
-          style={transformStyle}
+          style={contentStyle}
         >
           {/* Logo container with fixed width and centered */}
-          <div className={`flex justify-center ${isMobile ? 'mb-6 mt-[-60px]' : 'mb-12'}`}>
+          <div className={`flex justify-center ${isMobile ? 'mb-6 mt-[-90px]' : 'mb-12'}`}>
             <div className={`${isMobile ? 'w-56 h-56' : 'w-64 h-64 lg:w-80 lg:h-80'} flex items-center justify-center`}>
               <img
                 src="/logos/wunderwerk_circle_black_blurr.svg"
@@ -131,18 +138,13 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* Scroll down button - separate from main content for custom animation */}
+        {/* Scroll down button - optimized animation */}
         <div
           className={`absolute z-10 flex justify-center animate-bounce cursor-pointer ${
             isMobile ? 'bottom-24' : 'bottom-10'
           } left-0 right-0`}
           onClick={scrollToNextSection}
-          style={{ 
-            opacity,
-            transform: `translateY(-${translateY * 0.5}px)`,
-            transition: 'transform 0.05s ease-out',
-            willChange: 'transform, opacity'
-          }}
+          style={scrollButtonStyle}
         >
           <div className="bg-white bg-opacity-20 rounded-full p-2 backdrop-blur-sm hover:bg-opacity-30 transition-all">
             <ChevronDown className="w-6 h-6 text-white" />
