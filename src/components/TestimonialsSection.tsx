@@ -129,9 +129,9 @@ const TestimonialsSection = () => {
             />
           ))}
 
-          {/* Navigation arrows - Fixed pointer events */}
+          {/* Navigation arrows - Reduced outer padding */}
           <button
-            className={`absolute left-0 top-1/2 -translate-y-1/2 text-gray-400 hover:text-black transition-colors z-20 ${isMobile ? 'p-2' : 'p-4'}`}
+            className={`absolute left-0 top-1/2 -translate-y-1/2 text-gray-400 hover:text-black transition-colors z-20 ${isMobile ? 'pl-0 pr-2 py-2' : 'pl-0 pr-4 py-4'}`}
             onClick={goToPrev}
             aria-label="Previous testimonial"
             type="button"
@@ -140,7 +140,7 @@ const TestimonialsSection = () => {
           </button>
 
           <button
-            className={`absolute right-0 top-1/2 -translate-y-1/2 text-gray-400 hover:text-black transition-colors z-20 ${isMobile ? 'p-2' : 'p-4'}`}
+            className={`absolute right-0 top-1/2 -translate-y-1/2 text-gray-400 hover:text-black transition-colors z-20 ${isMobile ? 'pr-0 pl-2 py-2' : 'pr-0 pl-4 py-4'}`}
             onClick={goToNext}
             aria-label="Next testimonial"
             type="button"
