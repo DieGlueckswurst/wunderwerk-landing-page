@@ -33,3 +33,8 @@
   transform: translateZ(0);
   will-change: transform;
 }
+
+/* Make sure content scrolls properly over fixed elements */
+html, body {
+  overflow-x: hidden;
+}
