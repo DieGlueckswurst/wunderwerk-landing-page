@@ -1,4 +1,3 @@
-
 import { useEffect, useState, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
@@ -130,7 +129,6 @@ const HeroSection = () => {
           alt="Hero Background"
           className="w-full h-full object-cover"
           loading="eager"
-          importance="high"
         />
       </div>
 
