@@ -18,7 +18,7 @@ const Testimonial = ({
       className={`absolute inset-0 transition-opacity duration-300 ease-in-out flex flex-col items-center justify-center
         ${active ? "opacity-100 z-10" : "opacity-0 z-0"}`}
     >
-      <p className="text-xl text-center font-['Avenir_Next'] italic mb-6 max-w-3xl mx-auto md:text-lg">"{text}"</p>
+      <p className="text-xl text-center font-['Avenir_Next'] italic mb-6 max-w-3xl px-12 mx-auto md:text-lg">"{text}"</p>
       <p className="text-center font-sans text-base">{author}</p>
     </div>
   );
@@ -111,7 +111,7 @@ const TestimonialsSection = () => {
 
       <div className="max-w-4xl mx-auto text-center mb-12">
         <div
-          className="relative h-[180px] flex items-center justify-center mb-8 px-12"
+          className="relative h-[180px] flex items-center justify-center mb-8 px-16"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
@@ -127,7 +127,7 @@ const TestimonialsSection = () => {
 
           {/* Navigation arrows - Fixed pointer events */}
           <button
-            className="absolute left-0 top-1/2 -translate-y-1/2 text-gray-400 hover:text-black transition-colors p-2 z-20"
+            className="absolute left-0 top-1/2 -translate-y-1/2 text-gray-400 hover:text-black transition-colors p-4 z-20"
             onClick={goToPrev}
             aria-label="Previous testimonial"
             type="button"
@@ -136,7 +136,7 @@ const TestimonialsSection = () => {
           </button>
 
           <button
-            className="absolute right-0 top-1/2 -translate-y-1/2 text-gray-400 hover:text-black transition-colors p-2 z-20"
+            className="absolute right-0 top-1/2 -translate-y-1/2 text-gray-400 hover:text-black transition-colors p-4 z-20"
             onClick={goToNext}
             aria-label="Next testimonial"
             type="button"
