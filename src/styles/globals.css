@@ -53,17 +53,17 @@ section:not(#hero) {
   background-color: white;
 }
 
-/* Fix for About page background and z-index layering */
+/* Fix for About page background */
 body.about-page {
-  background-color: white; /* Reset to white */
+  background-color: white;
 }
 
-/* Target only the timeline section in the About page */
-body.about-page .timeline-section {
-  background-color: rgb(255 247 237); /* bg-orange-50 for timeline only */
+/* Target specifically the timeline section and ensure it has the orange background */
+.timeline-section {
+  background-color: rgb(255 247 237) !important; /* bg-orange-50 with !important to override other styles */
 }
 
 /* Ensure the footer message has the same background as timeline */
-body.about-page .footer-message {
-  background-color: rgb(255 247 237); /* bg-orange-50 */
+.footer-message {
+  background-color: rgb(255 247 237) !important; /* bg-orange-50 */
 }
