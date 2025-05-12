@@ -1,6 +1,5 @@
 
 import { useState, useEffect } from 'react';
-import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
 
 const RotatingText = () => {
@@ -30,10 +29,9 @@ const RotatingText = () => {
   return (
     <div className="inline-block min-w-[180px] text-center h-[1.2em]">
       <span
-        className={`transition-all duration-300 font-avenir text-white ${isVisible
-          ? "opacity-100 translate-y-0"
-          : "opacity-0 translate-y-4"
-          }`}
+        className={`transition-all duration-300 font-avenir text-white ${
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+        }`}
       >
         {words[currentIndex]}
       </span>
@@ -43,18 +41,13 @@ const RotatingText = () => {
 
 const HeroSection = () => {
   const [opacity, setOpacity] = useState(1);
-  const [translateY, setTranslateY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
+      // Only control the fade effect based on scroll position
       const scrollY = window.scrollY;
-      // Fade out content as user scrolls down
-      const newOpacity = Math.max(0, 1 - ((scrollY - 110) / 50));
+      const newOpacity = Math.max(0, 1 - (scrollY / 300));
       setOpacity(newOpacity);
-      
-      // Create parallax effect for background
-      const moveY = scrollY * 0.5; // Controls parallax speed (smaller number = slower)
-      setTranslateY(moveY);
     };
     
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -70,20 +63,22 @@ const HeroSection = () => {
   };
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image with parallax effect */}
+    <div className="relative h-screen">
+      {/* Fixed background - stays in place */}
       <div 
-        className="absolute inset-0 z-0" 
+        className="fixed top-0 left-0 w-full h-screen z-0"
         style={{
           backgroundImage: `url('/hero/studio_clean.webp')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          transform: `translate3d(0, ${translateY}px, 0)`,
-          transition: 'transform 0.05s ease-out',
         }}
       />
       
-      <div className="relative z-10 text-center w-full" style={{ opacity }}>
+      {/* Content that fades out when scrolling */}
+      <div 
+        className="relative z-10 h-screen flex flex-col items-center justify-center"
+        style={{ opacity }}
+      >
         {/* Logo container with fixed width and centered */}
         <div className="flex justify-center mb-12">
           <div className="w-64 h-64 lg:w-80 lg:h-80 flex items-center justify-center">
