@@ -15,9 +15,8 @@ const Testimonial = ({
 }) => {
   return (
     <div
-      className={`absolute inset-0 transition-all duration-300 ease-in-out flex flex-col items-center justify-center
-        ${active ? "opacity-100 z-10" : "opacity-0 z-0"}
-        ${leaving ? "transform translate-y-4" : "transform translate-y-0"}`}
+      className={`absolute inset-0 transition-opacity duration-300 ease-in-out flex flex-col items-center justify-center
+        ${active ? "opacity-100 z-10" : "opacity-0 z-0"}`}
     >
       <p className="text-xl text-center font-['Avenir_Next'] italic mb-6 max-w-3xl mx-auto md:text-lg">"{text}"</p>
       <p className="text-center font-sans text-base">{author}</p>
