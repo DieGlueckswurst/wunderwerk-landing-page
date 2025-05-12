@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { ChevronDown } from "lucide-react";
 
@@ -40,13 +41,17 @@ const RotatingText = () => {
 
 const HeroSection = () => {
   const [opacity, setOpacity] = useState(1);
+  const [translateY, setTranslateY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      // Only control the fade effect based on scroll position
+      // Control both the fade effect and translation based on scroll position
       const scrollY = window.scrollY;
       const newOpacity = Math.max(0, 1 - (scrollY / 300));
+      const newTranslate = Math.min(100, scrollY / 2); // Move up as user scrolls down
+      
       setOpacity(newOpacity);
+      setTranslateY(newTranslate);
     };
     
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -73,10 +78,14 @@ const HeroSection = () => {
           }}
         />
         
-        {/* Content layer with opacity transition */}
+        {/* Content layer with opacity and translateY transitions */}
         <div 
           className="relative z-10 h-full flex flex-col items-center justify-center"
-          style={{ opacity }}
+          style={{ 
+            opacity,
+            transform: `translateY(-${translateY}px)`,
+            transition: 'transform 0.05s ease-out'
+          }}
         >
           {/* Logo container with fixed width and centered */}
           <div className="flex justify-center mb-12">
@@ -97,11 +106,15 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* Scroll down button */}
+        {/* Scroll down button - separate from main content for custom animation */}
         <div
           className="absolute bottom-10 left-0 right-0 z-10 flex justify-center animate-bounce cursor-pointer"
           onClick={scrollToNextSection}
-          style={{ opacity }}
+          style={{ 
+            opacity,
+            transform: `translateY(-${translateY * 0.3}px)`, // Softer movement for the button
+            transition: 'transform 0.05s ease-out' 
+          }}
         >
           <div className="bg-white bg-opacity-20 rounded-full p-2 backdrop-blur-sm hover:bg-opacity-30 transition-all">
             <ChevronDown className="w-6 h-6 text-white" />
