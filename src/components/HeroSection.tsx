@@ -41,6 +41,18 @@ const RotatingText = () => {
 };
 
 const HeroSection = () => {
+  const [opacity, setOpacity] = useState(1);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const newOpacity = Math.max(0, 1 - ((scrollY - 110) / 50));
+      setOpacity(newOpacity);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const scrollToNextSection = () => {
     const heroHeight = window.innerHeight;
     window.scrollTo({
@@ -51,7 +63,7 @@ const HeroSection = () => {
 
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden hero-bg">
-      <div className="relative z-10 text-center w-full">
+      <div className="relative z-10 text-center w-full" style={{ opacity }}>
         {/* Logo container with fixed width and centered */}
         <div className="flex justify-center mb-12">
           <div className="w-64 h-64 lg:w-80 lg:h-80 flex items-center justify-center">
@@ -74,6 +86,7 @@ const HeroSection = () => {
       <div
         className="absolute bottom-10 left-0 right-0 z-10 flex justify-center animate-bounce cursor-pointer"
         onClick={scrollToNextSection}
+        style={{ opacity }}
       >
         <div className="bg-white bg-opacity-20 rounded-full p-2 backdrop-blur-sm hover:bg-opacity-30 transition-all">
           <ChevronDown className="w-6 h-6 text-white" />
