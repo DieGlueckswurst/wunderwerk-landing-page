@@ -40,19 +40,33 @@ const RotatingText = () => {
   );
 };
 
+const isMobile = () => typeof window !== 'undefined' && window.innerWidth <= 768;
+
 const HeroSection = () => {
   const [opacity, setOpacity] = useState(1);
+  const [mobileOffset, setMobileOffset] = useState(0);
+  const [mobile, setMobile] = useState(false);
 
   useEffect(() => {
-    // Optional: Fade out content as you scroll
+    const checkMobile = () => setMobile(isMobile());
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  useEffect(() => {
+    // Fade out content as you scroll
     const handleScroll = () => {
       const scrollY = window.scrollY;
       const newOpacity = Math.max(0, 1 - ((scrollY - 110) / 50));
       setOpacity(newOpacity);
+      if (mobile) {
+        setMobileOffset(scrollY * 0.4); // Parallax intensity for mobile
+      }
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [mobile]);
 
   const scrollToNextSection = () => {
     const heroHeight = window.innerHeight;
@@ -64,8 +78,19 @@ const HeroSection = () => {
 
   return (
     <div
-      className="relative min-h-screen flex items-center justify-center overflow-hidden hero-bg"
+      className={`relative min-h-screen flex items-center justify-center overflow-hidden hero-bg`}
+      style={!mobile ? undefined : { background: 'none' }}
     >
+      {/* Mobile parallax image */}
+      {mobile && (
+        <img
+          src="/hero/studio_clean.webp"
+          alt="Hero Background"
+          className="absolute inset-0 w-full h-full object-cover z-0 select-none pointer-events-none"
+          style={{ transform: `translateY(${mobileOffset}px)`, transition: 'transform 0.1s linear' }}
+          draggable={false}
+        />
+      )}
       <div
         className="relative z-10 text-center w-full"
         style={{ opacity }}
