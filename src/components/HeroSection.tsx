@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef, CSSProperties } from 'react';
 import { ChevronDown } from "lucide-react";
 import { useIsMobile } from '../hooks/use-mobile';
@@ -146,7 +147,7 @@ const HeroSection = () => {
           style={contentStyle}
         >
           {/* Logo container with fixed width and centered */}
-          <div className={`flex justify-center ${isMobile ? 'mb-6 mt-[20px]' : 'mb-12'}`}>
+          <div className={`flex justify-center ${isMobile ? 'mb-6 mt-[5px]' : 'mb-12'}`}>
             <div className={`${isMobile ? 'w-56 h-56' : 'w-64 h-64 lg:w-80 lg:h-80'} flex items-center justify-center`}>
               <img
                 src="/logos/wunderwerk_circle_black_blurr.svg"
