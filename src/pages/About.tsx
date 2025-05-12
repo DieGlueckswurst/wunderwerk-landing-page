@@ -68,12 +68,12 @@ const About = () => {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen flex flex-col">
       <Header />
       <PageHeader title="Über uns" />
 
-      {/* Timeline section - reduced bottom padding from py-16 to py-12 with pb-8 */}
-      <section className="pt-12 pb-8 px-6 timeline-section relative">
+      {/* Timeline section - extending to bottom of page with pb-24 and adding extended vertical line */}
+      <section className="pt-12 pb-24 px-6 timeline-section relative flex-grow">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">Es war einmal...</p>
@@ -116,6 +116,9 @@ const About = () => {
                 </div>
               </div>
             ))}
+            
+            {/* Extended vertical line after timeline items */}
+            <div className="hidden md:block mx-auto w-0.5 h-40 bg-gray-200"></div>
           </div>
         </div>
       </section>
