@@ -39,7 +39,7 @@ html, body {
   overflow-x: hidden;
 }
 
-/* Ensure content sections appear above the hero section */
+/* Ensure content sections appear above the hero section but below fixed navigation */
 #info, #rooms, #testimonials, #contact {
   position: relative;
   z-index: 10;
@@ -51,4 +51,9 @@ section:not(#hero) {
   background-color: white;
   position: relative;
   z-index: 10;
+}
+
+/* Fix for About page background and z-index layering */
+body.about-page {
+  background-color: rgb(255 247 237); /* bg-orange-50 equivalent */
 }
