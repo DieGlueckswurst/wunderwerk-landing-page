@@ -49,7 +49,7 @@ const TestimonialsSection = () => {
     }, 4000);
 
     return () => clearInterval(interval);
-  }, [isHovered, testimonials.length]);
+  }, [isHovered, currentIndex]); // Added currentIndex as dependency
 
   const handleNextTestimonial = () => {
     setLeavingIndex(currentIndex);
@@ -78,9 +78,7 @@ const TestimonialsSection = () => {
     }, 150);
   };
 
-  const goToNext = () => {
-    handleNextTestimonial();
-  };
+  const goToNext = handleNextTestimonial; // Simplify by directly using the existing function
 
   const handleDotClick = (index: number) => {
     if (index === currentIndex) return;
@@ -127,19 +125,21 @@ const TestimonialsSection = () => {
             />
           ))}
 
-          {/* Navigation arrows */}
+          {/* Navigation arrows - Fixed pointer events */}
           <button
-            className="absolute left-0 top-1/2 -translate-y-1/2 text-gray-400 hover:text-black transition-colors"
+            className="absolute left-0 top-1/2 -translate-y-1/2 text-gray-400 hover:text-black transition-colors p-2 z-20"
             onClick={goToPrev}
             aria-label="Previous testimonial"
+            type="button"
           >
             <ChevronLeft size={32} />
           </button>
 
           <button
-            className="absolute right-0 top-1/2 -translate-y-1/2 text-gray-400 hover:text-black transition-colors"
+            className="absolute right-0 top-1/2 -translate-y-1/2 text-gray-400 hover:text-black transition-colors p-2 z-20"
             onClick={goToNext}
             aria-label="Next testimonial"
+            type="button"
           >
             <ChevronRight size={32} />
           </button>
