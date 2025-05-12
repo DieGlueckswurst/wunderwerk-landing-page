@@ -72,8 +72,8 @@ const About = () => {
       <Header />
       <PageHeader title="Über uns" />
 
-      {/* Timeline section - extending to bottom of page with pb-24 and adding extended vertical line */}
-      <section className="pt-12 pb-24 px-6 timeline-section relative flex-grow">
+      {/* Timeline section - extending to bottom of page with flex-grow */}
+      <section className="pt-12 px-6 timeline-section relative flex-grow">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">Es war einmal...</p>
@@ -116,9 +116,6 @@ const About = () => {
                 </div>
               </div>
             ))}
-            
-            {/* Extended vertical line after timeline items */}
-            <div className="hidden md:block mx-auto w-0.5 h-40 bg-gray-200"></div>
           </div>
         </div>
       </section>
