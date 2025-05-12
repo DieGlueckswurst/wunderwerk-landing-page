@@ -62,7 +62,16 @@ const HeroSection = () => {
   };
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden hero-bg">
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <div 
+        className="absolute inset-0 z-0" 
+        style={{
+          backgroundImage: `url('/hero/studio_clean.webp')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      />
+      
       <div className="relative z-10 text-center w-full" style={{ opacity }}>
         {/* Logo container with fixed width and centered */}
         <div className="flex justify-center mb-12">

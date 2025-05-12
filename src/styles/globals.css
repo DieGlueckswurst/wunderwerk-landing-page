@@ -1,7 +1,35 @@
-.hero-bg {
-    background-image: url('/hero/studio_clean.webp');
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+
+.vertical-line {
+  width: 1px;
+  height: 160px;
+  /* Increased height */
+  background-color: #ddd;
+  margin: 0 auto;
+  margin-bottom: 24px;
+  /* Increased space between line and title */
+}
+
+.section-title {
+  @apply font-serif italic text-3xl text-gray-600 text-center mb-20;
+  /* Increased margin */
+}
+
+.parallax-container {
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.parallax-bg {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  transform: translateZ(0);
+  will-change: transform;
 }
