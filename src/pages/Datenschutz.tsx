@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -6,7 +7,7 @@ import PageHeader from "@/components/PageHeader";
 
 const Datenschutz = () => {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-orange-50">
       <Header />
       <PageHeader title="Datenschutz" />
 

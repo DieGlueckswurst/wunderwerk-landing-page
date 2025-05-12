@@ -1,10 +1,11 @@
+
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import PageHeader from "@/components/PageHeader";
 
 const Impressum = () => {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-orange-50">
       <Header />
       <PageHeader title="Impressum" />
 

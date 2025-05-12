@@ -1,5 +1,4 @@
 
-
 .vertical-line {
   width: 1px;
   height: 160px;
@@ -53,9 +52,3 @@ section:not(#hero) {
   position: relative;
   z-index: 10;
 }
-
-/* Ensure back button is always clickable and visible */
-.fixed {
-  z-index: 50;
-}
-

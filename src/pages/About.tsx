@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import Header from "@/components/Header";
 import PageHeader from "@/components/PageHeader";
@@ -25,43 +24,45 @@ const About = () => {
   }, []);
 
   // Sample timeline data - these would be replaced with real content
-  const timelineItems: TimelineItem[] = [{
-    id: 1,
-    date: "1900",
-    title: "Nürnberger Lebkuchen",
-    description: "Ich weiß nicht, was davor hier war. Vielleicht eine Lebkuchenbäckerei?",
-    image: "/timeline/lebkuchenbaeckerei.png"
-  }, {
-    id: 2,
-    date: "1945",
-    title: "Nürnberg in Ruinen",
-    description: "Krieg, nicht gut.",
-    image: "/timeline/nuremberg_in_ruins.png"
-  }, {
-    id: 3,
-    date: "2000",
-    title: "Herrenausstatter",
-    description: "Schick Schick",
-    image: "/timeline/herrenausstatter.png"
-  }, {
-    id: 4,
-    date: "2024",
-    title: "Umbau",
-    description: "(noch) voller guter Laune und Motivation",
-    image: "/timeline/umbau.png"
-  }, {
-    id: 5,
-    date: "2025",
-    title: "Harte Arbeit muss belohnt werden",
-    description: "Das Eis als Rettung langer Arbeitstage.",
-    image: "/timeline/eis.png"
-  }, {
-    id: 6,
-    date: "2025",
-    title: "Grand Opening",
-    description: "Es ist vollbracht! Das Wunderwerk ist offiziell eröffnet.",
-    image: "/timeline/group.png"
-  }];
+  const timelineItems: TimelineItem[] = [
+    {
+      id: 1,
+      date: "1900",
+      title: "Nürnberger Lebkuchen",
+      description: "Ich weiß nicht, was davor hier war. Vielleicht eine Lebkuchenbäckerei?",
+      image: "/timeline/lebkuchenbaeckerei.png"
+    }, {
+      id: 2,
+      date: "1945",
+      title: "Nürnberg in Ruinen",
+      description: "Krieg, nicht gut.",
+      image: "/timeline/nuremberg_in_ruins.png"
+    }, {
+      id: 3,
+      date: "2000",
+      title: "Herrenausstatter",
+      description: "Schick Schick",
+      image: "/timeline/herrenausstatter.png"
+    }, {
+      id: 4,
+      date: "2024",
+      title: "Umbau",
+      description: "(noch) voller guter Laune und Motivation",
+      image: "/timeline/umbau.png"
+    }, {
+      id: 5,
+      date: "2025",
+      title: "Harte Arbeit muss belohnt werden",
+      description: "Das Eis als Rettung langer Arbeitstage.",
+      image: "/timeline/eis.png"
+    }, {
+      id: 6,
+      date: "2025",
+      title: "Grand Opening",
+      description: "Es ist vollbracht! Das Wunderwerk ist offiziell eröffnet.",
+      image: "/timeline/group.png"
+    }
+  ];
   return <div className="min-h-screen bg-orange-50">
       <Header />
       <PageHeader title="Über uns" />

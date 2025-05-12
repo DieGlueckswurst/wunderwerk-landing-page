@@ -21,24 +21,29 @@ const PageHeader = ({ title, showBackButton = true }: PageHeaderProps) => {
     }, []);
 
     return (
-        <section className="pt-10 pb-8 relative">
+        <section className="pt-10 pb-8">
             <div className="container mx-auto px-6 max-w-4xl text-center">
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif mb-0">{title}</h1>
             </div>
             {showBackButton && (
-                <div
-                    className="fixed z-50 left-6 transition-all duration-200 pointer-events-auto"
-                    style={{ top: scrolled ? '5rem' : '2.5rem' }}
-                >
-                    <Link to="/">
-                        <Button variant="outline" size="icon" className="rounded-full shadow-md">
-                            <ArrowLeft className="h-4 w-4" />
-                        </Button>
-                    </Link>
-                </div>
+                <Link to="/" style={{ 
+                    position: 'fixed',
+                    left: '1.5rem',
+                    top: scrolled ? '5rem' : '2.5rem',
+                    zIndex: 1000,
+                    transition: 'top 0.2s ease'
+                }}>
+                    <Button 
+                        variant="outline" 
+                        size="icon" 
+                        className="rounded-full"
+                    >
+                        <ArrowLeft className="h-4 w-4" />
+                    </Button>
+                </Link>
             )}
         </section>
     );
 };
 
-export default PageHeader; 
+export default PageHeader;
