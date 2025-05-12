@@ -15,7 +15,7 @@ const Testimonial = ({
   leaving: boolean;
 }) => {
   const isMobile = useIsMobile();
-  
+
   return (
     <div
       className={`absolute inset-0 transition-opacity duration-300 ease-in-out flex flex-col items-center justify-center
@@ -57,12 +57,12 @@ const TestimonialsSection = () => {
 
   const handleNextTestimonial = () => {
     setLeavingIndex(currentIndex);
-    
+
     // Slight delay before changing the actual index
     if (timerRef.current) {
       clearTimeout(timerRef.current);
     }
-    
+
     timerRef.current = window.setTimeout(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
       setLeavingIndex(null);
@@ -71,11 +71,11 @@ const TestimonialsSection = () => {
 
   const goToPrev = () => {
     setLeavingIndex(currentIndex);
-    
+
     if (timerRef.current) {
       clearTimeout(timerRef.current);
     }
-    
+
     timerRef.current = window.setTimeout(() => {
       setCurrentIndex((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length);
       setLeavingIndex(null);
@@ -86,13 +86,13 @@ const TestimonialsSection = () => {
 
   const handleDotClick = (index: number) => {
     if (index === currentIndex) return;
-    
+
     setLeavingIndex(currentIndex);
-    
+
     if (timerRef.current) {
       clearTimeout(timerRef.current);
     }
-    
+
     timerRef.current = window.setTimeout(() => {
       setCurrentIndex(index);
       setLeavingIndex(null);
