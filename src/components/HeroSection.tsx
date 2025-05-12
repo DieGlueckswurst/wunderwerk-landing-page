@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
@@ -42,13 +43,20 @@ const RotatingText = () => {
 
 const HeroSection = () => {
   const [opacity, setOpacity] = useState(1);
+  const [translateY, setTranslateY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
+      // Fade out content as user scrolls down
       const newOpacity = Math.max(0, 1 - ((scrollY - 110) / 50));
       setOpacity(newOpacity);
+      
+      // Create parallax effect for background
+      const moveY = scrollY * 0.5; // Controls parallax speed (smaller number = slower)
+      setTranslateY(moveY);
     };
+    
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -63,12 +71,15 @@ const HeroSection = () => {
 
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Background Image with parallax effect */}
       <div 
         className="absolute inset-0 z-0" 
         style={{
           backgroundImage: `url('/hero/studio_clean.webp')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
+          transform: `translate3d(0, ${translateY}px, 0)`,
+          transition: 'transform 0.05s ease-out',
         }}
       />
       
