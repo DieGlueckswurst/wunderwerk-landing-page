@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
 
@@ -46,6 +46,8 @@ const HeroSection = () => {
   const [opacity, setOpacity] = useState(1);
   const [mobileOffset, setMobileOffset] = useState(0);
   const [mobile, setMobile] = useState(false);
+  const targetOffset = useRef(0);
+  const rafRef = useRef<number>();
 
   useEffect(() => {
     const checkMobile = () => setMobile(isMobile());
@@ -61,11 +63,25 @@ const HeroSection = () => {
       const newOpacity = Math.max(0, 1 - ((scrollY - 110) / 50));
       setOpacity(newOpacity);
       if (mobile) {
-        setMobileOffset(scrollY * 0.4); // Parallax intensity for mobile
+        targetOffset.current = scrollY * 0.4;
       }
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
+  }, [mobile]);
+
+  // Smooth parallax for mobile
+  useEffect(() => {
+    if (!mobile) return;
+    const animate = () => {
+      setMobileOffset(prev => {
+        const next = prev + (targetOffset.current - prev) * 0.15;
+        return Math.abs(next - targetOffset.current) < 0.1 ? targetOffset.current : next;
+      });
+      rafRef.current = requestAnimationFrame(animate);
+    };
+    rafRef.current = requestAnimationFrame(animate);
+    return () => rafRef.current && cancelAnimationFrame(rafRef.current);
   }, [mobile]);
 
   const scrollToNextSection = () => {
