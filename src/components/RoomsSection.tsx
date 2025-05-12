@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
@@ -20,7 +21,7 @@ const Room = ({
     e.stopPropagation();
     navigate(`/room/${title.toLowerCase()}`);
   };
-  return <div className="relative overflow-hidden cursor-pointer h-[400px]" onClick={handleClick} onMouseLeave={() => setIsHovered(false)}>
+  return <div className="relative overflow-hidden cursor-pointer h-[400px] rounded-lg" onClick={handleClick} onMouseLeave={() => setIsHovered(false)}>
     <img src={imageSrc} alt={title} className="w-full h-full object-cover transition-transform duration-500" style={{
       transform: isHovered ? 'scale(1.05)' : 'scale(1)'
     }} />
