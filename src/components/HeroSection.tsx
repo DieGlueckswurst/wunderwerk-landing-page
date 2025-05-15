@@ -28,7 +28,7 @@ const RotatingText = () => {
   }, []);
 
   return (
-    <div className="inline-block min-w-[180px] text-center h-[1.2em] relative">
+    <div className="inline-block min-w-[180px] text-center h-[1.2em]">
       <span
         className={`transition-all duration-300 font-avenir text-white ${
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
@@ -36,20 +36,6 @@ const RotatingText = () => {
       >
         {words[currentIndex]}
       </span>
-      {/* Sketched arrow pointing to the rotating text */}
-      <div className="absolute -top-12 -right-12 md:-right-16 transform rotate-45">
-        <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path 
-            d="M10 50 L45 15 M45 15 L30 15 M45 15 L45 30" 
-            stroke="white" 
-            strokeWidth="2" 
-            strokeLinecap="round" 
-            strokeLinejoin="round"
-            strokeDasharray="4 2"
-            className="animate-pulse"
-          />
-        </svg>
-      </div>
     </div>
   );
 };
