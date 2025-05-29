@@ -47,20 +47,19 @@ const Room = ({
 };
 const RoomsSection = () => {
   const rooms = [{
-    imageSrc: "/rooms/studio/studio_unfinished.png",
+    imageSrc: "/rooms/studio/studio_yoga.webp",
     title: "Studio",
     description: "Perfekt für Gruppenkurse und Workshops"
   }, {
-    // Swapped these two images
-    imageSrc: "/rooms/kugel_wohl/chaos.png",
+    imageSrc: "/rooms/kugel_wohl/kugel_wohl_clean.webp",
     title: "Kugelwohl",
     description: "Speziell ausgestattet für Hebammenarbeit"
   }, {
-    imageSrc: "/rooms/werkstadt/werkstadt_unfinished.png",
-    title: "Werkstadt",
+    imageSrc: "/rooms/werkstadt/werkstatt_clean.webp",
+    title: "Werkstatt",
     description: "Optimale Ausstattung für Physiotherapie"
   }, {
-    imageSrc: "/rooms/cafe/cafe_ambiente.png",
+    imageSrc: "/rooms/cafe/cafe_blumen.webp",
     title: "Café",
     description: "Ideal für kleine Ausstellungen, Pop-up Events und intime Konzerte"
   }];

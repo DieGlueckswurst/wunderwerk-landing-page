@@ -30,9 +30,8 @@ const RotatingText = () => {
   return (
     <div className="inline-block min-w-[180px] text-center h-[1.2em]">
       <span
-        className={`transition-all duration-300 font-avenir text-white ${
-          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-        }`}
+        className={`transition-all duration-300 font-avenir text-white ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
       >
         {words[currentIndex]}
       </span>
@@ -47,53 +46,53 @@ const HeroSection = () => {
   const frameId = useRef<number | null>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
-  
+
   // Simplify scroll indicator logic - show it by default
   useEffect(() => {
     // Only hide on very small screens where there might not be enough space
     const checkSpaceForButton = () => {
       // Use a very small threshold to show button in most cases
       const smallScreenThreshold = 400; // Extremely small screens
-      
+
       if (window.innerHeight < smallScreenThreshold) {
         setShowScrollIndicator(false);
       } else {
         setShowScrollIndicator(true);
       }
     };
-    
+
     checkSpaceForButton();
     window.addEventListener('resize', checkSpaceForButton);
-    
+
     return () => {
       window.removeEventListener('resize', checkSpaceForButton);
     };
   }, []);
-  
+
   useEffect(() => {
     const handleScroll = () => {
       // Cancel any pending animation frame
       if (frameId.current) {
         cancelAnimationFrame(frameId.current);
       }
-      
+
       // Schedule new animation frame
       frameId.current = requestAnimationFrame(() => {
         // Calculate scroll progress as a value between 0 and 1
         const scrollY = window.scrollY;
         // Use a smaller maxScroll value for faster fading
-        const maxScroll = window.innerHeight * 0.5; 
+        const maxScroll = window.innerHeight * 0.5;
         const newProgress = Math.min(1, scrollY / maxScroll);
         setScrollProgress(newProgress);
         frameId.current = null;
       });
     };
-    
+
     window.addEventListener('scroll', handleScroll, { passive: true });
-    
+
     // Initial calculation
     handleScroll();
-    
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
       if (frameId.current) {
@@ -120,7 +119,7 @@ const HeroSection = () => {
     transform: `translate3d(0, -${translateY}px, 0)`,
     willChange: 'transform, opacity'
   };
-  
+
   // Apply less aggressive transform to the scroll button
   const scrollButtonStyle: CSSProperties = {
     opacity,
@@ -132,16 +131,16 @@ const HeroSection = () => {
       {/* Fixed position wrapper for the hero content */}
       <div className="fixed top-0 left-0 w-full h-screen z-0">
         {/* Background image */}
-        <div 
+        <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage: `url('/hero/studio_clean.webp')`,
             willChange: 'transform',
           }}
         />
-        
+
         {/* Content layer with optimized transitions */}
-        <div 
+        <div
           ref={contentRef}
           className="relative z-10 h-full flex flex-col items-center justify-center"
           style={contentStyle}
@@ -168,9 +167,8 @@ const HeroSection = () => {
         {/* Scroll down button - simplified to show by default */}
         {showScrollIndicator && (
           <div
-            className={`absolute z-10 flex justify-center animate-bounce cursor-pointer ${
-              isMobile ? 'bottom-16' : 'bottom-8'
-            } left-0 right-0`}
+            className={`absolute z-10 flex justify-center animate-bounce cursor-pointer ${isMobile ? 'bottom-16' : 'bottom-8'
+              } left-0 right-0`}
             onClick={scrollToNextSection}
             style={scrollButtonStyle}
           >
@@ -180,7 +178,7 @@ const HeroSection = () => {
           </div>
         )}
       </div>
-      
+
       {/* Spacer element to push content below the hero section */}
       <div className="h-screen w-full" />
     </div>
