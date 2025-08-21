@@ -8,24 +8,45 @@ const AngebotSection = () => {
       <div className="vertical-line h-32 mb-16"></div>
       <h2 className="section-title">01 Angebot</h2>
 
-      <div className="max-w-3xl mx-auto text-center">
-        <p className="text-lg mb-8">
-          Das Wunderwerk ist der ideale Ort für Gesundheitsprofis und Kursleiter im Herzen Nürnbergs.
-          Unsere vier einzigartigen Räume bieten die perfekte Atmosphäre für deine Arbeit.
+      <div className="max-w-4xl mx-auto text-center">
+        <p className="text-xl text-gray-700 mb-12 font-light">
+          Vier <span className="font-semibold text-gray-900">einzigartige Räume</span> im Herzen Nürnbergs
         </p>
         
-        <div className="grid md:grid-cols-2 gap-6 mb-10">
-          <div className="p-6 bg-gray-50 rounded-lg">
-            <h3 className="font-serif text-xl mb-3">Gesundheit & Therapie</h3>
-            <p className="text-gray-600">
-              Speziell ausgestattete Räume für Hebammen, Physiotherapeuten und andere Gesundheitspraktiker
-            </p>
+        <div className="grid md:grid-cols-2 gap-8 mb-12">
+          <div className="p-8 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl">
+            <h3 className="font-serif text-2xl mb-4 text-gray-900">Gesundheit & Therapie</h3>
+            <div className="space-y-2 text-left">
+              <div className="flex items-center space-x-2">
+                <span className="w-2 h-2 bg-primary rounded-full"></span>
+                <span className="text-gray-700"><strong>Hebammen</strong></span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <span className="w-2 h-2 bg-primary rounded-full"></span>
+                <span className="text-gray-700"><strong>Physiotherapie</strong></span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <span className="w-2 h-2 bg-primary rounded-full"></span>
+                <span className="text-gray-700">Weitere Gesundheitspraktiker</span>
+              </div>
+            </div>
           </div>
-          <div className="p-6 bg-gray-50 rounded-lg">
-            <h3 className="font-serif text-xl mb-3">Kurse & Schulungen</h3>
-            <p className="text-gray-600">
-              Flexibles Studio für Yoga, Pilates, Workshops und Gruppenkurse aller Art
-            </p>
+          <div className="p-8 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl">
+            <h3 className="font-serif text-2xl mb-4 text-gray-900">Kurse & Schulungen</h3>
+            <div className="space-y-2 text-left">
+              <div className="flex items-center space-x-2">
+                <span className="w-2 h-2 bg-primary rounded-full"></span>
+                <span className="text-gray-700"><strong>Yoga & Pilates</strong></span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <span className="w-2 h-2 bg-primary rounded-full"></span>
+                <span className="text-gray-700"><strong>Workshops</strong></span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <span className="w-2 h-2 bg-primary rounded-full"></span>
+                <span className="text-gray-700">Gruppenkurse aller Art</span>
+              </div>
+            </div>
           </div>
         </div>
         
