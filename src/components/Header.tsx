@@ -134,11 +134,11 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             <Button
-              onClick={() => handleSectionClick('info')}
+              onClick={() => handleSectionClick('angebot')}
               variant="ghost"
               className={`font-sans hover:text-gray-600 transition-colors ${scrolled ? 'text-black' : 'text-white'}`}
             >
-              INFO
+              ANGEBOT
             </Button>
             <Button
               onClick={() => handleSectionClick('rooms')}
@@ -195,11 +195,11 @@ const Header = () => {
             <SheetContent side="right" className="w-[300px] bg-white/80 backdrop-blur-md">
               <nav className="flex flex-col space-y-4 mt-8">
                 <Button
-                  onClick={() => handleSectionClick('info')}
+                  onClick={() => handleSectionClick('angebot')}
                   variant="ghost"
                   className="font-sans text-black hover:text-gray-600 transition-colors justify-start"
                 >
-                  INFO
+                  ANGEBOT
                 </Button>
                 <Button
                   onClick={() => handleSectionClick('rooms')}
