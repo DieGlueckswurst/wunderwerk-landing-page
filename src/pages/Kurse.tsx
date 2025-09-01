@@ -2,18 +2,40 @@ import { useState } from 'react';
 import Header from "@/components/Header";
 import PageHeader from "@/components/PageHeader";
 import { Button } from "@/components/ui/button";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 const Kurse = () => {
   const [activeTab, setActiveTab] = useState<'alle' | 'wochenplan'>('alle');
 
   const kurse = [
-    "Schwangerschafts-Yoga",
-    "Rückbildungs-Yoga", 
-    "Rückbildung",
-    "Babymassage",
-    "Geburtsvorbereitung",
-    "Trageberatung",
-    "Krabbelgruppe"
+    {
+      name: "Babymassage",
+      description: "Liebevolle Berührung für eine starke Bindung zwischen Eltern und Baby. Erlernen Sie sanfte Massage-Techniken."
+    },
+    {
+      name: "Geburtsvorbereitung", 
+      description: "Umfassende Vorbereitung auf die Geburt mit praktischen Übungen, Atemtechniken und wichtigen Informationen."
+    },
+    {
+      name: "Krabbelgruppe",
+      description: "Spielerische Förderung und sozialer Austausch für Babys und Kleinkinder mit ihren Eltern."
+    },
+    {
+      name: "Rückbildung",
+      description: "Gezieltes Training zur Stärkung der Beckenbodenmuskulatur und Rückbildung nach der Geburt."
+    },
+    {
+      name: "Rückbildungs-Yoga",
+      description: "Sanfte Yoga-Übungen speziell für die Zeit nach der Geburt zur körperlichen und mentalen Regeneration."
+    },
+    {
+      name: "Schwangerschafts-Yoga",
+      description: "Entspannende Yoga-Praxis für werdende Mütter zur Vorbereitung auf die Geburt."
+    },
+    {
+      name: "Trageberatung",
+      description: "Professionelle Beratung zu ergonomischen Tragehilfen und bindungsförderndem Tragen."
+    }
   ];
 
   const wochenplan = [
@@ -38,8 +60,8 @@ const Kurse = () => {
           <div className="bg-amber-50 rounded-lg p-1 inline-flex">
             <Button
               onClick={() => setActiveTab('alle')}
-              variant={activeTab === 'alle' ? 'default' : 'ghost'}
-              className={`px-6 py-2 rounded-md ${
+              variant="ghost"
+              className={`px-6 py-2 rounded-md text-black font-medium ${
                 activeTab === 'alle' 
                   ? 'bg-white shadow-sm' 
                   : 'hover:bg-white/50'
@@ -49,8 +71,8 @@ const Kurse = () => {
             </Button>
             <Button
               onClick={() => setActiveTab('wochenplan')}
-              variant={activeTab === 'wochenplan' ? 'default' : 'ghost'}
-              className={`px-6 py-2 rounded-md ${
+              variant="ghost"
+              className={`px-6 py-2 rounded-md text-black font-medium ${
                 activeTab === 'wochenplan' 
                   ? 'bg-white shadow-sm' 
                   : 'hover:bg-white/50'
@@ -65,19 +87,23 @@ const Kurse = () => {
         {activeTab === 'alle' && (
           <div className="max-w-4xl mx-auto">
             <h3 className="text-2xl font-serif mb-8 text-center">Unsere Kursangebote</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <Accordion type="single" collapsible className="w-full">
               {kurse.map((kurs, index) => (
-                <div key={index} className="bg-amber-50 rounded-lg p-6 text-center hover:shadow-md transition-shadow">
-                  <h4 className="font-serif text-lg mb-2">{kurs}</h4>
-                  <p className="text-gray-600 text-sm mb-4">
-                    Informationen und Anmeldung über unser Kontaktformular.
-                  </p>
-                  <Button variant="outline" size="sm" className="border-amber-300 hover:bg-amber-100">
-                    Mehr erfahren
-                  </Button>
-                </div>
+                <AccordionItem key={index} value={`item-${index}`} className="border-amber-200">
+                  <AccordionTrigger className="hover:no-underline">
+                    <span className="font-serif text-lg text-left">{kurs.name}</span>
+                  </AccordionTrigger>
+                  <AccordionContent className="pb-6">
+                    <p className="text-gray-600 mb-4 leading-relaxed">
+                      {kurs.description}
+                    </p>
+                    <Button className="bg-primary hover:bg-primary/90">
+                      Zur Anmeldung
+                    </Button>
+                  </AccordionContent>
+                </AccordionItem>
               ))}
-            </div>
+            </Accordion>
           </div>
         )}
 

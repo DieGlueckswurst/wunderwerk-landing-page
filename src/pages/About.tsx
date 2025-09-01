@@ -49,7 +49,7 @@ const About = () => {
     {
       id: 1,
       name: "Eva Kauper",
-      proficiency: "Hebamme",
+      proficiency: "Hebamme & Mitgründerin",
       category: "hebammen",
       description: "Erfahrene Hebamme mit langjähriger Praxis in der Schwangerschaftsbegleitung und Geburtsvorbereitung.",
       website: "https://example.com",
@@ -58,7 +58,7 @@ const About = () => {
     {
       id: 2,
       name: "Ina Kauper",
-      proficiency: "Physiotherapeutin",
+      proficiency: "Physiotherapeutin & Mitgründerin",
       category: "physiotherapie",
       description: "Spezialistin für manuelle Therapie und therapeutische Behandlungen.",
       website: "https://example.com",
@@ -134,17 +134,19 @@ const About = () => {
     : teamMembers;
 
   const scrollToContact = () => {
-    const element = document.getElementById('contact');
-    if (element) {
-      const elementPosition = element.offsetTop;
-      const offsetPosition = elementPosition - 80;
-      
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
+    if (window.location.pathname === '/') {
+      const element = document.getElementById('contact');
+      if (element) {
+        const elementPosition = element.offsetTop;
+        const offsetPosition = elementPosition - 100;
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
     } else {
-      // If contact section doesn't exist, navigate to home page contact section
+      // Navigate to home page with scroll state
       window.location.href = '/#contact';
     }
   };
@@ -209,22 +211,24 @@ const About = () => {
           </div>
 
           {/* Team Members */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {filteredTeamMembers.map((member) => (
-              <div key={member.id} className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow">
-                <div className="aspect-square w-full h-48 overflow-hidden">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-full h-full object-cover"
-                  />
+              <div key={member.id} className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 p-6 text-center">
+                <div className="flex justify-center mb-4">
+                  <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-amber-100">
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                 </div>
-                <div className="p-4">
+                <div>
                   <h3 className="text-lg font-serif mb-1">{member.name}</h3>
-                  <p className="text-primary font-medium mb-2 text-sm">{member.proficiency}</p>
-                  <p className="text-gray-600 mb-3 text-sm leading-relaxed">{member.description}</p>
+                  <p className="text-primary font-medium mb-3 text-sm">{member.proficiency}</p>
+                  <p className="text-gray-600 mb-4 text-sm leading-relaxed">{member.description}</p>
                   {member.comingSoon && (
-                    <span className="inline-block bg-amber-100 text-amber-800 px-2 py-1 rounded text-xs font-medium">
+                    <span className="inline-block bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-xs font-medium">
                       Demnächst verfügbar
                     </span>
                   )}
@@ -233,7 +237,7 @@ const About = () => {
                       href={member.website}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center text-primary hover:text-primary/80 transition-colors text-sm"
+                      className="inline-flex items-center text-primary hover:text-primary/80 transition-colors text-sm font-medium"
                     >
                       Website besuchen
                       <ExternalLink className="ml-1 h-3 w-3" />
@@ -248,12 +252,6 @@ const About = () => {
         {/* Timeline Section */}
         <div>
           <h2 className="text-3xl font-serif text-center mb-12">Unsere Geschichte</h2>
-          <div className="text-center mb-12">
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Unsere Geschichte beginnt in einem besonderen Gebäude in der Nürnberger Altstadt. 
-              Erleben Sie die Entwicklung unseres Wunderwerks durch die Jahrzehnte.
-            </p>
-          </div>
 
           <div className="relative max-w-6xl mx-auto">
             {/* Vertical line */}
