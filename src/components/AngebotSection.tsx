@@ -43,7 +43,7 @@ const AngebotSection = () => {
       <h2 className="section-title">01 Angebot</h2>
 
       <div className="max-w-4xl mx-auto text-center">
-        <p className="text-xl text-gray-700 mb-12 font-light">
+        <p className="text-xl text-gray-700 mb-12 font-normal antialiased">
           <span className="font-semibold text-gray-900">Gesundheit</span> und <span className="font-semibold text-gray-900">Wohlfühlen</span> – für <span className="font-semibold text-gray-900">Groß & Klein</span>, im Herzen <span className="font-semibold text-gray-900">Nürnbergs</span>.
         </p>
 

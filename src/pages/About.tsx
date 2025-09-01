@@ -251,7 +251,7 @@ const About = () => {
           </div>
 
           <div className="py-12 text-center">
-            <div className="inline-block bg-white border border-gray-200 rounded-lg px-6 py-3 text-2xl font-serif text-gray-700 shadow-sm">
+            <div className="inline-block bg-white border border-gray-200 rounded-lg px-6 py-3 text-2xl font-serif text-gray-700">
               Die Zukunft? Wird wunderbar.
             </div>
           </div>

@@ -40,9 +40,9 @@ const Kurse = () => {
             <Button
               onClick={() => setActiveTab('alle')}
               variant="ghost"
-              className={`px-6 py-2 rounded-md text-black font-medium ${activeTab === 'alle'
-                ? 'bg-white shadow-sm'
-                : 'hover:bg-white/50'
+              className={`px-6 py-2 rounded-md text-black font-medium select-none touch-manipulation [-webkit-tap-highlight-color:transparent] transition-colors hover:text-black/80 active:text-black/70 focus:text-black/80 ${activeTab === 'alle'
+                ? 'bg-white shadow-sm hover:bg-white active:bg-white focus:bg-white'
+                : 'hover:bg-transparent active:bg-transparent focus:bg-transparent'
                 }`}
             >
               Alle Kurse
@@ -50,9 +50,9 @@ const Kurse = () => {
             <Button
               onClick={() => setActiveTab('wochenplan')}
               variant="ghost"
-              className={`px-6 py-2 rounded-md text-black font-medium ${activeTab === 'wochenplan'
-                ? 'bg-white shadow-sm'
-                : 'hover:bg-white/50'
+              className={`px-6 py-2 rounded-md text-black font-medium select-none touch-manipulation [-webkit-tap-highlight-color:transparent] transition-colors hover:text-black/80 active:text-black/70 focus:text-black/80 ${activeTab === 'wochenplan'
+                ? 'bg-white shadow-sm hover:bg-white active:bg-white focus:bg-white'
+                : 'hover:bg-transparent active:bg-transparent focus:bg-transparent'
                 }`}
             >
               Wochenplan
@@ -104,7 +104,7 @@ const Kurse = () => {
                 <AccordionItem key={index} value={`item-${index}`} className="border-amber-200">
                   <AccordionTrigger className="hover:no-underline">
                     <div className="flex-1">
-                      <span className="font-serif text-xl md:text-2xl text-left block">{kurs.name}</span>
+                      <span className="font-serif text-2xl text-left block">{kurs.name}</span>
                       <div className="mt-2 flex gap-2 flex-wrap">
                         {kurs.categories.map((cat, i) => (
                           <Tag key={i}>{cat}</Tag>

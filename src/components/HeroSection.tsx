@@ -8,10 +8,10 @@ const RotatingText = () => {
   const [isVisible, setIsVisible] = useState(true);
 
   const words = [
-    "Begleitung in der Schwangerschaft",
-    "Unterstützung für den Körper",
-    "Entspannung in deinem Alltag",
-    "Gemeinschaft und Austausch",
+    "Begleitung in der\nSchwangerschaft",
+    "Unterstützung\nfür den Körper",
+    "Entspannung\nin deinem Alltag",
+    "Gemeinschaft\n& Austausch",
   ];
 
   useEffect(() => {
@@ -27,9 +27,9 @@ const RotatingText = () => {
   }, []);
 
   return (
-    <div className="inline-block min-w-[180px] text-center h-[1.2em]">
+    <div className="inline-block min-w-[180px] text-center">
       <span
-        className={`transition-all duration-300 font-avenir text-white ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+        className={`transition-all duration-300 font-avenir text-white whitespace-pre-line ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
       >
         {words[currentIndex]}
