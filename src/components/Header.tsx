@@ -141,18 +141,18 @@ const Header = () => {
               ANGEBOT
             </Button>
             <Button
+              onClick={() => navigate('/kurse')}
+              variant="ghost"
+              className={`font-sans hover:text-gray-600 transition-colors ${scrolled ? 'text-black' : 'text-white'}`}
+            >
+              KURSE
+            </Button>
+            <Button
               onClick={() => handleSectionClick('rooms')}
               variant="ghost"
               className={`font-sans hover:text-gray-600 transition-colors ${scrolled ? 'text-black' : 'text-white'}`}
             >
               RÄUME
-            </Button>
-            <Button
-              onClick={() => handleSectionClick('testimonials')}
-              variant="ghost"
-              className={`font-sans hover:text-gray-600 transition-colors ${scrolled ? 'text-black' : 'text-white'}`}
-            >
-              STIMMEN
             </Button>
             <Button
               onClick={() => handleSectionClick('contact')}
@@ -202,18 +202,18 @@ const Header = () => {
                   ANGEBOT
                 </Button>
                 <Button
+                  onClick={() => { navigate('/kurse'); setIsOpen(false); }}
+                  variant="ghost"
+                  className="font-sans text-black hover:text-gray-600 transition-colors justify-start"
+                >
+                  KURSE
+                </Button>
+                <Button
                   onClick={() => handleSectionClick('rooms')}
                   variant="ghost"
                   className="font-sans text-black hover:text-gray-600 transition-colors justify-start"
                 >
                   RÄUME
-                </Button>
-                <Button
-                  onClick={() => handleSectionClick('testimonials')}
-                  variant="ghost"
-                  className="font-sans text-black hover:text-gray-600 transition-colors justify-start"
-                >
-                  STIMMEN
                 </Button>
                 <Button
                   onClick={() => handleSectionClick('contact')}

@@ -1,9 +1,11 @@
-
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import Header from "@/components/Header";
 import PageHeader from "@/components/PageHeader";
+import { Button } from "@/components/ui/button";
+import { ExternalLink } from "lucide-react";
+import { getPlaceholderImage } from "@/utils/placeholderImage";
 
-// Interface for our timeline items
 interface TimelineItem {
   id: number;
   date: string;
@@ -12,8 +14,21 @@ interface TimelineItem {
   image: string;
 }
 
+interface TeamMember {
+  id: number;
+  name: string;
+  proficiency: string;
+  category: string;
+  description: string;
+  website?: string;
+  image: string;
+  comingSoon?: boolean;
+}
+
 const About = () => {
-  // Add a class to the body for specific styling
+  const [searchParams] = useSearchParams();
+  const [activeFilter, setActiveFilter] = useState<string>('');
+
   useEffect(() => {
     document.body.classList.add('about-page');
     return () => {
@@ -21,7 +36,54 @@ const About = () => {
     };
   }, []);
 
-  // Sample timeline data - these would be replaced with real content
+  useEffect(() => {
+    const filter = searchParams.get('filter');
+    if (filter) {
+      setActiveFilter(filter);
+    } else {
+      setActiveFilter('');
+    }
+  }, [searchParams]);
+
+  const teamMembers: TeamMember[] = [
+    {
+      id: 1,
+      name: "Eva Kauper",
+      proficiency: "Hebamme",
+      category: "hebammen",
+      description: "Erfahrene Hebamme mit langjähriger Praxis in der Schwangerschaftsbegleitung und Geburtsvorbereitung.",
+      website: "https://example.com",
+      image: getPlaceholderImage(0)
+    },
+    {
+      id: 2,
+      name: "Ina Kauper",
+      proficiency: "Physiotherapeutin",
+      category: "physiotherapie",
+      description: "Spezialistin für manuelle Therapie und therapeutische Behandlungen.",
+      website: "https://example.com",
+      image: getPlaceholderImage(1)
+    },
+    {
+      id: 3,
+      name: "Osteopath/in",
+      proficiency: "Osteopathie",
+      category: "osteopathie",
+      description: "Demnächst verfügbar - Osteopathische Behandlungen für ganzheitliche Gesundheit.",
+      image: getPlaceholderImage(2),
+      comingSoon: true
+    },
+    {
+      id: 4,
+      name: "Osteopath/in",
+      proficiency: "Osteopathie",
+      category: "osteopathie", 
+      description: "Demnächst verfügbar - Osteopathische Behandlungen für ganzheitliche Gesundheit.",
+      image: getPlaceholderImage(3),
+      comingSoon: true
+    }
+  ];
+
   const timelineItems: TimelineItem[] = [
     {
       id: 1,
@@ -67,18 +129,133 @@ const About = () => {
     }
   ];
 
+  const filteredTeamMembers = activeFilter 
+    ? teamMembers.filter(member => member.category === activeFilter)
+    : teamMembers;
+
+  const scrollToContact = () => {
+    const element = document.getElementById('contact');
+    if (element) {
+      const elementPosition = element.offsetTop;
+      const offsetPosition = elementPosition - 80;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    } else {
+      // If contact section doesn't exist, navigate to home page contact section
+      window.location.href = '/#contact';
+    }
+  };
+
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen bg-white">
       <Header />
       <PageHeader title="Über uns" />
 
-      {/* Timeline section - extending to bottom of page with flex-grow */}
-      <section className="pt-12 px-6 timeline-section relative flex-grow">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">Es war einmal...</p>
+      <div className="container mx-auto px-6 pt-0 pb-16">
+        {/* Call to Action */}
+        <div className="text-center mb-12 bg-amber-50 rounded-lg p-8">
+          <p className="text-lg text-gray-700 mb-4">
+            Du möchtest Teil von uns werden?
+          </p>
+          <Button 
+            onClick={scrollToContact}
+            className="bg-primary hover:bg-primary/90"
+          >
+            Jetzt Kontakt aufnehmen
+          </Button>
+        </div>
+
+        {/* Team Section */}
+        <div className="mb-16">
+          <h2 className="text-3xl font-serif text-center mb-8">Unser Team</h2>
+          
+          {/* Filter Buttons */}
+          <div className="flex justify-center mb-8 gap-2 flex-wrap">
+            <Button
+              onClick={() => setActiveFilter('')}
+              variant={activeFilter === '' ? 'default' : 'outline'}
+              size="sm"
+              className="rounded-full"
+            >
+              Alle
+            </Button>
+            <Button
+              onClick={() => setActiveFilter('hebammen')}
+              variant={activeFilter === 'hebammen' ? 'default' : 'outline'}
+              size="sm"
+              className="rounded-full"
+            >
+              Hebamme
+            </Button>
+            <Button
+              onClick={() => setActiveFilter('physiotherapie')}
+              variant={activeFilter === 'physiotherapie' ? 'default' : 'outline'}
+              size="sm"
+              className="rounded-full"
+            >
+              Physiotherapie
+            </Button>
+            <Button
+              onClick={() => setActiveFilter('osteopathie')}
+              variant={activeFilter === 'osteopathie' ? 'default' : 'outline'}
+              size="sm"
+              className="rounded-full"
+            >
+              Osteopathie
+            </Button>
           </div>
-          <div className="relative">
+
+          {/* Team Members */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {filteredTeamMembers.map((member) => (
+              <div key={member.id} className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow">
+                <div className="aspect-square w-full h-48 overflow-hidden">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="p-4">
+                  <h3 className="text-lg font-serif mb-1">{member.name}</h3>
+                  <p className="text-primary font-medium mb-2 text-sm">{member.proficiency}</p>
+                  <p className="text-gray-600 mb-3 text-sm leading-relaxed">{member.description}</p>
+                  {member.comingSoon && (
+                    <span className="inline-block bg-amber-100 text-amber-800 px-2 py-1 rounded text-xs font-medium">
+                      Demnächst verfügbar
+                    </span>
+                  )}
+                  {member.website && !member.comingSoon && (
+                    <a
+                      href={member.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center text-primary hover:text-primary/80 transition-colors text-sm"
+                    >
+                      Website besuchen
+                      <ExternalLink className="ml-1 h-3 w-3" />
+                    </a>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Timeline Section */}
+        <div>
+          <h2 className="text-3xl font-serif text-center mb-12">Unsere Geschichte</h2>
+          <div className="text-center mb-12">
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Unsere Geschichte beginnt in einem besonderen Gebäude in der Nürnberger Altstadt. 
+              Erleben Sie die Entwicklung unseres Wunderwerks durch die Jahrzehnte.
+            </p>
+          </div>
+
+          <div className="relative max-w-6xl mx-auto">
             {/* Vertical line */}
             <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gray-200"></div>
 
@@ -93,14 +270,14 @@ const About = () => {
 
                   {/* Content */}
                   <div className={`md:w-1/2 ${index % 2 === 0 ? 'md:pr-16' : 'md:pl-16'}`}>
-                    <div className="bg-white rounded-lg overflow-hidden">
+                    <div className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
                       <img 
                         src={item.image} 
                         alt={item.title} 
                         className="w-full h-64 object-cover" 
                         onError={e => {
                           const target = e.target as HTMLImageElement;
-                          target.src = "https://images.unsplash.com/photo-1617173296640-e8d5320017bb?q=80&w=1600&h=900&auto=format&fit=crop";
+                          target.src = getPlaceholderImage(index);
                         }} 
                       />
                       <div className="p-6">
@@ -117,11 +294,11 @@ const About = () => {
               </div>
             ))}
           </div>
+          
+          <div className="py-12 text-center text-2xl font-serif text-gray-700">
+            Die Zukunft? Wird wunderbar.
+          </div>
         </div>
-      </section>
-      
-      <div className="py-12 text-center text-2xl font-serif text-gray-700 footer-message">
-        Die Zukunft? Wird wunderbar.
       </div>
     </div>
   );
