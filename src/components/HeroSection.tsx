@@ -8,11 +8,10 @@ const RotatingText = () => {
   const [isVisible, setIsVisible] = useState(true);
 
   const words = [
-    "Hebammen",
-    "Physiotherapeuten",
-    "Yoga-Kurse",
-    "Fortbildungen",
-    "Pop-up Events"
+    "Begleitung in der Schwangerschaft",
+    "Unterstützung für den Körper",
+    "Entspannung in deinem Alltag",
+    "Gemeinschaft und Austausch",
   ];
 
   useEffect(() => {
@@ -157,7 +156,7 @@ const HeroSection = () => {
             </div>
           </div>
           <div className={`flex flex-col md:flex-row items-center justify-center text-2xl md:text-3xl lg:text-4xl font-avenir text-white ${isMobile ? 'mt-8' : 'mt-8'}`}>
-            <span className="mb-2 md:mb-0">Räumlichkeiten für</span>
+            {/* <span className="mb-2 md:mb-0">Wunderwerk ist</span> */}
             <span className="font-bold tracking-wider md:ml-3">
               <RotatingText />
             </span>

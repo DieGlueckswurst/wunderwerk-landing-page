@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import Header from "@/components/Header";
 import PageHeader from "@/components/PageHeader";
 import { Button } from "@/components/ui/button";
+import { Tag } from "@/components/ui/tag";
 import { ExternalLink } from "lucide-react";
+import { teamMembers as teamData } from "@/data/team";
 import { getPlaceholderImage } from "@/utils/placeholderImage";
 
 interface TimelineItem {
@@ -14,20 +16,12 @@ interface TimelineItem {
   image: string;
 }
 
-interface TeamMember {
-  id: number;
-  name: string;
-  proficiency: string;
-  category: string;
-  description: string;
-  website?: string;
-  image: string;
-  comingSoon?: boolean;
-}
+// Team is now sourced from src/data/team
 
 const About = () => {
   const [searchParams] = useSearchParams();
   const [activeFilter, setActiveFilter] = useState<string>('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.body.classList.add('about-page');
@@ -45,44 +39,7 @@ const About = () => {
     }
   }, [searchParams]);
 
-  const teamMembers: TeamMember[] = [
-    {
-      id: 1,
-      name: "Eva Kauper",
-      proficiency: "Hebamme & Mitgründerin",
-      category: "hebammen",
-      description: "Erfahrene Hebamme mit langjähriger Praxis in der Schwangerschaftsbegleitung und Geburtsvorbereitung.",
-      website: "https://example.com",
-      image: getPlaceholderImage(0)
-    },
-    {
-      id: 2,
-      name: "Ina Kauper",
-      proficiency: "Physiotherapeutin & Mitgründerin",
-      category: "physiotherapie",
-      description: "Spezialistin für manuelle Therapie und therapeutische Behandlungen.",
-      website: "https://example.com",
-      image: getPlaceholderImage(1)
-    },
-    {
-      id: 3,
-      name: "Osteopath/in",
-      proficiency: "Osteopathie",
-      category: "osteopathie",
-      description: "Demnächst verfügbar - Osteopathische Behandlungen für ganzheitliche Gesundheit.",
-      image: getPlaceholderImage(2),
-      comingSoon: true
-    },
-    {
-      id: 4,
-      name: "Osteopath/in",
-      proficiency: "Osteopathie",
-      category: "osteopathie", 
-      description: "Demnächst verfügbar - Osteopathische Behandlungen für ganzheitliche Gesundheit.",
-      image: getPlaceholderImage(3),
-      comingSoon: true
-    }
-  ];
+  const teamMembers = teamData;
 
   const timelineItems: TimelineItem[] = [
     {
@@ -129,7 +86,7 @@ const About = () => {
     }
   ];
 
-  const filteredTeamMembers = activeFilter 
+  const filteredTeamMembers = activeFilter
     ? teamMembers.filter(member => member.category === activeFilter)
     : teamMembers;
 
@@ -139,7 +96,7 @@ const About = () => {
       if (element) {
         const elementPosition = element.offsetTop;
         const offsetPosition = elementPosition - 100;
-        
+
         window.scrollTo({
           top: offsetPosition,
           behavior: 'smooth'
@@ -147,7 +104,7 @@ const About = () => {
       }
     } else {
       // Navigate to home page with scroll state
-      window.location.href = '/#contact';
+      navigate('/', { state: { scrollTo: 'contact' } });
     }
   };
 
@@ -158,11 +115,11 @@ const About = () => {
 
       <div className="container mx-auto px-6 pt-0 pb-16">
         {/* Call to Action */}
-        <div className="text-center mb-12 bg-amber-50 rounded-lg p-8">
+        <div className="text-center mb-12 bg-amber-50 rounded-lg p-8 max-w-6xl mx-auto">
           <p className="text-lg text-gray-700 mb-4">
-            Du möchtest Teil von uns werden?
+            Lust, ein Teil von uns zu werden?
           </p>
-          <Button 
+          <Button
             onClick={scrollToContact}
             className="bg-primary hover:bg-primary/90"
           >
@@ -172,8 +129,6 @@ const About = () => {
 
         {/* Team Section */}
         <div className="mb-16">
-          <h2 className="text-3xl font-serif text-center mb-8">Unser Team</h2>
-          
           {/* Filter Buttons */}
           <div className="flex justify-center mb-8 gap-2 flex-wrap">
             <Button
@@ -215,32 +170,34 @@ const About = () => {
             {filteredTeamMembers.map((member) => (
               <div key={member.id} className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 p-6 text-center">
                 <div className="flex justify-center mb-4">
-                  <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-amber-100">
+                  <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-amber-50">
                     <img
-                      src={member.image}
+                      src={member.image || '/placeholder.svg'}
                       alt={member.name}
                       className="w-full h-full object-cover"
+                      onError={(e) => { (e.target as HTMLImageElement).src = '/placeholder.svg'; }}
                     />
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-lg font-serif mb-1">{member.name}</h3>
-                  <p className="text-primary font-medium mb-3 text-sm">{member.proficiency}</p>
-                  <p className="text-gray-600 mb-4 text-sm leading-relaxed">{member.description}</p>
-                  {member.comingSoon && (
-                    <span className="inline-block bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-xs font-medium">
-                      Demnächst verfügbar
-                    </span>
-                  )}
+                  <h3 className="text-lg font-serif mb-2">{member.name}</h3>
+                  <div className="flex flex-col items-center gap-2 mb-4">
+                    {member.coFounder && (
+                      <Tag>Mitgründerin</Tag>
+                    )}
+                    {member.role && (
+                      <Tag>{member.role}</Tag>
+                    )}
+                    {member.comingSoon && (
+                      <Tag variant="warning">Kommt bald!</Tag>
+                    )}
+                  </div>
                   {member.website && !member.comingSoon && (
-                    <a
-                      href={member.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center text-primary hover:text-primary/80 transition-colors text-sm font-medium"
-                    >
-                      Website besuchen
-                      <ExternalLink className="ml-1 h-3 w-3" />
+                    <a href={member.website} target="_blank" rel="noopener noreferrer">
+                      <Button variant="outline" className="border-gray-300 hover:bg-amber-50">
+                        Website besuchen
+                        <ExternalLink className="ml-1 h-3 w-3" />
+                      </Button>
                     </a>
                   )}
                 </div>
@@ -250,10 +207,10 @@ const About = () => {
         </div>
 
         {/* Timeline Section */}
-        <div>
+        <div className="bg-amber-50 rounded-lg p-8 max-w-6xl mx-auto">
           <h2 className="text-3xl font-serif text-center mb-12">Unsere Geschichte</h2>
 
-          <div className="relative max-w-6xl mx-auto">
+          <div className="relative">
             {/* Vertical line */}
             <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gray-200"></div>
 
@@ -262,21 +219,21 @@ const About = () => {
               <div key={item.id} className="mb-16 md:mb-24 relative">
                 <div className={`md:flex items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
                   {/* Date marker for desktop */}
-                  <div className="hidden md:block absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white border-4 border-gray-200 z-10 flex items-center justify-center">
+                  <div className="hidden md:block absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white border-4 border-gray-200 z-10 items-center justify-center">
                     <span className="font-bold text-xs leading-none text-center flex items-center justify-center w-full h-full">{item.date}</span>
                   </div>
 
                   {/* Content */}
                   <div className={`md:w-1/2 ${index % 2 === 0 ? 'md:pr-16' : 'md:pl-16'}`}>
                     <div className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
-                      <img 
-                        src={item.image} 
-                        alt={item.title} 
-                        className="w-full h-64 object-cover" 
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        className="w-full h-64 object-cover"
                         onError={e => {
                           const target = e.target as HTMLImageElement;
                           target.src = getPlaceholderImage(index);
-                        }} 
+                        }}
                       />
                       <div className="p-6">
                         {/* Date marker for mobile */}
@@ -292,9 +249,11 @@ const About = () => {
               </div>
             ))}
           </div>
-          
-          <div className="py-12 text-center text-2xl font-serif text-gray-700">
-            Die Zukunft? Wird wunderbar.
+
+          <div className="py-12 text-center">
+            <div className="inline-block bg-white border border-gray-200 rounded-lg px-6 py-3 text-2xl font-serif text-gray-700 shadow-sm">
+              Die Zukunft? Wird wunderbar.
+            </div>
           </div>
         </div>
       </div>

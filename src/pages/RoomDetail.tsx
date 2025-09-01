@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, X } from "lucide-react";
+import { X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import Header from "@/components/Header";
@@ -13,8 +13,8 @@ const getRoomData = (roomId: string) => {
       description: "Unser Studio ist der perfekte Ort für Gruppenkurse aller Art. Mit 60 Quadratmetern bietet es ausreichend Platz für bis zu 20 Personen. Die flexible Ausstattung ermöglicht verschiedenste Kursformate - von Yoga und Pilates bis hin zu Workshops und Seminaren.",
       features: ["60 m² Fläche", "Platz für bis zu 20 Personen", "Yoga-Matten & Zubehör", "Moderne Soundanlage", "Tageslicht & angenehme Beleuchtung"],
       images: [
+        "/rooms/studio/studio_krabbelgruppe.webp",
         "/rooms/studio/studio_yoga.webp",
-        "/rooms/studio/studio_unfinished.png",
       ]
     },
     kugelwohl: {
@@ -22,22 +22,21 @@ const getRoomData = (roomId: string) => {
       description: "Unser Raum Kugelwohl wurde speziell für Hebammen und ihre Arbeit konzipiert. Die intime Atmosphäre schafft einen sicheren Raum für Schwangere und junge Mütter. Die professionelle Ausstattung unterstützt deine Arbeit optimal.",
       features: ["18 m² Fläche", "Spezielle Ausstattung für Hebammenarbeit", "Angenehme, warme Atmosphäre", "Wickeltisch & Stillecke", "Babywaage & weitere Fachutensilien"],
       images: [
-        "/rooms/kugel_wohl/kugel_wohl_clean.webp",
+        "/rooms/kugel_wohl/kugelwohl_clean.webp",
       ]
     },
     werkstatt: {
       title: "Werkstatt",
       description: "Die Werkstatt ist ideal für Physiotherapeuten und andere Gesundheitspraktiker. Mit professioneller Ausstattung und ergonomischen Behandlungsliegen bietet dieser Raum alles, was du für deine therapeutische Arbeit benötigst.",
       features: ["15 m² Fläche", "2 professionelle Behandlungsliegen", "Umfangreiches Therapie-Equipment", "Ruhebereich für Patienten"],
-      images: ["/rooms/werkstadt/werkstatt_clean.webp"]
+      images: ["/rooms/werkstadt/werkstatt_green.webp"]
     },
     café: {
       title: "Café",
       description: "Unser Café-Raum bietet eine einzigartige Atmosphäre für kreative Events und kulturelle Veranstaltungen. Mit seiner gemütlichen Ausstattung ist er ideal für kleine Ausstellungen, Pop-up Events und intime Konzerte. Die Kombination aus modernem Design und behaglicher Atmosphäre schafft den perfekten Rahmen für unvergessliche Momente.",
       features: ["28 m² Fläche", "Große, lichtdurchflutete Fenster", "Gemütliche Wohnzimmer-Atmosphäre", "Barbereich"],
       images: [
-        "/rooms/cafe/cafe_ambiente.png",
-        "/rooms/cafe/cafe_blumen.webp",
+        "/rooms/cafe/cafe_light.webp",
       ]
     }
   };
@@ -50,11 +49,10 @@ const RoomDetail = () => {
   const navigate = useNavigate();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isFullscreenOpen, setIsFullscreenOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setIsFullscreenOpen(window.scrollY > 50);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);

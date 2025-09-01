@@ -3,40 +3,19 @@ import Header from "@/components/Header";
 import PageHeader from "@/components/PageHeader";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Tag } from "@/components/ui/tag";
+import { courses } from "@/data/courses";
+import { useNavigate } from "react-router-dom";
 
 const Kurse = () => {
   const [activeTab, setActiveTab] = useState<'alle' | 'wochenplan'>('alle');
+  const navigate = useNavigate();
 
-  const kurse = [
-    {
-      name: "Babymassage",
-      description: "Liebevolle Berührung für eine starke Bindung zwischen Eltern und Baby. Erlernen Sie sanfte Massage-Techniken."
-    },
-    {
-      name: "Geburtsvorbereitung", 
-      description: "Umfassende Vorbereitung auf die Geburt mit praktischen Übungen, Atemtechniken und wichtigen Informationen."
-    },
-    {
-      name: "Krabbelgruppe",
-      description: "Spielerische Förderung und sozialer Austausch für Babys und Kleinkinder mit ihren Eltern."
-    },
-    {
-      name: "Rückbildung",
-      description: "Gezieltes Training zur Stärkung der Beckenbodenmuskulatur und Rückbildung nach der Geburt."
-    },
-    {
-      name: "Rückbildungs-Yoga",
-      description: "Sanfte Yoga-Übungen speziell für die Zeit nach der Geburt zur körperlichen und mentalen Regeneration."
-    },
-    {
-      name: "Schwangerschafts-Yoga",
-      description: "Entspannende Yoga-Praxis für werdende Mütter zur Vorbereitung auf die Geburt."
-    },
-    {
-      name: "Trageberatung",
-      description: "Professionelle Beratung zu ergonomischen Tragehilfen und bindungsförderndem Tragen."
-    }
-  ];
+  const kurse = courses;
+  const [activeCategory, setActiveCategory] = useState<string>('');
+  const filteredKurse = activeCategory
+    ? kurse.filter(k => k.categories.includes(activeCategory as any))
+    : kurse;
 
   const wochenplan = [
     { tag: "Montag", zeit: "09:00 - 10:00", kurs: "Schwangerschafts-Yoga" },
@@ -61,22 +40,20 @@ const Kurse = () => {
             <Button
               onClick={() => setActiveTab('alle')}
               variant="ghost"
-              className={`px-6 py-2 rounded-md text-black font-medium ${
-                activeTab === 'alle' 
-                  ? 'bg-white shadow-sm' 
-                  : 'hover:bg-white/50'
-              }`}
+              className={`px-6 py-2 rounded-md text-black font-medium ${activeTab === 'alle'
+                ? 'bg-white shadow-sm'
+                : 'hover:bg-white/50'
+                }`}
             >
               Alle Kurse
             </Button>
             <Button
               onClick={() => setActiveTab('wochenplan')}
               variant="ghost"
-              className={`px-6 py-2 rounded-md text-black font-medium ${
-                activeTab === 'wochenplan' 
-                  ? 'bg-white shadow-sm' 
-                  : 'hover:bg-white/50'
-              }`}
+              className={`px-6 py-2 rounded-md text-black font-medium ${activeTab === 'wochenplan'
+                ? 'bg-white shadow-sm'
+                : 'hover:bg-white/50'
+                }`}
             >
               Wochenplan
             </Button>
@@ -85,21 +62,74 @@ const Kurse = () => {
 
         {/* Content */}
         {activeTab === 'alle' && (
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             <h3 className="text-2xl font-serif mb-8 text-center">Unsere Kursangebote</h3>
+            {/* Category Filters */}
+            <div className="flex justify-center mb-8 gap-2 flex-wrap">
+              <Button
+                onClick={() => setActiveCategory('')}
+                variant={activeCategory === '' ? 'default' : 'outline'}
+                size="sm"
+                className="rounded-full"
+              >
+                Alle
+              </Button>
+              <Button
+                onClick={() => setActiveCategory('Vor der Geburt')}
+                variant={activeCategory === 'Vor der Geburt' ? 'default' : 'outline'}
+                size="sm"
+                className="rounded-full"
+              >
+                Vor der Geburt
+              </Button>
+              <Button
+                onClick={() => setActiveCategory('Nach der Geburt')}
+                variant={activeCategory === 'Nach der Geburt' ? 'default' : 'outline'}
+                size="sm"
+                className="rounded-full"
+              >
+                Nach der Geburt
+              </Button>
+              <Button
+                onClick={() => setActiveCategory('Yoga')}
+                variant={activeCategory === 'Yoga' ? 'default' : 'outline'}
+                size="sm"
+                className="rounded-full"
+              >
+                Yoga
+              </Button>
+            </div>
             <Accordion type="single" collapsible className="w-full">
-              {kurse.map((kurs, index) => (
+              {filteredKurse.map((kurs, index) => (
                 <AccordionItem key={index} value={`item-${index}`} className="border-amber-200">
                   <AccordionTrigger className="hover:no-underline">
-                    <span className="font-serif text-lg text-left">{kurs.name}</span>
+                    <div className="flex-1">
+                      <span className="font-serif text-xl md:text-2xl text-left block">{kurs.name}</span>
+                      <div className="mt-2 flex gap-2 flex-wrap">
+                        {kurs.categories.map((cat, i) => (
+                          <Tag key={i}>{cat}</Tag>
+                        ))}
+                      </div>
+                    </div>
                   </AccordionTrigger>
                   <AccordionContent className="pb-6">
-                    <p className="text-gray-600 mb-4 leading-relaxed">
+                    <p className="text-gray-600 mb-4 leading-relaxed whitespace-pre-line">
                       {kurs.description}
                     </p>
-                    <Button className="bg-primary hover:bg-primary/90">
-                      Zur Anmeldung
-                    </Button>
+                    {kurs.url ? (
+                      <a href={kurs.url} target="_blank" rel="noopener noreferrer">
+                        <Button className="bg-primary hover:bg-primary/90">
+                          Zur Anmeldung
+                        </Button>
+                      </a>
+                    ) : (
+                      <Button
+                        className="bg-primary hover:bg-primary/90"
+                        onClick={() => navigate('/', { state: { scrollTo: 'contact' } })}
+                      >
+                        Kontakt aufnehmen
+                      </Button>
+                    )}
                   </AccordionContent>
                 </AccordionItem>
               ))}

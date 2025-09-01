@@ -141,6 +141,13 @@ const Header = () => {
               ANGEBOT
             </Button>
             <Button
+              onClick={handleAboutClick}
+              variant="ghost"
+              className={`font-sans hover:text-gray-600 transition-colors ${scrolled ? 'text-black' : 'text-white'}`}
+            >
+              ÜBER
+            </Button>
+            <Button
               onClick={() => navigate('/kurse')}
               variant="ghost"
               className={`font-sans hover:text-gray-600 transition-colors ${scrolled ? 'text-black' : 'text-white'}`}
@@ -160,13 +167,6 @@ const Header = () => {
               className={`font-sans hover:text-gray-600 transition-colors ${scrolled ? 'text-black' : 'text-white'}`}
             >
               KONTAKT
-            </Button>
-            <Button
-              onClick={handleAboutClick}
-              variant="ghost"
-              className={`font-sans hover:text-gray-600 transition-colors ${scrolled ? 'text-black' : 'text-white'}`}
-            >
-              ÜBER
             </Button>
           </nav>
 
@@ -202,6 +202,13 @@ const Header = () => {
                   ANGEBOT
                 </Button>
                 <Button
+                  onClick={handleAboutClick}
+                  variant="ghost"
+                  className="font-sans text-black hover:text-gray-600 transition-colors justify-start"
+                >
+                  ÜBER
+                </Button>
+                <Button
                   onClick={() => { navigate('/kurse'); setIsOpen(false); }}
                   variant="ghost"
                   className="font-sans text-black hover:text-gray-600 transition-colors justify-start"
@@ -221,13 +228,6 @@ const Header = () => {
                   className="font-sans text-black hover:text-gray-600 transition-colors justify-start"
                 >
                   KONTAKT
-                </Button>
-                <Button
-                  onClick={handleAboutClick}
-                  variant="ghost"
-                  className="font-sans text-black hover:text-gray-600 transition-colors justify-start"
-                >
-                  ÜBER
                 </Button>
               </nav>
             </SheetContent>

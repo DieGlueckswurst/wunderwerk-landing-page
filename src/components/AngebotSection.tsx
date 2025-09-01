@@ -9,7 +9,7 @@ const AngebotSection = () => {
     if (element) {
       const elementPosition = element.offsetTop;
       const offsetPosition = elementPosition - 80;
-      
+
       window.scrollTo({
         top: offsetPosition,
         behavior: 'smooth'
@@ -44,45 +44,45 @@ const AngebotSection = () => {
 
       <div className="max-w-4xl mx-auto text-center">
         <p className="text-xl text-gray-700 mb-12 font-light">
-          Entdecke unser <span className="font-semibold text-gray-900">vielfältiges Angebot</span> für deine Gesundheit
+          <span className="font-semibold text-gray-900">Gesundheit</span> und <span className="font-semibold text-gray-900">Wohlfühlen</span> – für <span className="font-semibold text-gray-900">Groß & Klein</span>, im Herzen <span className="font-semibold text-gray-900">Nürnbergs</span>.
         </p>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-3xl mx-auto">
-          <Button 
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-3xl mx-auto justify-center">
+          <Button
             onClick={() => handleCategoryClick('hebammen')}
-            variant="outline" 
+            variant="outline"
             className="h-16 text-lg font-medium border-2 border-gray-300 hover:bg-amber-50 hover:border-amber-300 transition-all"
           >
             Hebammen-Betreuung
           </Button>
-          
-          <Button 
+
+          <Button
             onClick={() => handleCategoryClick('physiotherapie')}
-            variant="outline" 
+            variant="outline"
             className="h-16 text-lg font-medium border-2 border-gray-300 hover:bg-amber-50 hover:border-amber-300 transition-all"
           >
             Physiotherapie
           </Button>
-          
-          <Button 
+
+          <Button
             onClick={() => handleCategoryClick('osteopathie')}
-            variant="outline" 
+            variant="outline"
             className="h-16 text-lg font-medium border-2 border-gray-300 hover:bg-amber-50 hover:border-amber-300 transition-all"
           >
             Osteopathie
           </Button>
-          
-          <Button 
+
+          <Button
             onClick={() => handleCategoryClick('kurse')}
-            variant="outline" 
+            variant="outline"
             className="h-16 text-lg font-medium border-2 border-gray-300 hover:bg-amber-50 hover:border-amber-300 transition-all"
           >
             Kurse
           </Button>
-          
-          <Button 
+
+          <Button
             onClick={() => handleCategoryClick('raumlichkeiten')}
-            variant="outline" 
+            variant="outline"
             className="h-16 text-lg font-medium border-2 border-gray-300 hover:bg-amber-50 hover:border-amber-300 transition-all md:col-span-2 lg:col-span-1"
           >
             Räumlichkeiten
