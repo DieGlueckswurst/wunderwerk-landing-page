@@ -108,6 +108,18 @@ const About = () => {
     }
   };
 
+  // Helper function to generate srcSet for retina images
+  const getSrcSet = (imagePath: string | undefined) => {
+    if (!imagePath || imagePath === '/placeholder.svg') {
+      return '/placeholder.svg';
+    }
+
+    const extension = imagePath.substring(imagePath.lastIndexOf('.'));
+    const basePathWithoutExt = imagePath.substring(0, imagePath.lastIndexOf('.'));
+
+    return `${imagePath} 1x, ${basePathWithoutExt}@2x${extension} 2x, ${basePathWithoutExt}@3x${extension} 3x`;
+  };
+
   return (
     <div className="min-h-screen bg-white">
       <Header />
@@ -176,9 +188,9 @@ const About = () => {
                       alt={member.name}
                       width={96}
                       height={96}
-                      srcSet={`${member.image || '/placeholder.svg'} 1x, ${member.image || '/placeholder.svg'} 2x`}
+                      srcSet={getSrcSet(member.image)}
                       sizes="96px"
-                      className="w-full h-full object-cover object-top scale-105"
+                      className="w-full h-full object-cover"
                       decoding="async"
                       onError={(e) => { (e.target as HTMLImageElement).src = '/placeholder.svg'; }}
                     />
