@@ -174,7 +174,12 @@ const About = () => {
                     <img
                       src={member.image || '/placeholder.svg'}
                       alt={member.name}
-                      className="w-full h-full object-cover"
+                      width={96}
+                      height={96}
+                      srcSet={`${member.image || '/placeholder.svg'} 1x, ${member.image || '/placeholder.svg'} 2x`}
+                      sizes="96px"
+                      className="w-full h-full object-cover object-top scale-105"
+                      decoding="async"
                       onError={(e) => { (e.target as HTMLImageElement).src = '/placeholder.svg'; }}
                     />
                   </div>

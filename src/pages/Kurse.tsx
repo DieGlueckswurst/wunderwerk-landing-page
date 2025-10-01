@@ -4,29 +4,38 @@ import PageHeader from "@/components/PageHeader";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Tag } from "@/components/ui/tag";
-import { courses } from "@/data/courses";
+import { courses, type Course, type CourseCategory } from "@/data/courses";
+import { weeklySchedule, type Weekday } from "@/data/schedule";
 import { useNavigate } from "react-router-dom";
+import { Info } from "lucide-react";
 
 const Kurse = () => {
   const [activeTab, setActiveTab] = useState<'alle' | 'wochenplan'>('alle');
   const navigate = useNavigate();
 
-  const kurse = courses;
+  const kurse = [...courses]; // Convert to mutable array for filtering
   const [activeCategory, setActiveCategory] = useState<string>('');
   const filteredKurse = activeCategory
-    ? kurse.filter(k => k.categories.includes(activeCategory as any))
+    ? kurse.filter(k => (k.categories as readonly string[]).includes(activeCategory))
     : kurse;
 
-  const wochenplan = [
-    { tag: "Montag", zeit: "09:00 - 10:00", kurs: "Schwangerschafts-Yoga" },
-    { tag: "Montag", zeit: "18:00 - 19:00", kurs: "Rückbildungs-Yoga" },
-    { tag: "Dienstag", zeit: "10:00 - 11:30", kurs: "Geburtsvorbereitung" },
-    { tag: "Mittwoch", zeit: "09:30 - 10:30", kurs: "Babymassage" },
-    { tag: "Mittwoch", zeit: "16:00 - 17:00", kurs: "Krabbelgruppe" },
-    { tag: "Donnerstag", zeit: "09:00 - 10:00", kurs: "Schwangerschafts-Yoga" },
-    { tag: "Donnerstag", zeit: "18:00 - 19:00", kurs: "Rückbildung" },
-    { tag: "Freitag", zeit: "11:00 - 12:00", kurs: "Trageberatung" },
-  ];
+  // Join schedule entries with course details
+  const scheduleWithDetails = weeklySchedule.map(entry => {
+    const course = [...courses].find(c => c.id === entry.courseId) as Course | undefined;
+    return {
+      ...entry,
+      courseName: course?.name || '',
+      courseUrl: course?.url
+    };
+  });
+
+  const handleScheduleEntryClick = (url?: string) => {
+    if (url) {
+      window.open(url, '_blank', 'noopener,noreferrer');
+    } else {
+      navigate('/', { state: { scrollTo: 'contact' } });
+    }
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -100,74 +109,82 @@ const Kurse = () => {
               </Button>
             </div>
             <Accordion type="single" collapsible className="w-full">
-              {filteredKurse.map((kurs, index) => (
-                <AccordionItem key={index} value={`item-${index}`} className="border-amber-200">
-                  <AccordionTrigger className="hover:no-underline">
-                    <div className="flex-1">
-                      <span className="font-serif text-2xl text-left block">{kurs.name}</span>
-                      <div className="mt-2 flex gap-2 flex-wrap">
-                        {kurs.categories.map((cat, i) => (
-                          <Tag key={i}>{cat}</Tag>
-                        ))}
+              {filteredKurse.map((kurs, index) => {
+                const courseWithUrl = kurs as Course;
+                return (
+                  <AccordionItem key={index} value={`item-${index}`} className="border-amber-200">
+                    <AccordionTrigger className="hover:no-underline">
+                      <div className="flex-1">
+                        <span className="font-serif text-2xl text-left block">{courseWithUrl.name}</span>
+                        <div className="mt-2 flex gap-2 flex-wrap">
+                          {courseWithUrl.categories.map((cat, i) => (
+                            <Tag key={i}>{cat}</Tag>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="pb-6">
-                    <p className="text-gray-600 mb-4 leading-relaxed whitespace-pre-line">
-                      {kurs.description}
-                    </p>
-                    {kurs.url ? (
-                      <a href={kurs.url} target="_blank" rel="noopener noreferrer">
-                        <Button className="bg-primary hover:bg-primary/90">
-                          Zur Anmeldung
+                    </AccordionTrigger>
+                    <AccordionContent className="pb-6">
+                      <p className="text-gray-600 mb-4 leading-relaxed whitespace-pre-line">
+                        {courseWithUrl.description}
+                      </p>
+                      {courseWithUrl.url ? (
+                        <a href={courseWithUrl.url} target="_blank" rel="noopener noreferrer">
+                          <Button className="bg-primary hover:bg-primary/90">
+                            Zur Anmeldung
+                          </Button>
+                        </a>
+                      ) : (
+                        <Button
+                          className="bg-primary hover:bg-primary/90"
+                          onClick={() => navigate('/', { state: { scrollTo: 'contact' } })}
+                        >
+                          Kontakt aufnehmen
                         </Button>
-                      </a>
-                    ) : (
-                      <Button
-                        className="bg-primary hover:bg-primary/90"
-                        onClick={() => navigate('/', { state: { scrollTo: 'contact' } })}
-                      >
-                        Kontakt aufnehmen
-                      </Button>
-                    )}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
+                      )}
+                    </AccordionContent>
+                  </AccordionItem>
+                );
+              })}
             </Accordion>
           </div>
         )}
 
         {activeTab === 'wochenplan' && (
           <div className="max-w-6xl mx-auto">
-            <h3 className="text-2xl font-serif mb-8 text-center">Wochenplan</h3>
+            <h3 className="text-2xl font-serif mb-4 text-center">Wochenplan</h3>
+
+            {/* Info Banner */}
+            <div className="bg-amber-50 rounded-lg p-4 mb-8 max-w-3xl mx-auto flex gap-3">
+              <Info className="w-5 h-5 text-amber-600 flex-shrink-0 self-start -translate-y-[0.1rem]" />
+              <p className="text-sm text-gray-700 leading-5">
+                <span className="font-medium text-gray-900">Üblicher Zeitplan:</span> Klicke auf einen Kurs für die aktuellen Termine und Anmeldung
+              </p>
+            </div>
+
             <div className="bg-amber-50 rounded-lg p-6">
               <div className="grid grid-cols-1 gap-4">
-                {['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag'].map(tag => (
+                {(['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag'] as Weekday[]).map(tag => (
                   <div key={tag} className="bg-white rounded-lg p-4">
                     <h4 className="font-serif text-lg mb-4 border-b pb-2">{tag}</h4>
                     <div className="space-y-2">
-                      {wochenplan
-                        .filter(termin => termin.tag === tag)
-                        .map((termin, index) => (
-                          <div key={index} className="flex justify-between items-center p-2 bg-gray-50 rounded">
-                            <span className="font-medium">{termin.zeit}</span>
-                            <span className="text-gray-700">{termin.kurs}</span>
+                      {scheduleWithDetails
+                        .filter(entry => entry.weekday === tag)
+                        .map((entry, index) => (
+                          <div
+                            key={index}
+                            className="flex flex-col md:flex-row md:justify-between md:items-center gap-1 md:gap-0 p-3 bg-gray-50 rounded hover:bg-gray-100 transition-colors cursor-pointer"
+                            onClick={() => handleScheduleEntryClick(entry.courseUrl)}
+                          >
+                            <span className="font-medium">{entry.startTime} - {entry.endTime}</span>
+                            <span className="text-gray-700">{entry.courseName}</span>
                           </div>
                         ))}
-                      {wochenplan.filter(termin => termin.tag === tag).length === 0 && (
+                      {scheduleWithDetails.filter(entry => entry.weekday === tag).length === 0 && (
                         <p className="text-gray-500 text-sm italic">Keine Termine</p>
                       )}
                     </div>
                   </div>
                 ))}
-              </div>
-              <div className="mt-6 text-center">
-                <p className="text-sm text-gray-600 mb-4">
-                  Änderungen vorbehalten. Aktuelle Termine und Anmeldung über unser Kontaktformular.
-                </p>
-                <Button className="bg-primary hover:bg-primary/90">
-                  Zur Anmeldung
-                </Button>
               </div>
             </div>
           </div>

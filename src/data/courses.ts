@@ -1,14 +1,16 @@
 export type CourseCategory = 'Vor der Geburt' | 'Nach der Geburt' | 'Yoga';
 
 export interface Course {
-    name: string;
-    description: string;
-    url?: string; // Optional: when omitted, fallback to contact
-    categories: CourseCategory[];
+    readonly id: string;
+    readonly name: string;
+    readonly description: string;
+    readonly url?: string; // Optional: when omitted, fallback to contact
+    readonly categories: readonly CourseCategory[];
 }
 
-export const courses: Course[] = [
+export const courses = [
     {
+        id: "babymassage",
         name: "Babymassage",
         description: `Babymassage ist eine liebevolle Art, mit deinem Baby zu kommunizieren.
 Die sanften Berührungen unterstützen das Immunsystem, lindern Verdauungsbeschwerden und führen zu einem erholsameren Schlaf.
@@ -20,12 +22,14 @@ Geeignet für Babys ab 6 Wochen bis ca. 6 Monate.`,
         categories: ["Nach der Geburt"],
     },
     {
+        id: "geburtsvorbereitung",
         name: "Geburtsvorbereitung",
         description:
             "Umfassende Vorbereitung auf die Geburt mit praktischen Übungen, Atemtechniken und wichtigen Informationen.",
         categories: ["Vor der Geburt"],
     },
     {
+        id: "krabbelgruppe",
         name: "Krabbelgruppe",
         description:
             "Offene Krabbelgruppen für alle Eltern und Babys, die Lust auf Austausch und Spielen in entspannter Atmosphäre haben. ",
@@ -33,6 +37,7 @@ Geeignet für Babys ab 6 Wochen bis ca. 6 Monate.`,
         categories: ["Nach der Geburt"],
     },
     {
+        id: "rueckbildung",
         name: "Rückbildung",
         description:
             `In meinem Rückbildungskurs geht es darum, deinen gesamten Körper nach der Geburt zu kräftigen und insbesondere deinen Beckenboden wieder zu festigen. 
@@ -47,6 +52,7 @@ Nach einer Spontangeburt kann nach ca. 6 Wochen, bei einer Bauchgeburt nach ca. 
         categories: ["Nach der Geburt"],
     },
     {
+        id: "rueckbildungs-yoga",
         name: "Rückbildungs-Yoga",
         description:
             "Sanfte Yoga-Übungen speziell für die Zeit nach der Geburt zur körperlichen und mentalen Regeneration.",
@@ -54,6 +60,7 @@ Nach einer Spontangeburt kann nach ca. 6 Wochen, bei einer Bauchgeburt nach ca. 
         categories: ["Nach der Geburt", "Yoga"],
     },
     {
+        id: "schwangerschafts-yoga",
         name: "Schwangerschafts-Yoga",
         description:
             "Entspannende Yoga-Praxis für werdende Mütter zur Vorbereitung auf die Geburt.",
@@ -61,12 +68,15 @@ Nach einer Spontangeburt kann nach ca. 6 Wochen, bei einer Bauchgeburt nach ca. 
         categories: ["Vor der Geburt", "Yoga"],
     },
     {
+        id: "trageberatung",
         name: "Trageberatung",
         description:
             "Gemeinsam gehen wir verschiedene Tragesysteme durch und finden heraus, was am besten zu euch passt. Danach üben wir das sichere und bequeme Tragen, sodass ihr euch beide wohl fühlt und die gemeinsame Zeit genießen könnt.",
         url: "https://www.hebammeeva.de/trageberatung",
         categories: ["Nach der Geburt"],
     },
-];
+] as const;
+
+export type CourseId = typeof courses[number]['id'];
 
 

@@ -16,7 +16,7 @@ export const teamMembers: TeamMember[] = [
         role: 'Hebamme',
         category: 'hebammen',
         website: 'https://www.hebammeeva.de/',
-        image: '/members/eva.webp',
+        image: '/members/eva_min.png',
         coFounder: true,
     },
     {
@@ -25,7 +25,7 @@ export const teamMembers: TeamMember[] = [
         role: 'Physiotherapeutin',
         category: 'physiotherapie',
         website: 'https://www.praxis-inakauper.de/',
-        image: '/members/ina.webp',
+        image: '/members/ina_min.png',
         coFounder: true,
     },
     {
@@ -33,7 +33,7 @@ export const teamMembers: TeamMember[] = [
         name: 'Greta di Bari',
         role: 'Hebamme',
         category: 'hebammen',
-        image: '/members/greta.png',
+        image: '/members/greta_min.png',
         website: 'https://www.hebamme-guterstart.de/',
     },
     {
