@@ -132,7 +132,21 @@ const Header = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden lg:flex items-center space-x-8">
+            {/* Instagram Icon - Desktop */}
+            <a
+              href="https://www.instagram.com/wunderwerk_nuernberg?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:opacity-70 transition-opacity flex-shrink-0"
+            >
+              <img
+                src="/logos/instagram.svg"
+                alt="Instagram"
+                className={`w-6 h-6 transition-all flex-shrink-0 ${scrolled ? '[filter:brightness(0)]' : '[filter:brightness(0)_invert(1)]'}`}
+              />
+            </a>
+
             <Button
               onClick={() => handleSectionClick('angebot')}
               variant="ghost"
@@ -170,68 +184,83 @@ const Header = () => {
             </Button>
           </nav>
 
-          {/* Mobile Menu Button */}
-          <Sheet open={isOpen} onOpenChange={(open) => {
-            setIsOpen(open);
-            // Reset any active states when the sheet closes
-            if (!open) {
-              const button = document.querySelector('[data-sheet-trigger]');
-              if (button) {
-                button.classList.remove('active', 'hover:bg-gray-100');
+          {/* Mobile: Instagram + Menu Button */}
+          <div className="lg:hidden flex items-center gap-3">
+            <a
+              href="https://www.instagram.com/wunderwerk_nuernberg?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:opacity-70 transition-opacity flex-shrink-0"
+            >
+              <img
+                src="/logos/instagram.svg"
+                alt="Instagram"
+                className={`w-6 h-6 transition-all flex-shrink-0 ${scrolled ? '[filter:brightness(0)]' : '[filter:brightness(0)_invert(1)]'}`}
+              />
+            </a>
+
+            <Sheet open={isOpen} onOpenChange={(open) => {
+              setIsOpen(open);
+              // Reset any active states when the sheet closes
+              if (!open) {
+                const button = document.querySelector('[data-sheet-trigger]');
+                if (button) {
+                  button.classList.remove('active', 'hover:bg-gray-100');
+                }
               }
-            }
-          }}>
-            <SheetTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                data-sheet-trigger
-                className={`md:hidden touch-none select-none ${scrolled ? 'bg-white' : 'bg-transparent'
-                  } ${isOpen ? 'bg-gray-100' : ''}`}
-              >
-                <Menu className={`h-6 w-6 ${scrolled ? 'text-black' : 'text-white'}`} />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right" className="w-[300px] bg-white/80 backdrop-blur-md">
-              <nav className="flex flex-col space-y-4 mt-8">
+            }}>
+              <SheetTrigger asChild>
                 <Button
-                  onClick={() => handleSectionClick('angebot')}
                   variant="ghost"
-                  className="font-sans text-black hover:text-gray-600 transition-colors justify-start"
+                  size="icon"
+                  data-sheet-trigger
+                  className={`touch-none select-none ${scrolled ? 'bg-white' : 'bg-transparent'
+                    } ${isOpen ? 'bg-gray-100' : ''}`}
                 >
-                  ANGEBOT
+                  <Menu className={`h-6 w-6 ${scrolled ? 'text-black' : 'text-white'}`} />
                 </Button>
-                <Button
-                  onClick={handleAboutClick}
-                  variant="ghost"
-                  className="font-sans text-black hover:text-gray-600 transition-colors justify-start"
-                >
-                  ÜBER
-                </Button>
-                <Button
-                  onClick={() => { navigate('/kurse'); setIsOpen(false); }}
-                  variant="ghost"
-                  className="font-sans text-black hover:text-gray-600 transition-colors justify-start"
-                >
-                  KURSE
-                </Button>
-                <Button
-                  onClick={() => handleSectionClick('rooms')}
-                  variant="ghost"
-                  className="font-sans text-black hover:text-gray-600 transition-colors justify-start"
-                >
-                  RÄUME
-                </Button>
-                <Button
-                  onClick={() => handleSectionClick('contact')}
-                  variant="ghost"
-                  className="font-sans text-black hover:text-gray-600 transition-colors justify-start"
-                >
-                  KONTAKT
-                </Button>
-              </nav>
-            </SheetContent>
-          </Sheet>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-[300px] bg-white/80 backdrop-blur-md">
+                <nav className="flex flex-col space-y-4 mt-8">
+                  <Button
+                    onClick={() => handleSectionClick('angebot')}
+                    variant="ghost"
+                    className="font-sans text-black hover:text-gray-600 transition-colors justify-start"
+                  >
+                    ANGEBOT
+                  </Button>
+                  <Button
+                    onClick={handleAboutClick}
+                    variant="ghost"
+                    className="font-sans text-black hover:text-gray-600 transition-colors justify-start"
+                  >
+                    ÜBER
+                  </Button>
+                  <Button
+                    onClick={() => { navigate('/kurse'); setIsOpen(false); }}
+                    variant="ghost"
+                    className="font-sans text-black hover:text-gray-600 transition-colors justify-start"
+                  >
+                    KURSE
+                  </Button>
+                  <Button
+                    onClick={() => handleSectionClick('rooms')}
+                    variant="ghost"
+                    className="font-sans text-black hover:text-gray-600 transition-colors justify-start"
+                  >
+                    RÄUME
+                  </Button>
+                  <Button
+                    onClick={() => handleSectionClick('contact')}
+                    variant="ghost"
+                    className="font-sans text-black hover:text-gray-600 transition-colors justify-start"
+                  >
+                    KONTAKT
+                  </Button>
+                </nav>
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
       </div>
     </header>
