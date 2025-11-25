@@ -16,7 +16,7 @@ export const teamMembers: TeamMember[] = [
         role: 'Hebamme',
         category: 'hebammen',
         website: 'https://www.hebammeeva.de/',
-        image: '/members/eva_avatar.png',
+        image: '/members/eva/avatar.png',
         coFounder: true,
     },
     {
@@ -25,7 +25,7 @@ export const teamMembers: TeamMember[] = [
         role: 'Physiotherapeutin',
         category: 'physiotherapie',
         website: 'https://www.praxis-inakauper.de/',
-        image: '/members/ina_avatar.png',
+        image: '/members/ina/avatar.png',
         coFounder: true,
     },
     {
@@ -33,8 +33,16 @@ export const teamMembers: TeamMember[] = [
         name: 'Greta di Bari',
         role: 'Hebamme',
         category: 'hebammen',
-        image: '/members/greta_avatar.png',
+        image: '/members/greta/avatar.png',
         website: 'https://www.hebamme-guterstart.de/',
+    },
+    {
+        id: 4,
+        name: 'Lisa Moser',
+        role: 'Baby & Kinder Physiotherapeutin',
+        category: 'physiotherapie',
+        image: '/members/lisa/avatar.png',
+        website: 'https://kinderphysiomoser.de/',
     },
     {
         id: 3,
@@ -43,4 +51,5 @@ export const teamMembers: TeamMember[] = [
         category: 'osteopathie',
         comingSoon: true,
     },
+
 ];
