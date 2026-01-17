@@ -45,6 +45,13 @@ export const teamMembers: TeamMember[] = [
         website: 'https://kinderphysiomoser.de/',
     },
     {
+        id: 6,
+        name: 'Judith Boier',
+        role: 'Hebamme',
+        category: 'hebammen',
+        website: 'https://geburtshauserlangen.de/',
+    },
+    {
         id: 3,
         name: undefined,
         role: 'Osteopathie',

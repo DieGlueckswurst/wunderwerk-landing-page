@@ -25,7 +25,8 @@ Geeignet für Babys ab 6 Wochen bis ca. 6 Monate.`,
         id: "geburtsvorbereitung",
         name: "Geburtsvorbereitung",
         description:
-            "Umfassende Vorbereitung auf die Geburt mit praktischen Übungen, Atemtechniken und wichtigen Informationen.",
+            "Geburtsvorbereitung für Paare in Nürnberg: Wochenendkurs (Sa/So 10–15 Uhr) im WunderWerk. Teilnahme für Schwangere 30.–36. SSW mit Gebär-PartnerIn. Inhalt: Themen rund um Schwangerschaft, Geburt und Wochenbett, Austausch und praktische Übungen zur selbstbestimmten Geburt.",
+        url: "https://gh-erlangen.mymiya.de/courses/#course/select/0001",
         categories: ["Vor der Geburt"],
     },
     {
