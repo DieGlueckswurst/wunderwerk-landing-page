@@ -49,6 +49,7 @@ export const teamMembers: TeamMember[] = [
         name: 'Judith Boier',
         role: 'Hebamme',
         category: 'hebammen',
+        image: '/members/judith/avatar.png',
         website: 'https://geburtshauserlangen.de/',
     },
     {
