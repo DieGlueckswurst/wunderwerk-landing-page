@@ -59,9 +59,9 @@ body.about-page {
   background-color: white;
 }
 
-/* Target specifically the timeline section and ensure it has the orange background */
+/* Timeline: sanftes Rost-Burgund (nutzt Theme-Variable) */
 .timeline-section {
-  background-color: rgb(255 247 237) !important; /* bg-orange-50 with !important to override other styles */
+  background-color: hsl(var(--warm)) !important;
 }
 
 /* Footer message now has white background */

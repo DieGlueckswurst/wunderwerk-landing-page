@@ -29,14 +29,14 @@ const Testimonial = ({
 
 const TestimonialsSection = () => {
   const testimonials = [{
-    text: "Ich habe hier das Dübeln gelernt. Hoffentlich hält alles.",
-    author: "Chris"
+    text: "Super Kursaufbau und Anleitung, alles in einer sehr schönen Atmosphäre. Toll fand ich auch die kleine Kursgröße. Kann das Wunderwerk nur wärmstens empfehlen!",
+    author: "Sarah K."
   }, {
-    text: "Räumlichkeiten mit wahnsinnig schönem Licht.",
-    author: "Toni"
+    text: "Wunderbare Freundschaften sind hier schon entstanden. Ein Ort, an dem man sich trifft und austauscht. Einfach herzlich.",
+    author: "Anna M."
   }, {
-    text: "Den Namen finde ich fraglich, sonst top.",
-    author: "Ina"
+    text: "Man fühlt sich gleich wohl. Die Räumlichkeiten sind modern und gepflegt, Terminvergabe unkompliziert. Kann die Praxis absolut empfehlen.",
+    author: "Maria S."
   }];
 
   const [currentIndex, setCurrentIndex] = useState(0);

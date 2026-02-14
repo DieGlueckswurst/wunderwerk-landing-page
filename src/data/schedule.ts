@@ -10,53 +10,53 @@ export interface WeeklyScheduleEntry {
 }
 
 export const weeklySchedule: WeeklyScheduleEntry[] = [
+    // Montag: leer (Tag wird trotzdem angezeigt)
     {
-        courseId: "schwangerschafts-yoga",
-        weekday: "Montag",
-        startTime: "09:00",
-        endTime: "10:00"
+        courseId: "krabbelgruppe-0-6",
+        weekday: "Dienstag",
+        startTime: "10:00",
+        endTime: "12:00"
     },
     {
-        courseId: "rueckbildungs-yoga",
-        weekday: "Montag",
+        courseId: "schwangerschafts-yoga",
+        weekday: "Dienstag",
+        startTime: "16:30",
+        endTime: "17:30"
+    },
+    {
+        courseId: "schwangerschafts-yoga",
+        weekday: "Dienstag",
         startTime: "18:00",
         endTime: "19:00"
     },
     {
-        courseId: "geburtsvorbereitung",
-        weekday: "Dienstag",
+        courseId: "krabbelgruppe-6-12",
+        weekday: "Mittwoch",
         startTime: "10:00",
-        endTime: "11:30"
+        endTime: "12:00"
     },
     {
-        courseId: "babymassage",
+        courseId: "babymassage-praxis-just",
         weekday: "Mittwoch",
-        startTime: "09:30",
-        endTime: "10:30"
-    },
-    {
-        courseId: "krabbelgruppe",
-        weekday: "Mittwoch",
-        startTime: "16:00",
-        endTime: "17:00"
-    },
-    {
-        courseId: "schwangerschafts-yoga",
-        weekday: "Donnerstag",
-        startTime: "09:00",
-        endTime: "10:00"
+        startTime: "11:15",
+        endTime: "12:00"
     },
     {
         courseId: "rueckbildung",
-        weekday: "Donnerstag",
+        weekday: "Mittwoch",
         startTime: "18:00",
-        endTime: "19:00"
+        endTime: "19:15"
     },
     {
-        courseId: "trageberatung",
+        courseId: "krabbelgruppe-12-plus",
+        weekday: "Donnerstag",
+        startTime: "15:00",
+        endTime: "17:00"
+    },
+    {
+        courseId: "babymassage",
         weekday: "Freitag",
-        startTime: "11:00",
-        endTime: "12:00"
+        startTime: "10:00",
+        endTime: "10:45"
     },
 ];
-

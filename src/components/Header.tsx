@@ -76,7 +76,7 @@ const Header = () => {
 
   const handleSectionClick = (sectionId: string) => {
     if (location.pathname === '/') {
-      scrollToSection(sectionId, window.innerWidth < 768); // Pass isMobile flag
+      scrollToSection(sectionId, window.innerWidth < 1024); // Pass isMobile flag
     } else {
       navigate('/', { state: { scrollTo: sectionId } });
       setIsOpen(false);
@@ -109,7 +109,7 @@ const Header = () => {
   // If header should not be visible and it's not the home page, add pointer-events-none
   const headerClasses = cn(
     "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-    scrolled ? 'bg-white/80 backdrop-blur-md shadow-sm' : 'bg-transparent',
+    scrolled ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-warm/20' : 'bg-transparent',
     !headerVisible && !isHomePage ? 'opacity-0 pointer-events-none' : ''
   );
 
@@ -150,35 +150,35 @@ const Header = () => {
             <Button
               onClick={() => handleSectionClick('angebot')}
               variant="ghost"
-              className={`font-sans hover:text-gray-600 transition-colors ${scrolled ? 'text-black' : 'text-white'}`}
+              className={`font-sans hover:text-warm transition-colors ${scrolled ? 'text-black' : 'text-white'}`}
             >
               ANGEBOT
             </Button>
             <Button
               onClick={handleAboutClick}
               variant="ghost"
-              className={`font-sans hover:text-gray-600 transition-colors ${scrolled ? 'text-black' : 'text-white'}`}
+              className={`font-sans hover:text-warm transition-colors ${scrolled ? 'text-black' : 'text-white'}`}
             >
               ÜBER
             </Button>
             <Button
               onClick={() => navigate('/kurse')}
               variant="ghost"
-              className={`font-sans hover:text-gray-600 transition-colors ${scrolled ? 'text-black' : 'text-white'}`}
+              className={`font-sans hover:text-warm transition-colors ${scrolled ? 'text-black' : 'text-white'}`}
             >
               KURSE
             </Button>
             <Button
               onClick={() => handleSectionClick('rooms')}
               variant="ghost"
-              className={`font-sans hover:text-gray-600 transition-colors ${scrolled ? 'text-black' : 'text-white'}`}
+              className={`font-sans hover:text-warm transition-colors ${scrolled ? 'text-black' : 'text-white'}`}
             >
               RÄUME
             </Button>
             <Button
               onClick={() => handleSectionClick('contact')}
               variant="ghost"
-              className={`font-sans hover:text-gray-600 transition-colors ${scrolled ? 'text-black' : 'text-white'}`}
+              className={`font-sans hover:text-warm transition-colors ${scrolled ? 'text-black' : 'text-white'}`}
             >
               KONTAKT
             </Button>
@@ -214,46 +214,46 @@ const Header = () => {
                   variant="ghost"
                   size="icon"
                   data-sheet-trigger
-                  className={`touch-none select-none ${scrolled ? 'bg-white' : 'bg-transparent'
-                    } ${isOpen ? 'bg-gray-100' : ''}`}
+                  className={`touch-none select-none rounded-full ${scrolled ? 'bg-white' : 'bg-transparent'
+                    } ${isOpen ? 'bg-warm/10' : ''}`}
                 >
                   <Menu className={`h-6 w-6 ${scrolled ? 'text-black' : 'text-white'}`} />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-[300px] bg-white/80 backdrop-blur-md">
+              <SheetContent side="right" className="w-[300px] bg-white border-l border-warm/30">
                 <nav className="flex flex-col space-y-4 mt-8">
                   <Button
                     onClick={() => handleSectionClick('angebot')}
                     variant="ghost"
-                    className="font-sans text-black hover:text-gray-600 transition-colors justify-start"
+                    className="font-sans text-black hover:text-warm hover:bg-warm/10 transition-colors justify-start"
                   >
                     ANGEBOT
                   </Button>
                   <Button
                     onClick={handleAboutClick}
                     variant="ghost"
-                    className="font-sans text-black hover:text-gray-600 transition-colors justify-start"
+                    className="font-sans text-black hover:text-warm hover:bg-warm/10 transition-colors justify-start"
                   >
                     ÜBER
                   </Button>
                   <Button
                     onClick={() => { navigate('/kurse'); setIsOpen(false); }}
                     variant="ghost"
-                    className="font-sans text-black hover:text-gray-600 transition-colors justify-start"
+                    className="font-sans text-black hover:text-warm hover:bg-warm/10 transition-colors justify-start"
                   >
                     KURSE
                   </Button>
                   <Button
                     onClick={() => handleSectionClick('rooms')}
                     variant="ghost"
-                    className="font-sans text-black hover:text-gray-600 transition-colors justify-start"
+                    className="font-sans text-black hover:text-warm hover:bg-warm/10 transition-colors justify-start"
                   >
                     RÄUME
                   </Button>
                   <Button
                     onClick={() => handleSectionClick('contact')}
                     variant="ghost"
-                    className="font-sans text-black hover:text-gray-600 transition-colors justify-start"
+                    className="font-sans text-black hover:text-warm hover:bg-warm/10 transition-colors justify-start"
                   >
                     KONTAKT
                   </Button>

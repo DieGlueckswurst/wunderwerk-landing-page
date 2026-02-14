@@ -51,6 +51,13 @@
     --sidebar-border: 220 13% 91%;
 
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /*
+     * Rostrot (#9F412F) – einheitlich für alle farbigen Elemente
+     */
+    --warm: 10 54% 40%;
+    --warm-hover: 10 54% 35%;
+    --warm-strong: 10 54% 40%;
   }
 
   .dark {
@@ -89,6 +96,10 @@
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --warm: 10 48% 35%;
+    --warm-hover: 10 54% 45%;
+    --warm-strong: 10 54% 60%;
   }
 }
 
@@ -116,7 +127,7 @@
   width: 1px;
   height: 160px;
   /* Increased height */
-  background-color: #ddd;
+  background-color: hsl(var(--warm));
   margin: 0 auto;
   margin-bottom: 24px;
   /* Increased space between line and title */

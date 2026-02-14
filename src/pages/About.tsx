@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
+import confetti from 'canvas-confetti';
 import Header from "@/components/Header";
 import PageHeader from "@/components/PageHeader";
 import { Button } from "@/components/ui/button";
@@ -46,42 +47,42 @@ const About = () => {
       id: 1,
       date: "1900",
       title: "Nürnberger Lebkuchen",
-      description: "Ich weiß nicht, was davor hier war. Vielleicht eine Lebkuchenbäckerei?",
+      description: "Was davor hier war? Unklar, vielleicht eine Lebkuchenbäckerei.",
       image: "/timeline/lebkuchenbaeckerei.png"
     },
     {
       id: 2,
       date: "1945",
       title: "Nürnberg in Ruinen",
-      description: "Krieg, nicht gut.",
+      description: "Die dunklen Jahre. Nürnberg und das Haus erleben schwere Zeiten.",
       image: "/timeline/nuremberg_in_ruins.png"
     },
     {
       id: 3,
       date: "2000",
       title: "Herrenausstatter",
-      description: "Schick Schick",
+      description: "Schick Schick! Elegante Herrenmode für den stilbewussten Nürnberger.",
       image: "/timeline/herrenausstatter.png"
     },
     {
       id: 4,
       date: "2024",
       title: "Umbau",
-      description: "(noch) voller guter Laune und Motivation",
+      description: "Voller Elan und Motivation geht es in den Umbau. Aus Alt wird Neu.",
       image: "/timeline/umbau.png"
     },
     {
       id: 5,
       date: "2025",
       title: "Harte Arbeit muss belohnt werden",
-      description: "Das Eis als Rettung langer Arbeitstage.",
+      description: "Nach langen Arbeitstagen: Eis als verdiente Belohnung.",
       image: "/timeline/eis.png"
     },
     {
       id: 6,
       date: "2025",
       title: "Grand Opening",
-      description: "Es ist vollbracht! Das Wunderwerk ist offiziell eröffnet.",
+      description: "Mission accomplished! Das Wunderwerk öffnet offiziell seine Türen.",
       image: "/timeline/group.png"
     }
   ];
@@ -127,16 +128,18 @@ const About = () => {
 
       <div className="container mx-auto px-6 pt-0 pb-16">
         {/* Call to Action */}
-        <div className="text-center mb-12 bg-amber-50 rounded-lg p-8 max-w-6xl mx-auto">
-          <p className="text-lg text-gray-700 mb-4">
-            Lust, ein Teil von uns zu werden?
-          </p>
-          <Button
-            onClick={scrollToContact}
-            className="bg-primary hover:bg-primary/90"
-          >
-            Jetzt Kontakt aufnehmen
-          </Button>
+        <div className="mb-16">
+          <div className="max-w-2xl mx-auto text-center">
+            <p className="text-lg text-gray-600 mb-6">
+              Lust, ein Teil von uns zu werden?
+            </p>
+            <Button
+              onClick={scrollToContact}
+              className="bg-warm hover:bg-warm-hover text-white border-2 border-warm hover:border-warm-hover px-8 py-6 text-base font-medium rounded-lg transition-all"
+            >
+              Jetzt Kontakt aufnehmen
+            </Button>
+          </div>
         </div>
 
         {/* Team Section */}
@@ -182,7 +185,7 @@ const About = () => {
             {filteredTeamMembers.map((member) => (
               <div key={member.id} className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 p-6 text-center">
                 <div className="flex justify-center mb-4">
-                  <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-amber-50">
+                  <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-warm">
                     <img
                       src={member.image || '/placeholder.svg'}
                       alt={member.name}
@@ -211,7 +214,7 @@ const About = () => {
                   </div>
                   {member.website && !member.comingSoon && (
                     <a href={member.website} target="_blank" rel="noopener noreferrer">
-                      <Button variant="outline" className="border-gray-300 hover:bg-amber-50">
+                      <Button variant="outline" className="border-gray-300 hover:bg-warm-hover hover:border-warm-hover hover:text-white transition-all">
                         Website besuchen
                         <ExternalLink className="ml-1 h-3 w-3" />
                       </Button>
@@ -224,8 +227,8 @@ const About = () => {
         </div>
 
         {/* Timeline Section */}
-        <div className="bg-amber-50 rounded-lg p-8 max-w-6xl mx-auto">
-          <h2 className="text-3xl font-serif text-center mb-12">Unsere Geschichte</h2>
+        <div className="p-6 max-w-6xl mx-auto">
+          <h2 className="text-2xl font-serif text-center mb-8">Unsere Geschichte</h2>
 
           <div className="relative">
             {/* Vertical line */}
@@ -233,32 +236,32 @@ const About = () => {
 
             {/* Timeline items */}
             {timelineItems.map((item, index) => (
-              <div key={item.id} className="mb-16 md:mb-24 relative">
+              <div key={item.id} className={`relative ${index === timelineItems.length - 1 ? 'mb-6' : 'mb-6 md:-mb-20'}`}>
                 <div className={`md:flex items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
                   {/* Date marker for desktop */}
-                  <div className="hidden md:block absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white border-4 border-gray-200 z-10 items-center justify-center">
-                    <span className="font-bold text-xs leading-none text-center flex items-center justify-center w-full h-full">{item.date}</span>
+                  <div className="hidden md:block absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white border-4 border-warm z-10 items-center justify-center">
+                    <span className="font-bold text-[10px] leading-none text-center flex items-center justify-center w-full h-full">{item.date}</span>
                   </div>
 
                   {/* Content */}
-                  <div className={`md:w-1/2 ${index % 2 === 0 ? 'md:pr-16' : 'md:pl-16'}`}>
+                  <div className={`md:w-1/2 ${index % 2 === 0 ? 'md:pr-12' : 'md:pl-12'}`}>
                     <div className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
                       <img
                         src={item.image}
                         alt={item.title}
-                        className="w-full h-64 object-cover"
+                        className="w-full aspect-[4/3] object-cover"
                         onError={e => {
                           const target = e.target as HTMLImageElement;
                           target.src = getPlaceholderImage(index);
                         }}
                       />
-                      <div className="p-6">
+                      <div className="p-4">
                         {/* Date marker for mobile */}
-                        <div className="md:hidden mb-2 inline-block px-3 py-1 bg-gray-100 rounded-full text-xs font-bold">
+                        <div className="md:hidden mb-2 inline-block px-3 py-1 bg-white border-2 border-warm rounded-full text-xs font-bold">
                           {item.date}
                         </div>
-                        <h3 className="text-xl font-serif mb-2">{item.title}</h3>
-                        <p className="text-gray-600">{item.description}</p>
+                        <h3 className="text-lg font-serif mb-1">{item.title}</h3>
+                        <p className="text-sm text-gray-600">{item.description}</p>
                       </div>
                     </div>
                   </div>
@@ -267,10 +270,21 @@ const About = () => {
             ))}
           </div>
 
-          <div className="py-12 text-center">
-            <div className="inline-block bg-white border border-gray-200 rounded-lg px-6 py-3 text-2xl font-serif text-gray-700">
+          <div className="py-6 text-center">
+            <button
+              type="button"
+              onClick={() => {
+                confetti({
+                  particleCount: 80,
+                  spread: 70,
+                  origin: { y: 0.8 },
+                  colors: ['#9F412F', '#c45c3e', '#e07850', '#f5a962']
+                });
+              }}
+              className="inline-block bg-warm border-2 border-warm text-white rounded-lg px-4 py-2 text-lg font-serif cursor-pointer hover:bg-white hover:text-warm hover:border-warm transition-all"
+            >
               Die Zukunft? Wird wunderbar.
-            </div>
+            </button>
           </div>
         </div>
       </div>

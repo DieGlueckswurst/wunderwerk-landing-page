@@ -18,7 +18,7 @@ Die sanften Berührungen unterstützen das Immunsystem, lindern Verdauungsbeschw
 Mit max. 7 Babys sind die Kurse bewusst klein gehalten, um eine ruhige und entspannte Atmosphäre zu schaffen.
 
 Geeignet für Babys ab 6 Wochen bis ca. 6 Monate.`,
-        url: "https://www.hebammeeva.de/kurse",
+        url: "https://www.hebammeeva.de/babymassage",
         categories: ["Nach der Geburt"],
     },
     {
@@ -35,6 +35,38 @@ Geeignet für Babys ab 6 Wochen bis ca. 6 Monate.`,
         description:
             "Offene Krabbelgruppen für alle Eltern und Babys, die Lust auf Austausch und Spielen in entspannter Atmosphäre haben. ",
         url: "https://www.hebammeeva.de/krabbelgruppe",
+        categories: ["Nach der Geburt"],
+    },
+    {
+        id: "krabbelgruppe-0-6",
+        name: "Krabbelgruppe (0-6 Monate)",
+        description:
+            "Offene Krabbelgruppen für alle Eltern und Babys von 0-6 Monaten, die Lust auf Austausch und Spielen in entspannter Atmosphäre haben.",
+        url: "https://www.hebammeeva.de/krabbelgruppe",
+        categories: ["Nach der Geburt"],
+    },
+    {
+        id: "krabbelgruppe-6-12",
+        name: "Krabbelgruppe (6-12 Monate)",
+        description:
+            "Offene Krabbelgruppen für alle Eltern und Babys von 6-12 Monaten, die Lust auf Austausch und Spielen in entspannter Atmosphäre haben.",
+        url: "https://www.hebammeeva.de/krabbelgruppe",
+        categories: ["Nach der Geburt"],
+    },
+    {
+        id: "krabbelgruppe-12-plus",
+        name: "Krabbelgruppe (>12 Monate)",
+        description:
+            "Offene Krabbelgruppen für alle Eltern und Babys ab 12 Monaten, die Lust auf Austausch und Spielen in entspannter Atmosphäre haben.",
+        url: "https://www.hebammeeva.de/krabbelgruppe",
+        categories: ["Nach der Geburt"],
+    },
+    {
+        id: "babymassage-praxis-just",
+        name: "Babymassage (Ort: Praxis Just)",
+        description:
+            "Babymassage in der Praxis Just. Die sanften Berührungen unterstützen das Immunsystem, lindern Verdauungsbeschwerden und führen zu einem erholsameren Schlaf.",
+        url: "https://www.hebammeeva.de/babymassage",
         categories: ["Nach der Geburt"],
     },
     {
@@ -65,7 +97,7 @@ Nach einer Spontangeburt kann nach ca. 6 Wochen, bei einer Bauchgeburt nach ca. 
         name: "Schwangerschafts-Yoga",
         description:
             "Entspannende Yoga-Praxis für werdende Mütter zur Vorbereitung auf die Geburt.",
-        url: "https://www.praxis-inakauper.de/contact-8",
+        url: "https://www.praxis-inakauper.de/yoga",
         categories: ["Vor der Geburt", "Yoga"],
     },
     {

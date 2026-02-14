@@ -5,14 +5,14 @@ import PageHeader from "@/components/PageHeader";
 
 const Impressum = () => {
   return (
-    <div className="min-h-screen bg-orange-50">
+    <div className="min-h-screen bg-warm text-white">
       <Header />
       <PageHeader title="Impressum" />
 
       {/* Content section */}
       <section className="pb-16">
         <div className="container mx-auto px-6 max-w-4xl">
-          <div className="prose max-w-none">
+          <div className="prose prose-invert max-w-none">
             <h2>Angaben gemäß § 5 TMG</h2>
             <p>
               Wunderwerk<br />

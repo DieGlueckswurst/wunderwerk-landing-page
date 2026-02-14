@@ -7,14 +7,14 @@ import PageHeader from "@/components/PageHeader";
 
 const Datenschutz = () => {
   return (
-    <div className="min-h-screen bg-orange-50">
+    <div className="min-h-screen bg-warm text-white">
       <Header />
       <PageHeader title="Datenschutz" />
 
       {/* Content section */}
       <section className="pb-16">
         <div className="container mx-auto px-6 max-w-4xl">
-          <div className="prose max-w-none">
+          <div className="prose prose-invert max-w-none">
             <h2>1. Datenschutz auf einen Blick</h2>
             <h3>Allgemeine Hinweise</h3>
             <p>

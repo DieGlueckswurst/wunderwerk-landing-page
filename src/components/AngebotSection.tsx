@@ -51,7 +51,7 @@ const AngebotSection = () => {
           <Button
             onClick={() => handleCategoryClick('hebammen')}
             variant="outline"
-            className="h-16 text-lg font-medium border-2 border-gray-300 hover:bg-amber-50 hover:border-amber-300 transition-all"
+            className="h-16 text-lg font-medium border-2 border-gray-300 hover:bg-warm-hover hover:border-warm-hover hover:text-white transition-all"
           >
             Hebammen-Betreuung
           </Button>
@@ -59,7 +59,7 @@ const AngebotSection = () => {
           <Button
             onClick={() => handleCategoryClick('physiotherapie')}
             variant="outline"
-            className="h-16 text-lg font-medium border-2 border-gray-300 hover:bg-amber-50 hover:border-amber-300 transition-all"
+            className="h-16 text-lg font-medium border-2 border-gray-300 hover:bg-warm-hover hover:border-warm-hover hover:text-white transition-all"
           >
             Physiotherapie
           </Button>
@@ -67,7 +67,7 @@ const AngebotSection = () => {
           <Button
             onClick={() => handleCategoryClick('osteopathie')}
             variant="outline"
-            className="h-16 text-lg font-medium border-2 border-gray-300 hover:bg-amber-50 hover:border-amber-300 transition-all"
+            className="h-16 text-lg font-medium border-2 border-gray-300 hover:bg-warm-hover hover:border-warm-hover hover:text-white transition-all"
           >
             Osteopathie
           </Button>
@@ -75,7 +75,7 @@ const AngebotSection = () => {
           <Button
             onClick={() => handleCategoryClick('kurse')}
             variant="outline"
-            className="h-16 text-lg font-medium border-2 border-gray-300 hover:bg-amber-50 hover:border-amber-300 transition-all"
+            className="h-16 text-lg font-medium border-2 border-gray-300 hover:bg-warm-hover hover:border-warm-hover hover:text-white transition-all"
           >
             Kurse
           </Button>
@@ -83,7 +83,7 @@ const AngebotSection = () => {
           <Button
             onClick={() => handleCategoryClick('raumlichkeiten')}
             variant="outline"
-            className="h-16 text-lg font-medium border-2 border-gray-300 hover:bg-amber-50 hover:border-amber-300 transition-all md:col-span-2 lg:col-span-1"
+            className="h-16 text-lg font-medium border-2 border-gray-300 hover:bg-warm-hover hover:border-warm-hover hover:text-white transition-all md:col-span-2 lg:col-span-1"
           >
             Räumlichkeiten
           </Button>

@@ -54,10 +54,11 @@ export const teamMembers: TeamMember[] = [
     },
     {
         id: 3,
-        name: undefined,
-        role: 'Osteopathie',
+        name: 'Rene Rathmann',
+        role: 'Heilpraktiker für Osteopathie',
         category: 'osteopathie',
-        comingSoon: true,
+        image: '/members/rene/avatar.png',
+        website: 'https://www.osteopathie-rathmann.de/',
     },
 
 ];

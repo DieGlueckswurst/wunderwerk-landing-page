@@ -11,7 +11,7 @@ export function Tag({ children, className, variant = "neutral", ...props }: TagP
     const baseClasses = "inline-block px-3 py-1 rounded-full text-xs font-medium font-sans";
     const variantClasses =
         variant === "warning"
-            ? "bg-amber-100 text-amber-800"
+            ? "bg-warm text-white"
             : "bg-gray-50 text-gray-700 border border-gray-200";
 
     return (
