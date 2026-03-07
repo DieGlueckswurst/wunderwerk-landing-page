@@ -6,7 +6,7 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 30 22% 94%;
     --foreground: 222.2 84% 4.9%;
 
     --card: 0 0% 100%;
@@ -15,8 +15,8 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 10 45% 52%;
+    --primary-foreground: 0 0% 100%;
 
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
@@ -53,11 +53,13 @@
     --sidebar-ring: 217.2 91.2% 59.8%;
 
     /*
-     * Rostrot (#9F412F) – einheitlich für alle farbigen Elemente
+     * Pastelliges Rostrot – etwas kräftiger
      */
-    --warm: 10 54% 40%;
-    --warm-hover: 10 54% 35%;
-    --warm-strong: 10 54% 40%;
+    --warm: 10 45% 52%;
+    --warm-hover: 10 45% 46%;
+    --warm-strong: 10 46% 44%;
+
+    --input-bg: 0 0% 100%;
   }
 
   .dark {
@@ -70,8 +72,8 @@
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 10 35% 50%;
+    --primary-foreground: 0 0% 100%;
 
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
@@ -97,9 +99,11 @@
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
 
-    --warm: 10 48% 35%;
-    --warm-hover: 10 54% 45%;
-    --warm-strong: 10 54% 60%;
+    --warm: 10 35% 50%;
+    --warm-hover: 10 38% 55%;
+    --warm-strong: 10 40% 60%;
+
+    --input-bg: 217.2 32.6% 17.5%;
   }
 }
 
@@ -127,7 +131,7 @@
   width: 1px;
   height: 160px;
   /* Increased height */
-  background-color: hsl(var(--warm));
+  background-color: black;
   margin: 0 auto;
   margin-bottom: 24px;
   /* Increased space between line and title */
@@ -156,4 +160,12 @@
   z-index: -1;
   transform: translateZ(0);
   will-change: transform;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

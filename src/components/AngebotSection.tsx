@@ -43,15 +43,15 @@ const AngebotSection = () => {
       <h2 className="section-title">01 Angebot</h2>
 
       <div className="max-w-4xl mx-auto text-center">
-        <p className="text-xl text-gray-700 mb-12 font-normal antialiased">
-          <span className="font-semibold text-gray-900">Gesundheit</span> und <span className="font-semibold text-gray-900">Wohlfühlen</span> – für <span className="font-semibold text-gray-900">Groß & Klein</span>, im Herzen <span className="font-semibold text-gray-900">Nürnbergs</span>.
+        <p className="text-lg text-gray-700 mb-12 font-normal antialiased">
+          <span className="font-medium text-gray-900">Gesundheit</span> und <span className="font-medium text-gray-900">Wohlfühlen</span> – für <span className="font-medium text-gray-900">Groß & Klein</span>, im Herzen <span className="font-medium text-gray-900">Nürnbergs</span>.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-3xl mx-auto justify-center">
+        <div className="flex flex-wrap justify-center gap-4 max-w-3xl mx-auto">
           <Button
             onClick={() => handleCategoryClick('hebammen')}
             variant="outline"
-            className="h-16 text-lg font-medium border-2 border-gray-300 hover:bg-warm-hover hover:border-warm-hover hover:text-white transition-all"
+            className="h-16 min-w-[200px] text-lg font-medium border-2 border-gray-200 bg-white text-black hover:border-warm hover:bg-warm/10 hover:text-black transition-all active:bg-warm/15"
           >
             Hebammen-Betreuung
           </Button>
@@ -59,7 +59,7 @@ const AngebotSection = () => {
           <Button
             onClick={() => handleCategoryClick('physiotherapie')}
             variant="outline"
-            className="h-16 text-lg font-medium border-2 border-gray-300 hover:bg-warm-hover hover:border-warm-hover hover:text-white transition-all"
+            className="h-16 min-w-[200px] text-lg font-medium border-2 border-gray-200 bg-white text-black hover:border-warm hover:bg-warm/10 hover:text-black transition-all active:bg-warm/15"
           >
             Physiotherapie
           </Button>
@@ -67,7 +67,7 @@ const AngebotSection = () => {
           <Button
             onClick={() => handleCategoryClick('osteopathie')}
             variant="outline"
-            className="h-16 text-lg font-medium border-2 border-gray-300 hover:bg-warm-hover hover:border-warm-hover hover:text-white transition-all"
+            className="h-16 min-w-[200px] text-lg font-medium border-2 border-gray-200 bg-white text-black hover:border-warm hover:bg-warm/10 hover:text-black transition-all active:bg-warm/15"
           >
             Osteopathie
           </Button>
@@ -75,7 +75,7 @@ const AngebotSection = () => {
           <Button
             onClick={() => handleCategoryClick('kurse')}
             variant="outline"
-            className="h-16 text-lg font-medium border-2 border-gray-300 hover:bg-warm-hover hover:border-warm-hover hover:text-white transition-all"
+            className="h-16 min-w-[200px] text-lg font-medium border-2 border-gray-200 bg-white text-black hover:border-warm hover:bg-warm/10 hover:text-black transition-all active:bg-warm/15"
           >
             Kurse
           </Button>
@@ -83,7 +83,7 @@ const AngebotSection = () => {
           <Button
             onClick={() => handleCategoryClick('raumlichkeiten')}
             variant="outline"
-            className="h-16 text-lg font-medium border-2 border-gray-300 hover:bg-warm-hover hover:border-warm-hover hover:text-white transition-all md:col-span-2 lg:col-span-1"
+            className="h-16 min-w-[200px] text-lg font-medium border-2 border-gray-200 bg-white text-black hover:border-warm hover:bg-warm/10 hover:text-black transition-all active:bg-warm/15"
           >
             Räumlichkeiten
           </Button>

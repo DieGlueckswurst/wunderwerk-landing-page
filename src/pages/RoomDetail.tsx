@@ -65,7 +65,7 @@ const RoomDetail = () => {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-2xl font-serif mb-4">Raum nicht gefunden</h2>
-          <Button onClick={() => navigate('/')} className="bg-black text-white">
+          <Button onClick={() => navigate('/')}>
             Zurück zur Startseite
           </Button>
         </div>
@@ -82,7 +82,7 @@ const RoomDetail = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background">
       <Header />
       <PageHeader title={roomData.title} />
 
@@ -143,7 +143,6 @@ const RoomDetail = () => {
                 const mailtoLink = `mailto:info@wunderwerk-muenchen.de?subject=Raumanfrage: ${roomData.title}`;
                 window.location.href = mailtoLink;
               }}
-              className="bg-black hover:bg-gray-800 text-white"
             >
               Jetzt anfragen
             </Button>

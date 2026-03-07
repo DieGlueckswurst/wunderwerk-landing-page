@@ -12,7 +12,7 @@ export function Tag({ children, className, variant = "neutral", ...props }: TagP
     const variantClasses =
         variant === "warning"
             ? "bg-warm text-white"
-            : "bg-gray-50 text-gray-700 border border-gray-200";
+            : "bg-warm/10 text-warm";
 
     return (
         <span className={cn(baseClasses, variantClasses, className)} {...props}>

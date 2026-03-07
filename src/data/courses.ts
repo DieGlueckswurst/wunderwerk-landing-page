@@ -63,9 +63,9 @@ Geeignet für Babys ab 6 Wochen bis ca. 6 Monate.`,
     },
     {
         id: "babymassage-praxis-just",
-        name: "Babymassage (Ort: Praxis Just)",
+        name: "Babymassage (Ort: Praxis Dr. Just)",
         description:
-            "Babymassage in der Praxis Just. Die sanften Berührungen unterstützen das Immunsystem, lindern Verdauungsbeschwerden und führen zu einem erholsameren Schlaf.",
+            "Babymassage in der Praxis Dr. Just. Die sanften Berührungen unterstützen das Immunsystem, lindern Verdauungsbeschwerden und führen zu einem erholsameren Schlaf.",
         url: "https://www.hebammeeva.de/babymassage",
         categories: ["Nach der Geburt"],
     },
@@ -88,7 +88,7 @@ Nach einer Spontangeburt kann nach ca. 6 Wochen, bei einer Bauchgeburt nach ca. 
         id: "rueckbildungs-yoga",
         name: "Rückbildungs-Yoga",
         description:
-            "Sanfte Yoga-Übungen speziell für die Zeit nach der Geburt zur körperlichen und mentalen Regeneration.",
+            "Yoga-Übungen speziell für die Zeit nach der Geburt zur körperlichen und mentalen Regeneration.",
         url: "https://www.praxis-inakauper.de/contact-8",
         categories: ["Nach der Geburt", "Yoga"],
     },
@@ -96,7 +96,7 @@ Nach einer Spontangeburt kann nach ca. 6 Wochen, bei einer Bauchgeburt nach ca. 
         id: "schwangerschafts-yoga",
         name: "Schwangerschafts-Yoga",
         description:
-            "Entspannende Yoga-Praxis für werdende Mütter zur Vorbereitung auf die Geburt.",
+            "Fließende Yoga-Praxis für werdende Mütter zur Vorbereitung auf die Geburt.",
         url: "https://www.praxis-inakauper.de/yoga",
         categories: ["Vor der Geburt", "Yoga"],
     },
@@ -107,6 +107,30 @@ Nach einer Spontangeburt kann nach ca. 6 Wochen, bei einer Bauchgeburt nach ca. 
             "Gemeinsam gehen wir verschiedene Tragesysteme durch und finden heraus, was am besten zu euch passt. Danach üben wir das sichere und bequeme Tragen, sodass ihr euch beide wohl fühlt und die gemeinsame Zeit genießen könnt.",
         url: "https://www.hebammeeva.de/trageberatung",
         categories: ["Nach der Geburt"],
+    },
+    {
+        id: "lunch-yoga",
+        name: "Lunch Yoga",
+        description:
+            "Kurze Yoga-Einheit in der Mittagspause – ideal zum Auftanken und Entspannen. Mit Anna (Oce'anna).",
+        url: "https://www.oceanna.de/#Kurse",
+        categories: ["Yoga"],
+    },
+    {
+        id: "after-work-yoga",
+        name: "After Work Yoga",
+        description:
+            "Yoga nach Feierabend zum Abschalten und Regenerieren. Mit Anna (Oce'anna).",
+        url: "https://www.oceanna.de/#Kurse",
+        categories: ["Yoga"],
+    },
+    {
+        id: "kinder-yoga",
+        name: "Kinder-Yoga",
+        description:
+            "Yoga für Kinder – spielerische Übungen für mehr Beweglichkeit, Konzentration und Entspannung. Mit Kelly (Calm Minds).",
+        url: "https://www.instagram.com/__calmminds__",
+        categories: ["Yoga"],
     },
 ] as const;
 

@@ -1,6 +1,6 @@
 import { type CourseId } from './courses';
 
-export type Weekday = 'Montag' | 'Dienstag' | 'Mittwoch' | 'Donnerstag' | 'Freitag';
+export type Weekday = 'Montag' | 'Dienstag' | 'Mittwoch' | 'Donnerstag' | 'Freitag' | 'Samstag' | 'Sonntag';
 
 export interface WeeklyScheduleEntry {
     courseId: CourseId;
@@ -54,9 +54,39 @@ export const weeklySchedule: WeeklyScheduleEntry[] = [
         endTime: "17:00"
     },
     {
+        courseId: "lunch-yoga",
+        weekday: "Donnerstag",
+        startTime: "12:15",
+        endTime: "13:00"
+    },
+    {
+        courseId: "after-work-yoga",
+        weekday: "Donnerstag",
+        startTime: "18:00",
+        endTime: "19:00"
+    },
+    {
         courseId: "babymassage",
         weekday: "Freitag",
         startTime: "10:00",
         endTime: "10:45"
+    },
+    {
+        courseId: "geburtsvorbereitung",
+        weekday: "Samstag",
+        startTime: "10:00",
+        endTime: "15:00"
+    },
+    {
+        courseId: "geburtsvorbereitung",
+        weekday: "Sonntag",
+        startTime: "10:00",
+        endTime: "15:00"
+    },
+    {
+        courseId: "kinder-yoga",
+        weekday: "Sonntag",
+        startTime: "11:30",
+        endTime: "12:30"
     },
 ];

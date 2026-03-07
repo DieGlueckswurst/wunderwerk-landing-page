@@ -96,7 +96,7 @@ const ContactSection = () => {
             <label htmlFor="message" className="block text-sm font-medium mb-1 text-left">Nachricht</label>
             <Textarea id="message" placeholder="Deine Nachricht" rows={4} value={message} onChange={e => setMessage(e.target.value)} required disabled={isLoading} />
           </div>
-          <Button type="submit" className="bg-black hover:bg-gray-800 text-white w-full" disabled={isLoading}>
+          <Button type="submit" className="w-full" disabled={isLoading}>
             {isLoading ? "Wird gesendet..." : "Nachricht senden"}
           </Button>
         </form> : <div className="text-center p-8 border border-gray-200 rounded-lg">
@@ -108,15 +108,15 @@ const ContactSection = () => {
 
       <div className="text-center">
         <div className="mb-8">
-          <a href="mailto:info@wunderwerk-nuernberg.de" className="mb-2 block">info@wunderwerk-nuernberg.de</a>
-          <p>Wunderwerk • Pfarrgasse 9 • 90402 Nürnberg</p>
+          <a href="mailto:info@wunderwerk-nuernberg.de" className="mb-2 block hover:underline focus:outline-none focus:underline">info@wunderwerk-nuernberg.de</a>
+          <a href="https://maps.app.goo.gl/1s7prvMzRec9Qnod9" target="_blank" rel="noopener noreferrer" className="block hover:underline focus:outline-none focus:underline">WunderWerk • Pfarrgasse 9 • 90402 Nürnberg</a>
         </div>
       </div>
     </div>
 
     <div className="max-w-4xl mx-auto mt-20">
       <div className="border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center">
-        <p className="text-sm text-gray-500 mb-4 md:mb-0">© 2025 Wunderwerk Nürnberg. Alle Rechte vorbehalten.</p>
+        <p className="text-sm text-gray-500 mb-4 md:mb-0">© 2025 WunderWerk Nürnberg. Alle Rechte vorbehalten.</p>
         <div className="flex gap-6">
           <Link to="/impressum" className="text-sm text-gray-500 hover:text-black">Impressum</Link>
           <Link to="/datenschutz" className="text-sm text-gray-500 hover:text-black">Datenschutz</Link>

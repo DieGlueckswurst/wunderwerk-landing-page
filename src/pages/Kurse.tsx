@@ -38,20 +38,20 @@ const Kurse = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background">
       <Header />
       <PageHeader title="Kurse" />
 
       <div className="container mx-auto px-6 pt-0 pb-16">
         {/* Segment Control */}
-        <div className="flex justify-center mb-12">
+        <div className="flex justify-center mb-6">
           <div className="bg-warm rounded-lg p-1 inline-flex text-white">
             <Button
               onClick={() => setActiveTab('alle')}
               variant="ghost"
               className={`px-6 py-2 rounded-md font-medium select-none touch-manipulation [-webkit-tap-highlight-color:transparent] transition-colors ${activeTab === 'alle'
-                ? 'bg-white text-black shadow-sm hover:bg-white active:bg-white focus:bg-white'
-                : 'text-white hover:bg-transparent active:bg-transparent focus:bg-transparent'
+                ? 'bg-white text-black shadow-sm hover:bg-white hover:text-black active:bg-white focus:bg-white'
+                : 'text-white hover:bg-white/15 hover:text-white active:bg-transparent focus:bg-transparent'
                 }`}
             >
               Alle Kurse
@@ -60,8 +60,8 @@ const Kurse = () => {
               onClick={() => setActiveTab('wochenplan')}
               variant="ghost"
               className={`px-6 py-2 rounded-md font-medium select-none touch-manipulation [-webkit-tap-highlight-color:transparent] transition-colors ${activeTab === 'wochenplan'
-                ? 'bg-white text-black shadow-sm hover:bg-white active:bg-white focus:bg-white'
-                : 'text-white hover:bg-transparent active:bg-transparent focus:bg-transparent'
+                ? 'bg-white text-black shadow-sm hover:bg-white hover:text-black active:bg-white focus:bg-white'
+                : 'text-white hover:bg-white/15 hover:text-white active:bg-transparent focus:bg-transparent'
                 }`}
             >
               Wochenplan
@@ -72,100 +72,100 @@ const Kurse = () => {
         {/* Content */}
         {activeTab === 'alle' && (
           <div className="max-w-6xl mx-auto">
-            <h3 className="text-2xl font-serif mb-8 text-center">Unsere Kursangebote</h3>
-            {/* Category Filters */}
-            <div className="flex justify-center mb-8 gap-2 flex-wrap">
-              <Button
-                onClick={() => setActiveCategory('')}
-                variant={activeCategory === '' ? 'default' : 'outline'}
-                size="sm"
-                className="rounded-full"
-              >
-                Alle
-              </Button>
-              <Button
-                onClick={() => setActiveCategory('Vor der Geburt')}
-                variant={activeCategory === 'Vor der Geburt' ? 'default' : 'outline'}
-                size="sm"
-                className="rounded-full"
-              >
-                Vor der Geburt
-              </Button>
-              <Button
-                onClick={() => setActiveCategory('Nach der Geburt')}
-                variant={activeCategory === 'Nach der Geburt' ? 'default' : 'outline'}
-                size="sm"
-                className="rounded-full"
-              >
-                Nach der Geburt
-              </Button>
-              <Button
-                onClick={() => setActiveCategory('Yoga')}
-                variant={activeCategory === 'Yoga' ? 'default' : 'outline'}
-                size="sm"
-                className="rounded-full"
-              >
-                Yoga
-              </Button>
-            </div>
-            <Accordion type="single" collapsible className="w-full">
-              {filteredKurse.map((kurs, index) => {
-                const courseWithUrl = kurs as Course;
-                return (
-                  <AccordionItem key={index} value={`item-${index}`} className="border-warm">
-                    <AccordionTrigger className="hover:no-underline">
-                      <div className="flex-1">
-                        <span className="font-serif text-2xl text-left block">{courseWithUrl.name}</span>
-                        <div className="mt-2 flex gap-2 flex-wrap">
-                          {courseWithUrl.categories.map((cat, i) => (
-                            <Tag key={i}>{cat}</Tag>
-                          ))}
+            <div className="bg-white rounded-lg p-6 border border-gray-200">
+              {/* Category Filters */}
+              <div className="flex justify-center mb-8 gap-2 flex-wrap">
+                <Button
+                  onClick={() => setActiveCategory('')}
+                  variant={activeCategory === '' ? 'default' : 'outline'}
+                  size="sm"
+                  className={`rounded-full ${activeCategory === '' ? 'bg-white text-black hover:bg-gray-100 hover:text-black border border-gray-200' : ''}`}
+                >
+                  Alle
+                </Button>
+                <Button
+                  onClick={() => setActiveCategory('Vor der Geburt')}
+                  variant={activeCategory === 'Vor der Geburt' ? 'default' : 'outline'}
+                  size="sm"
+                  className={`rounded-full ${activeCategory === 'Vor der Geburt' ? 'bg-white text-black hover:bg-gray-100 hover:text-black border border-gray-200' : ''}`}
+                >
+                  Vor der Geburt
+                </Button>
+                <Button
+                  onClick={() => setActiveCategory('Nach der Geburt')}
+                  variant={activeCategory === 'Nach der Geburt' ? 'default' : 'outline'}
+                  size="sm"
+                  className={`rounded-full ${activeCategory === 'Nach der Geburt' ? 'bg-white text-black hover:bg-gray-100 hover:text-black border border-gray-200' : ''}`}
+                >
+                  Nach der Geburt
+                </Button>
+                <Button
+                  onClick={() => setActiveCategory('Yoga')}
+                  variant={activeCategory === 'Yoga' ? 'default' : 'outline'}
+                  size="sm"
+                  className={`rounded-full ${activeCategory === 'Yoga' ? 'bg-white text-black hover:bg-gray-100 hover:text-black border border-gray-200' : ''}`}
+                >
+                  Yoga
+                </Button>
+              </div>
+              <Accordion type="single" collapsible className="w-full space-y-4">
+                {filteredKurse.map((kurs, index) => {
+                  const courseWithUrl = kurs as Course;
+                  return (
+                    <AccordionItem key={index} value={`item-${index}`} className="bg-background rounded-lg p-4 border-0 [&:not(:last-child)]:mb-0">
+                      <AccordionTrigger className="hover:no-underline py-2">
+                        <div className="flex-1 text-left">
+                          <span className="font-serif text-2xl block">{courseWithUrl.name}</span>
+                          <div className="mt-2 flex gap-2 flex-wrap">
+                            {courseWithUrl.categories.map((cat, i) => (
+                              <Tag key={i}>{cat}</Tag>
+                            ))}
+                          </div>
                         </div>
-                      </div>
-                    </AccordionTrigger>
-                    <AccordionContent className="pb-6">
-                      <p className="text-gray-600 mb-4 leading-relaxed whitespace-pre-line">
-                        {courseWithUrl.description}
-                      </p>
-                      {courseWithUrl.url ? (
-                        <a href={courseWithUrl.url} target="_blank" rel="noopener noreferrer">
-                          <Button className="bg-primary hover:bg-primary/90">
-                            Zur Anmeldung
+                      </AccordionTrigger>
+                      <AccordionContent className="pb-4 pt-0">
+                        <p className="text-gray-600 mb-4 leading-relaxed whitespace-pre-line">
+                          {courseWithUrl.description}
+                        </p>
+                        {courseWithUrl.url ? (
+                          <a href={courseWithUrl.url} target="_blank" rel="noopener noreferrer">
+                            <Button>
+                              Zur Anmeldung
+                            </Button>
+                          </a>
+                        ) : (
+                          <Button
+                            onClick={() => navigate('/', { state: { scrollTo: 'contact' } })}
+                          >
+                            Kontakt aufnehmen
                           </Button>
-                        </a>
-                      ) : (
-                        <Button
-                          className="bg-primary hover:bg-primary/90"
-                          onClick={() => navigate('/', { state: { scrollTo: 'contact' } })}
-                        >
-                          Kontakt aufnehmen
-                        </Button>
-                      )}
-                    </AccordionContent>
-                  </AccordionItem>
-                );
-              })}
-            </Accordion>
+                        )}
+                      </AccordionContent>
+                    </AccordionItem>
+                  );
+                })}
+              </Accordion>
+            </div>
           </div>
         )}
 
         {activeTab === 'wochenplan' && (
           <div className="max-w-6xl mx-auto">
-            <h3 className="text-2xl font-serif mb-4 text-center">Wochenplan</h3>
-
             {/* Info Banner */}
-            <div className="bg-warm rounded-lg p-4 mb-8 max-w-3xl mx-auto flex gap-3 text-white">
-              <Info className="w-5 h-5 flex-shrink-0 self-start -translate-y-[0.1rem]" />
-              <p className="text-sm leading-5">
-                <span className="font-medium">Üblicher Zeitplan:</span> Klicke auf einen Kurs für die aktuellen Termine und Anmeldung
-              </p>
+            <div className="flex justify-center mb-8">
+              <div className="bg-white rounded-lg p-4 inline-flex items-start gap-3 text-black border border-gray-200">
+                <Info className="w-5 h-5 flex-shrink-0 -translate-y-[0.1rem] text-warm" />
+                <p className="text-sm leading-5">
+                  <span className="font-medium">Üblicher Zeitplan:</span> Klicke auf einen Kurs für die aktuellen Termine und Anmeldung
+                </p>
+              </div>
             </div>
 
-            <div className="bg-warm rounded-lg p-6">
+            <div className="bg-white rounded-lg p-6 border border-gray-200">
               <div className="grid grid-cols-1 gap-4">
-                {(['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag'] as Weekday[]).map(tag => (
-                  <div key={tag} className="bg-white rounded-lg p-4 text-gray-900">
-                    <h4 className="font-serif text-lg mb-4 border-b border-gray-200 pb-2">{tag}</h4>
+                {(['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'] as Weekday[]).map(tag => (
+                  <div key={tag} className="bg-background rounded-lg p-4 text-gray-900">
+                    <h4 className="font-serif text-xl font-semibold mb-4 border-b border-gray-200 pb-2 text-warm">{tag}</h4>
                     <div className="space-y-2">
                       {scheduleWithDetails
                         .filter(entry => entry.weekday === tag)
