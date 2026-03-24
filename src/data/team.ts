@@ -3,7 +3,7 @@ export type TeamCategory = 'hebammen' | 'physiotherapie' | 'osteopathie' | 'othe
 export interface TeamMember {
     id: number;
     name: string;
-    role?: string; // e.g., Hebamme, Physiotherapeutin (main profession shown on card)
+    role?: string | string[]; // e.g., Hebamme, Physiotherapeutin (main profession shown on card)
     categories: TeamCategory[];
     website?: string;
     image?: string; // path relative to public, e.g., /members/name_avatar.png
@@ -57,7 +57,7 @@ export const teamMembers: TeamMember[] = [
     {
         id: 3,
         name: 'Rene Rathmann',
-        role: 'Heilpraktiker für Osteopathie',
+        role: ['Heilpraktiker', 'Osteopath für Erwachsene & Kinder'],
         categories: ['osteopathie'],
         image: '/members/rene/avatar.png',
         website: 'https://www.osteopathie-rathmann.de/',

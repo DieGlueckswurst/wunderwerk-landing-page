@@ -54,7 +54,7 @@ const About = () => {
       id: 2,
       date: "2000",
       title: "Herrenausstatter",
-      description: "Schick Schick! Elegante Herrenmode für den stilbewussten Nürnberger.",
+      description: "Elegante Herrenmode für den stilbewussten Nürnberger.",
       image: "/timeline/herrenausstatter.png"
     },
     {
@@ -75,7 +75,7 @@ const About = () => {
       id: 5,
       date: "2025",
       title: "Grand Opening",
-      description: "Mission accomplished! Das Wunderwerk öffnet offiziell seine Türen.",
+      description: "Es ist soweit! Das Wunderwerk öffnet offiziell die Türen.",
       image: "/timeline/group.png"
     }
   ];
@@ -206,7 +206,9 @@ const About = () => {
                     <Tag>Mitgründerin</Tag>
                   )}
                   {member.role && (
-                    <Tag>{member.role}</Tag>
+                    Array.isArray(member.role)
+                      ? member.role.map((r) => <Tag key={r}>{r}</Tag>)
+                      : <Tag>{member.role}</Tag>
                   )}
                   {member.comingSoon && (
                     <Tag variant="warning">Kommt bald!</Tag>
@@ -234,25 +236,27 @@ const About = () => {
           <h2 className="text-4xl font-serif text-center mb-12">Unsere Geschichte</h2>
 
           <div className="overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-2 -mx-2">
-            <div className="flex gap-10 min-w-max px-4">
+            <div className="flex gap-10 min-w-max px-4 items-end">
               {timelineItems.map((item, index) => (
                 <div
                   key={item.id}
                   className="flex flex-col items-center w-[260px] flex-shrink-0 snap-center"
                 >
-                  <div className="bg-white rounded-lg border border-gray-200 overflow-hidden w-full hover:shadow-md transition-shadow mb-5">
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className="w-full aspect-[4/3] object-cover"
-                      onError={e => {
-                        const target = e.target as HTMLImageElement;
-                        target.src = getPlaceholderImage(index);
-                      }}
-                    />
-                    <div className="p-4">
-                      <h3 className="text-lg font-serif font-semibold mb-1.5">{item.title}</h3>
-                      <p className="text-sm text-gray-500 line-clamp-2">{item.description}</p>
+                  <div className="flex-1 flex items-end w-full mb-5">
+                    <div className="bg-white rounded-lg border border-gray-200 overflow-hidden w-full hover:shadow-md transition-shadow">
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        className="w-full aspect-[4/3] object-cover"
+                        onError={e => {
+                          const target = e.target as HTMLImageElement;
+                          target.src = getPlaceholderImage(index);
+                        }}
+                      />
+                      <div className="p-4">
+                        <h3 className="text-lg font-serif font-semibold mb-1.5">{item.title}</h3>
+                        <p className="text-sm text-gray-500">{item.description}</p>
+                      </div>
                     </div>
                   </div>
                   <span className="text-sm font-medium text-gray-500 mb-2">{item.date}</span>
@@ -279,7 +283,7 @@ const About = () => {
                         colors: ['#d4a090', '#e0b5a8', '#e8c9bf', '#f0ddd6']
                       });
                     }}
-                    className="bg-warm border-2 border-warm text-white rounded-lg px-5 py-4 text-base font-serif cursor-pointer hover:bg-white hover:text-warm hover:border-warm transition-all text-center"
+                    className="bg-warm border-2 border-warm text-white rounded-lg px-6 py-5 text-xl font-serif font-semibold cursor-pointer hover:bg-white hover:text-warm hover:border-warm transition-all text-center"
                   >
                     Die Zukunft? Wird wunderbar.
                   </button>
