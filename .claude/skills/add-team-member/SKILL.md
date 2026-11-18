@@ -43,6 +43,10 @@ make_avatar.sh <bild> public/members/<vorname> avatar <größe> <x> <y>
 ```
 Größer = weiter raus gezoomt; `y` kleiner = Person rutscht nach unten.
 
+Bei viel/voluminösem Haar (Locken) misst der Auto-Crop die Kopfbreite zu groß und zoomt zu weit raus. Dann manuell: Haaransatz-Oberkante und Kinn im Original schätzen, `größe ≈ (Kinn − Haaroberkante) / 0,6`, `y = Haaroberkante − 0,14 · größe`, `x = Gesichtsmitte − größe/2` (negative Werte sind erlaubt).
+
+Fotos von Zyro-Websites (`assets.zyrosite.com/cdn-cgi/image/…/<id>/<datei>`) in voller Auflösung laden, indem man den `cdn-cgi/image/…/`-Teil aus der URL entfernt.
+
 Voraussetzungen: `rembg` (CLI, liegt unter `~/.local/bin/rembg`) und ImageMagick 7 (`magick`).
 
 ### 3. Datensatz in `src/data/team.ts`
@@ -64,6 +68,11 @@ Ans Ende von `teamMembers` anhängen, `id` = höchste bisherige + 1 (die Reihenf
 1. `TeamCategory` in `src/data/team.ts` um die neue ID erweitern (klein, ohne Umlaute).
 2. `AngebotSection.tsx`: neuen `case '<id>'` → `navigate('/about?filter=<id>')` und einen Button (Klassen vom Nachbar-Button kopieren). Darauf achten, dass das Raster aufgeht (aktuell 6 Buttons = 3×2).
 3. `About.tsx`: Filter-Button kopieren (vor „Yoga“), ID und Label anpassen.
+
+### Mitglied entfernen
+1. Eintrag aus `teamMembers` in `src/data/team.ts` löschen.
+2. Bildordner löschen: `git rm -r public/members/<vorname>`.
+3. Kurse der Person in `src/data/courses.ts` suchen (Name/Website in `description`/`url`) und den User fragen, ob sie mit raus sollen. Falls ja: auch alle Einträge mit dieser `courseId` in `src/data/schedule.ts` entfernen (sonst TypeScript-Fehler).
 
 ### 5. Prüfen
 - `npx tsc --noEmit -p tsconfig.app.json`

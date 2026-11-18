@@ -30,6 +30,17 @@ Geeignet für Babys ab 6 Wochen bis ca. 6 Monate.`,
         categories: ["Vor der Geburt"],
     },
     {
+        id: "geburtsvorbereitung-franzi-zoe",
+        name: "Geburtsvorbereitung für Paare (Franzi & Zoe)",
+        description: `Wochenendkurs im WunderWerk mit den Hebammen Franzi und Zoe. Alles rund um die Geburt – von Geburtsorten in Nürnberg über Umgang mit Wehen bis zur Bauchgeburt – und gut vorbereitet ins Wochenbett: die ersten Stunden mit Baby, Stillen, sicherer Babyschlaf.
+
+Deine Begleitperson lernt, dich unter der Geburt optimal zu unterstützen.
+
+Für Schwangere ab der 25. SSW, Abschluss ca. 3 Wochen vor dem Geburtstermin. Die Kosten für Schwangere übernimmt die Krankenkasse.`,
+        url: "https://www.hebamme-franziska-buendner.de/kurse",
+        categories: ["Vor der Geburt"],
+    },
+    {
         id: "krabbelgruppe",
         name: "Krabbelgruppe",
         description:
@@ -107,30 +118,6 @@ Nach einer Spontangeburt kann nach ca. 6 Wochen, bei einer Bauchgeburt nach ca. 
             "Gemeinsam gehen wir verschiedene Tragesysteme durch und finden heraus, was am besten zu euch passt. Danach üben wir das sichere und bequeme Tragen, sodass ihr euch beide wohl fühlt und die gemeinsame Zeit genießen könnt.",
         url: "https://www.hebammeeva.de/trageberatung",
         categories: ["Nach der Geburt"],
-    },
-    {
-        id: "lunch-yoga",
-        name: "Lunch Yoga",
-        description:
-            "Kurze Yoga-Einheit in der Mittagspause – ideal zum Auftanken und Entspannen. Mit Anna (Oce'anna).",
-        url: "https://www.oceanna.de/#Kurse",
-        categories: ["Yoga"],
-    },
-    {
-        id: "after-work-yoga",
-        name: "After Work Yoga",
-        description:
-            "Yoga nach Feierabend zum Abschalten und Regenerieren. Mit Anna (Oce'anna).",
-        url: "https://www.oceanna.de/#Kurse",
-        categories: ["Yoga"],
-    },
-    {
-        id: "kinder-yoga",
-        name: "Kinder-Yoga",
-        description:
-            "Yoga für Kinder – spielerische Übungen für mehr Beweglichkeit, Konzentration und Entspannung. Mit Kelly (Calm Minds).",
-        url: "https://www.instagram.com/__calmminds__",
-        categories: ["Yoga"],
     },
 ] as const;
 
