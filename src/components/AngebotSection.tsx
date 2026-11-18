@@ -28,6 +28,9 @@ const AngebotSection = () => {
       case 'osteopathie':
         navigate('/about?filter=osteopathie');
         break;
+      case 'heilpraktik':
+        navigate('/about?filter=heilpraktik');
+        break;
       case 'kurse':
         navigate('/kurse');
         break;
@@ -70,6 +73,14 @@ const AngebotSection = () => {
             className="h-16 min-w-[200px] text-lg font-medium border-2 border-gray-200 bg-white text-black hover:border-warm hover:bg-warm/10 hover:text-black transition-all active:bg-warm/15"
           >
             Osteopathie
+          </Button>
+
+          <Button
+            onClick={() => handleCategoryClick('heilpraktik')}
+            variant="outline"
+            className="h-16 min-w-[200px] text-lg font-medium border-2 border-gray-200 bg-white text-black hover:border-warm hover:bg-warm/10 hover:text-black transition-all active:bg-warm/15"
+          >
+            Heilpraktik
           </Button>
 
           <Button

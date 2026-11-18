@@ -1,4 +1,4 @@
-export type TeamCategory = 'hebammen' | 'physiotherapie' | 'osteopathie' | 'other' | 'yoga';
+export type TeamCategory = 'hebammen' | 'physiotherapie' | 'osteopathie' | 'heilpraktik' | 'other' | 'yoga';
 
 export interface TeamMember {
     id: number;
@@ -77,5 +77,13 @@ export const teamMembers: TeamMember[] = [
         categories: ['yoga'],
         website: 'https://www.instagram.com/__calmminds__',
         image: '/members/kelly/kelly_avatar.png',
+    },
+    {
+        id: 9,
+        name: 'Doris Lamatsch',
+        role: ['Heilpraktikerin', 'Kinesiologie & Craniosacrale Osteopathie'],
+        categories: ['heilpraktik', 'osteopathie'],
+        website: 'https://www.dorislamatsch.de/',
+        image: '/members/doris/avatar.png',
     },
 ];

@@ -172,6 +172,14 @@ const About = () => {
               Osteopathie
             </Button>
             <Button
+              onClick={() => setActiveFilter('heilpraktik')}
+              variant={activeFilter === 'heilpraktik' ? 'default' : 'outline'}
+              size="sm"
+              className={`rounded-full ${activeFilter === 'heilpraktik' ? 'bg-white text-black hover:bg-gray-100 hover:text-black border border-gray-200' : ''}`}
+            >
+              Heilpraktik
+            </Button>
+            <Button
               onClick={() => setActiveFilter('yoga')}
               variant={activeFilter === 'yoga' ? 'default' : 'outline'}
               size="sm"
