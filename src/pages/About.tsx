@@ -47,7 +47,11 @@ const About = () => {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
-  const dragState = useRef({ active: false, startX: 0, startScroll: 0, moved: false });
+  // While a drag glides to its resting card, CSS scroll-snap stays off –
+  // otherwise the browser would snap abruptly the moment the mouse is released.
+  const [isSettling, setIsSettling] = useState(false);
+  const settleTimer = useRef<number>();
+  const dragState = useRef({ active: false, startX: 0, startScroll: 0, moved: false, lastX: 0, lastT: 0, velocity: 0 });
 
   // Cards of the timeline (direct children of the inner flex row)
   const getTimelineItems = () =>
@@ -110,7 +114,17 @@ const About = () => {
   // Mouse drag-to-scroll (touch keeps native swiping)
   const onDragStart = (e: React.PointerEvent<HTMLDivElement>) => {
     if (e.pointerType !== 'mouse' || e.button !== 0 || !timelineRef.current) return;
-    dragState.current = { active: true, startX: e.clientX, startScroll: timelineRef.current.scrollLeft, moved: false };
+    window.clearTimeout(settleTimer.current);
+    setIsSettling(false);
+    dragState.current = {
+      active: true,
+      startX: e.clientX,
+      startScroll: timelineRef.current.scrollLeft,
+      moved: false,
+      lastX: e.clientX,
+      lastT: performance.now(),
+      velocity: 0,
+    };
   };
 
   const onDragMove = (e: React.PointerEvent<HTMLDivElement>) => {
@@ -123,14 +137,54 @@ const About = () => {
       setIsDragging(true);
       el.setPointerCapture(e.pointerId);
     }
-    if (state.moved) el.scrollLeft = state.startScroll - dx;
+    if (!state.moved) return;
+    el.scrollLeft = state.startScroll - dx;
+    // Smoothed pointer velocity (px/ms) for a natural "throw" on release
+    const now = performance.now();
+    const dt = Math.max(now - state.lastT, 1);
+    state.velocity = 0.8 * ((e.clientX - state.lastX) / dt) + 0.2 * state.velocity;
+    state.lastX = e.clientX;
+    state.lastT = now;
   };
 
   const onDragEnd = (e: React.PointerEvent<HTMLDivElement>) => {
     const el = timelineRef.current;
+    const state = dragState.current;
     if (el?.hasPointerCapture(e.pointerId)) el.releasePointerCapture(e.pointerId);
-    dragState.current.active = false;
+    const wasDragging = state.active && state.moved;
+    state.active = false;
     setIsDragging(false);
+    if (!el || !wasDragging) return;
+
+    // Project where the throw would end, then glide to the card closest to that point
+    const idle = performance.now() - state.lastT > 100; // mouse held still before release -> no throw
+    const throwDistance = idle ? 0 : Math.max(-450, Math.min(450, state.velocity * 250)); // max ~1.5 cards
+    const projected = el.scrollLeft - throwDistance;
+    const box = el.getBoundingClientRect();
+    const mid = box.width / 2;
+    let best = projected;
+    let bestDist = Infinity;
+    for (const item of getTimelineItems()) {
+      const r = item.getBoundingClientRect();
+      const itemCenter = el.scrollLeft + (r.left - box.left) + r.width / 2;
+      const left = itemCenter - mid;
+      const dist = Math.abs(left - projected);
+      if (dist < bestDist) {
+        bestDist = dist;
+        best = left;
+      }
+    }
+    best = Math.max(0, Math.min(best, el.scrollWidth - el.clientWidth));
+
+    setIsSettling(true);
+    el.scrollTo({ left: best, behavior: 'smooth' });
+    const finish = () => {
+      window.clearTimeout(settleTimer.current);
+      el.removeEventListener('scrollend', finish);
+      setIsSettling(false);
+    };
+    el.addEventListener('scrollend', finish, { once: true });
+    settleTimer.current = window.setTimeout(finish, 800); // fallback for browsers without scrollend
   };
 
   // Swallow the click that ends a drag so buttons inside aren't triggered
@@ -343,13 +397,24 @@ const About = () => {
         <div className="p-6 max-w-6xl mx-auto mt-20">
           <h2 className="text-4xl font-serif text-center mb-12">Unsere Geschichte</h2>
 
-          <div className="relative">
+          {/* Wrapper has the same negative margin as the scroller, so the fades sit exactly on its edges */}
+          <div className="relative -mx-2">
+          {/* Edge fades – only visible when there is more content in that direction */}
+          <div
+            aria-hidden="true"
+            className={`pointer-events-none absolute inset-y-0 left-0 w-10 md:w-16 z-10 bg-gradient-to-r from-background to-transparent transition-opacity duration-300 ${canScrollLeft ? 'opacity-100' : 'opacity-0'}`}
+          />
+          <div
+            aria-hidden="true"
+            className={`pointer-events-none absolute inset-y-0 right-0 w-10 md:w-16 z-10 bg-gradient-to-l from-background to-transparent transition-opacity duration-300 ${canScrollRight ? 'opacity-100' : 'opacity-0'}`}
+          />
+
           {/* Arrow buttons */}
           <button
             type="button"
             aria-label="Zurück"
             onClick={() => scrollTimeline(-1)}
-            className={`absolute left-0 md:-left-4 top-[40%] -translate-y-1/2 z-20 h-11 w-11 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-700 hover:border-warm hover:text-warm transition-all duration-300 ${canScrollLeft ? 'opacity-100' : 'opacity-0 invisible pointer-events-none'}`}
+            className={`absolute left-2 md:-left-2 top-[40%] -translate-y-1/2 z-20 h-11 w-11 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-700 hover:border-warm hover:text-warm transition-all duration-300 ${canScrollLeft ? 'opacity-100' : 'opacity-0 invisible pointer-events-none'}`}
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
@@ -357,7 +422,7 @@ const About = () => {
             type="button"
             aria-label="Weiter"
             onClick={() => scrollTimeline(1)}
-            className={`absolute right-0 md:-right-4 top-[40%] -translate-y-1/2 z-20 h-11 w-11 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-700 hover:border-warm hover:text-warm transition-all duration-300 ${canScrollRight ? 'opacity-100' : 'opacity-0 invisible pointer-events-none'}`}
+            className={`absolute right-2 md:-right-2 top-[40%] -translate-y-1/2 z-20 h-11 w-11 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-700 hover:border-warm hover:text-warm transition-all duration-300 ${canScrollRight ? 'opacity-100' : 'opacity-0 invisible pointer-events-none'}`}
           >
             <ChevronRight className="h-5 w-5" />
           </button>
@@ -373,7 +438,7 @@ const About = () => {
             onDragStartCapture={(e) => e.preventDefault()}
             tabIndex={0}
             aria-label="Zeitleiste – mit Pfeiltasten scrollen"
-            className={`overflow-x-auto scrollbar-hide pb-2 -mx-2 outline-none select-none ${isDragging ? 'cursor-grabbing' : 'snap-x snap-mandatory md:cursor-grab'}`}
+            className={`overflow-x-auto scrollbar-hide pb-2 outline-none select-none ${isDragging ? 'cursor-grabbing' : 'md:cursor-grab'} ${isDragging || isSettling ? '' : 'snap-x snap-mandatory'}`}
           >
             <div className="flex gap-10 min-w-max px-4 items-end">
               {timelineItems.map((item, index) => (
