@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import confetti from 'canvas-confetti';
 import Header from "@/components/Header";
 import PageHeader from "@/components/PageHeader";
 import { Button } from "@/components/ui/button";
 import { Tag } from "@/components/ui/tag";
-import { ExternalLink } from "lucide-react";
+import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
 import { teamMembers as teamData, type TeamCategory } from "@/data/team";
 import { getPlaceholderImage } from "@/utils/placeholderImage";
 
@@ -41,6 +41,70 @@ const About = () => {
   }, [searchParams]);
 
   const teamMembers = teamData;
+
+  // --- Timeline horizontal scrolling (arrows, edge fades, mouse drag) ---
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const dragState = useRef({ active: false, startX: 0, startScroll: 0, moved: false });
+
+  const updateScrollState = useCallback(() => {
+    const el = timelineRef.current;
+    if (!el) return;
+    setCanScrollLeft(el.scrollLeft > 4);
+    setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 4);
+  }, []);
+
+  useEffect(() => {
+    updateScrollState();
+    const el = timelineRef.current;
+    if (!el) return;
+    const observer = new ResizeObserver(updateScrollState);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [updateScrollState]);
+
+  const scrollTimeline = (direction: 1 | -1) => {
+    const el = timelineRef.current;
+    if (!el) return;
+    el.scrollBy({ left: direction * Math.max(300, el.clientWidth * 0.7), behavior: 'smooth' });
+  };
+
+  // Mouse drag-to-scroll (touch keeps native swiping)
+  const onDragStart = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType !== 'mouse' || e.button !== 0 || !timelineRef.current) return;
+    dragState.current = { active: true, startX: e.clientX, startScroll: timelineRef.current.scrollLeft, moved: false };
+  };
+
+  const onDragMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    const state = dragState.current;
+    const el = timelineRef.current;
+    if (!state.active || !el) return;
+    const dx = e.clientX - state.startX;
+    if (!state.moved && Math.abs(dx) > 5) {
+      state.moved = true;
+      setIsDragging(true);
+      el.setPointerCapture(e.pointerId);
+    }
+    if (state.moved) el.scrollLeft = state.startScroll - dx;
+  };
+
+  const onDragEnd = (e: React.PointerEvent<HTMLDivElement>) => {
+    const el = timelineRef.current;
+    if (el?.hasPointerCapture(e.pointerId)) el.releasePointerCapture(e.pointerId);
+    dragState.current.active = false;
+    setIsDragging(false);
+  };
+
+  // Swallow the click that ends a drag so buttons inside aren't triggered
+  const onClickCapture = (e: React.MouseEvent) => {
+    if (dragState.current.moved) {
+      e.stopPropagation();
+      e.preventDefault();
+      dragState.current.moved = false;
+    }
+  };
 
   const timelineItems: TimelineItem[] = [
     {
@@ -243,7 +307,48 @@ const About = () => {
         <div className="p-6 max-w-6xl mx-auto mt-20">
           <h2 className="text-4xl font-serif text-center mb-12">Unsere Geschichte</h2>
 
-          <div className="overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-2 -mx-2">
+          <div className="relative">
+          {/* Edge fades – only visible when there is more content in that direction */}
+          <div
+            aria-hidden="true"
+            className={`pointer-events-none absolute inset-y-0 left-0 w-12 md:w-20 z-10 bg-gradient-to-r from-background to-transparent transition-opacity duration-300 ${canScrollLeft ? 'opacity-100' : 'opacity-0'}`}
+          />
+          <div
+            aria-hidden="true"
+            className={`pointer-events-none absolute inset-y-0 right-0 w-12 md:w-20 z-10 bg-gradient-to-l from-background to-transparent transition-opacity duration-300 ${canScrollRight ? 'opacity-100' : 'opacity-0'}`}
+          />
+
+          {/* Arrow buttons */}
+          <button
+            type="button"
+            aria-label="Zurück"
+            onClick={() => scrollTimeline(-1)}
+            className={`absolute left-0 md:-left-4 top-[40%] -translate-y-1/2 z-20 h-11 w-11 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-700 hover:border-warm hover:text-warm transition-all duration-300 ${canScrollLeft ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+          <button
+            type="button"
+            aria-label="Weiter"
+            onClick={() => scrollTimeline(1)}
+            className={`absolute right-0 md:-right-4 top-[40%] -translate-y-1/2 z-20 h-11 w-11 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-700 hover:border-warm hover:text-warm transition-all duration-300 ${canScrollRight ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+          >
+            <ChevronRight className="h-5 w-5" />
+          </button>
+
+          <div
+            ref={timelineRef}
+            onScroll={updateScrollState}
+            onPointerDown={onDragStart}
+            onPointerMove={onDragMove}
+            onPointerUp={onDragEnd}
+            onPointerCancel={onDragEnd}
+            onClickCapture={onClickCapture}
+            onDragStartCapture={(e) => e.preventDefault()}
+            tabIndex={0}
+            aria-label="Zeitleiste – mit Pfeiltasten scrollen"
+            className={`overflow-x-auto scrollbar-hide pb-2 -mx-2 outline-none select-none ${isDragging ? 'cursor-grabbing' : 'snap-x snap-mandatory md:cursor-grab'}`}
+          >
             <div className="flex gap-10 min-w-max px-4 items-end">
               {timelineItems.map((item, index) => (
                 <div
@@ -304,6 +409,7 @@ const About = () => {
                 </div>
               </div>
             </div>
+          </div>
           </div>
         </div>
       </div>
