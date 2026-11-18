@@ -10,7 +10,24 @@ export interface WeeklyScheduleEntry {
 }
 
 export const weeklySchedule: WeeklyScheduleEntry[] = [
-    // Montag: leer (Tag wird trotzdem angezeigt)
+    {
+        courseId: "hatha-yoga-ukrainisch",
+        weekday: "Montag",
+        startTime: "10:00",
+        endTime: "11:00"
+    },
+    {
+        courseId: "hatha-yoga-ukrainisch",
+        weekday: "Montag",
+        startTime: "16:30",
+        endTime: "17:30"
+    },
+    {
+        courseId: "hatha-yoga-ukrainisch",
+        weekday: "Montag",
+        startTime: "18:00",
+        endTime: "19:00"
+    },
     {
         courseId: "krabbelgruppe-0-6",
         weekday: "Dienstag",
@@ -48,10 +65,28 @@ export const weeklySchedule: WeeklyScheduleEntry[] = [
         endTime: "19:15"
     },
     {
+        courseId: "hatha-yoga-ukrainisch",
+        weekday: "Donnerstag",
+        startTime: "10:00",
+        endTime: "11:00"
+    },
+    {
         courseId: "krabbelgruppe-12-plus",
         weekday: "Donnerstag",
         startTime: "15:00",
         endTime: "17:00"
+    },
+    {
+        courseId: "hatha-yoga-ukrainisch",
+        weekday: "Freitag",
+        startTime: "16:30",
+        endTime: "17:30"
+    },
+    {
+        courseId: "hatha-yoga-ukrainisch",
+        weekday: "Freitag",
+        startTime: "18:00",
+        endTime: "19:00"
     },
     {
         courseId: "babymassage",

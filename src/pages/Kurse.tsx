@@ -20,14 +20,17 @@ const Kurse = () => {
     : kurse;
 
   // Join schedule entries with course details
-  const scheduleWithDetails = weeklySchedule.map(entry => {
-    const course = [...courses].find(c => c.id === entry.courseId) as Course | undefined;
-    return {
-      ...entry,
-      courseName: course?.name || '',
-      courseUrl: course?.url
-    };
-  });
+  // Join schedule entries with course details, sorted by start time ("HH:MM" sorts lexicographically)
+  const scheduleWithDetails = weeklySchedule
+    .map(entry => {
+      const course = [...courses].find(c => c.id === entry.courseId) as Course | undefined;
+      return {
+        ...entry,
+        courseName: course?.name || '',
+        courseUrl: course?.url
+      };
+    })
+    .sort((a, b) => a.startTime.localeCompare(b.startTime));
 
   const handleScheduleEntryClick = (url?: string) => {
     if (url) {

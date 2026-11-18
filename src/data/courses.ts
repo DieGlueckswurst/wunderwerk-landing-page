@@ -119,6 +119,17 @@ Nach einer Spontangeburt kann nach ca. 6 Wochen, bei einer Bauchgeburt nach ca. 
         url: "https://www.hebammeeva.de/trageberatung",
         categories: ["Nach der Geburt"],
     },
+    {
+        id: "hatha-yoga-ukrainisch",
+        name: "Hatha-Yoga auf Ukrainisch & Russisch",
+        description: `Hatha-Yoga mit Daria – eine Verbindung aus dynamischen und statischen Elementen, Atemübungen und sanfter Körperwahrnehmung. Die Stunden stärken den Körper, entspannen den Geist und helfen, auch im Alltag immer wieder zu sich zurückzukehren.
+
+Die Kurse finden in ukrainischer und russischer Sprache statt. Probestunde jederzeit möglich – Anmeldung per E-Mail an Daria.
+
+Хатха-йога українською та російською мовами. Запрошую на пробне заняття!`,
+        url: "mailto:dashasimutina@gmail.com",
+        categories: ["Yoga"],
+    },
 ] as const;
 
 export type CourseId = typeof courses[number]['id'];

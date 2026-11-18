@@ -86,4 +86,12 @@ export const teamMembers: TeamMember[] = [
         website: 'https://hebamme-zoe-kusche.de/',
         image: '/members/zoe/avatar.png',
     },
+    {
+        id: 12,
+        name: 'Daria Simutina',
+        role: ['Hatha-Yoga', 'auf Ukrainisch & Russisch'],
+        categories: ['yoga'],
+        website: 'https://yogastudio-lauf.de/nina-soraruf-moves2fit/',
+        image: '/members/daria/avatar.png',
+    },
 ];
