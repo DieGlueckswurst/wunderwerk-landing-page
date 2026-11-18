@@ -49,11 +49,27 @@ const About = () => {
   const [isDragging, setIsDragging] = useState(false);
   const dragState = useRef({ active: false, startX: 0, startScroll: 0, moved: false });
 
+  // Cards of the timeline (direct children of the inner flex row)
+  const getTimelineItems = () =>
+    Array.from(timelineRef.current?.firstElementChild?.children ?? []) as HTMLElement[];
+
+  // An arrow is only shown if the first/last card is NOT fully visible yet.
+  // (Checking the cards instead of raw scroll extremes avoids false positives
+  // from scroll-snap, sub-pixel rounding and elastic overscroll in Safari.)
   const updateScrollState = useCallback(() => {
     const el = timelineRef.current;
     if (!el) return;
-    setCanScrollLeft(el.scrollLeft > 4);
-    setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 4);
+    const items = Array.from(el.firstElementChild?.children ?? []) as HTMLElement[];
+    if (items.length === 0) return;
+    const box = el.getBoundingClientRect();
+    const first = items[0].getBoundingClientRect();
+    const last = items[items.length - 1].getBoundingClientRect();
+    const tolerance = 8;
+    const atStart = el.scrollLeft <= tolerance || first.left >= box.left - tolerance;
+    const atEnd =
+      el.scrollLeft + el.clientWidth >= el.scrollWidth - tolerance || last.right <= box.right + tolerance;
+    setCanScrollLeft(!atStart);
+    setCanScrollRight(!atEnd);
   }, []);
 
   useEffect(() => {
@@ -62,13 +78,33 @@ const About = () => {
     if (!el) return;
     const observer = new ResizeObserver(updateScrollState);
     observer.observe(el);
-    return () => observer.disconnect();
+    el.addEventListener('scrollend', updateScrollState);
+    window.addEventListener('load', updateScrollState);
+    return () => {
+      observer.disconnect();
+      el.removeEventListener('scrollend', updateScrollState);
+      window.removeEventListener('load', updateScrollState);
+    };
   }, [updateScrollState]);
 
+  // Center the next card in the given direction. This lands exactly on a
+  // snap point (cards use snap-center), so scroll-snap never pulls it back.
   const scrollTimeline = (direction: 1 | -1) => {
     const el = timelineRef.current;
     if (!el) return;
-    el.scrollBy({ left: direction * Math.max(300, el.clientWidth * 0.7), behavior: 'smooth' });
+    const box = el.getBoundingClientRect();
+    const mid = box.left + box.width / 2;
+    const centerOf = (item: HTMLElement) => {
+      const r = item.getBoundingClientRect();
+      return r.left + r.width / 2;
+    };
+    const items = getTimelineItems();
+    const target =
+      direction === 1
+        ? items.find((item) => centerOf(item) > mid + 10)
+        : [...items].reverse().find((item) => centerOf(item) < mid - 10);
+    if (!target) return;
+    el.scrollTo({ left: el.scrollLeft + centerOf(target) - mid, behavior: 'smooth' });
   };
 
   // Mouse drag-to-scroll (touch keeps native swiping)
@@ -308,22 +344,12 @@ const About = () => {
           <h2 className="text-4xl font-serif text-center mb-12">Unsere Geschichte</h2>
 
           <div className="relative">
-          {/* Edge fades – only visible when there is more content in that direction */}
-          <div
-            aria-hidden="true"
-            className={`pointer-events-none absolute inset-y-0 left-0 w-12 md:w-20 z-10 bg-gradient-to-r from-background to-transparent transition-opacity duration-300 ${canScrollLeft ? 'opacity-100' : 'opacity-0'}`}
-          />
-          <div
-            aria-hidden="true"
-            className={`pointer-events-none absolute inset-y-0 right-0 w-12 md:w-20 z-10 bg-gradient-to-l from-background to-transparent transition-opacity duration-300 ${canScrollRight ? 'opacity-100' : 'opacity-0'}`}
-          />
-
           {/* Arrow buttons */}
           <button
             type="button"
             aria-label="Zurück"
             onClick={() => scrollTimeline(-1)}
-            className={`absolute left-0 md:-left-4 top-[40%] -translate-y-1/2 z-20 h-11 w-11 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-700 hover:border-warm hover:text-warm transition-all duration-300 ${canScrollLeft ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+            className={`absolute left-0 md:-left-4 top-[40%] -translate-y-1/2 z-20 h-11 w-11 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-700 hover:border-warm hover:text-warm transition-all duration-300 ${canScrollLeft ? 'opacity-100' : 'opacity-0 invisible pointer-events-none'}`}
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
@@ -331,7 +357,7 @@ const About = () => {
             type="button"
             aria-label="Weiter"
             onClick={() => scrollTimeline(1)}
-            className={`absolute right-0 md:-right-4 top-[40%] -translate-y-1/2 z-20 h-11 w-11 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-700 hover:border-warm hover:text-warm transition-all duration-300 ${canScrollRight ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+            className={`absolute right-0 md:-right-4 top-[40%] -translate-y-1/2 z-20 h-11 w-11 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-700 hover:border-warm hover:text-warm transition-all duration-300 ${canScrollRight ? 'opacity-100' : 'opacity-0 invisible pointer-events-none'}`}
           >
             <ChevronRight className="h-5 w-5" />
           </button>
